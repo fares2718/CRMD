@@ -1,0 +1,130 @@
+using CRMD.Domain.Entities;
+using CRMD.Domain.Repos.Interfaces;
+using CRMD.Infrastructure.Persistence.Databases;
+using Microsoft.Data.SqlClient;
+using System.Data;
+
+
+namespace CRMD.Infrastructure.Repositories;
+
+public class SupplierRepo : ISupplierRepo
+{
+    public async Task<int> AddSupplierAsync(clsSupplier supplier)
+    {
+        using (var conn = SqlConnectionFactory.CreateSqlConnection())
+        {
+            using (var cmd = new SqlCommand("SP_AddSupplier", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Name", supplier.SupplierName);
+                cmd.Parameters.AddWithValue("@Address", supplier.Address);
+                cmd.Parameters.AddWithValue("@Phone", supplier.Phone);
+                cmd.Parameters.AddWithValue("@Email", supplier.Email);
+                cmd.Parameters.AddWithValue("@Rating", supplier.Rating);
+                var returnIdParam = new SqlParameter("@Id", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.ReturnValue
+                };   
+                cmd.Parameters.Add(returnIdParam);
+                await conn.OpenAsync();
+                await cmd.ExecuteNonQueryAsync();
+                return (int)returnIdParam.Value; 
+            }
+        }
+    }
+
+    public async Task<bool> DeleteSupplierAsync(string supplierId)
+    {
+        using (var conn = SqlConnectionFactory.CreateSqlConnection())
+        {
+            using (var cmd = new SqlCommand("SP_DeleteSupplier", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Id", supplierId);
+                await conn.OpenAsync();
+                var rowsAffected = await cmd.ExecuteNonQueryAsync();
+                return rowsAffected > 0;
+            }
+        }
+    }
+
+    public async Task<List<clsSupplier>> GetAllSuppliersAsync()
+    {
+        using (var conn = SqlConnectionFactory.CreateSqlConnection())
+        {
+            using (var cmd = new SqlCommand("SP_GetAllSuppliers", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                var suppliers = new List<clsSupplier>();
+                await conn.OpenAsync();
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        var supplier = new clsSupplier
+                        {
+                            SupplierId = reader.GetString(reader.GetOrdinal("Id")),
+                            SupplierName = reader.GetString(reader.GetOrdinal("Name")),
+                            Address = reader.GetString(reader.GetOrdinal("Address")),
+                            Phone = reader.GetString(reader.GetOrdinal("Phone")),
+                            Email = reader.GetString(reader.GetOrdinal("Email")),
+                            Rating = reader.GetDecimal(reader.GetOrdinal("Rating")),
+                            CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt"))
+                        };
+                        suppliers.Add(supplier);
+                    }
+                }
+                return suppliers;
+            }
+        }
+    }
+
+    public async Task<clsSupplier?> GetSupplierByIdAsync(int supplierId)
+    {
+        using (var conn = SqlConnectionFactory.CreateSqlConnection())
+        {
+            using (var cmd = new SqlCommand("SP_GetSupplierById", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Id", supplierId);
+                await conn.OpenAsync();
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    if (await reader.ReadAsync())
+                    {
+                        var supplier = new clsSupplier
+                        {
+                            SupplierId = reader.GetString(reader.GetOrdinal("Id")),
+                            SupplierName = reader.GetString(reader.GetOrdinal("Name")),
+                            Address = reader.GetString(reader.GetOrdinal("Address")),
+                            Phone = reader.GetString(reader.GetOrdinal("Phone")),
+                            Email = reader.GetString(reader.GetOrdinal("Email")),
+                            Rating = reader.GetDecimal(reader.GetOrdinal("Rating")),
+                            CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt"))
+                        };
+                        return supplier;
+                    }
+                }
+                return null;
+            }
+        }
+    }
+
+    public async Task<bool> UpdateSupplierPhoneAsync(string SupplierId,string newPhone)
+    {
+        using (var conn = SqlConnectionFactory.CreateSqlConnection())
+        {
+            using (var cmd = new SqlCommand("SP_UpdateSupplierPhone", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Id", SupplierId);
+                cmd.Parameters.AddWithValue("@Phone", newPhone);
+                await conn.OpenAsync();
+                var rowsAffected = await cmd.ExecuteNonQueryAsync();
+                return rowsAffected > 0;
+            }
+        }
+    }
+
+    
+}
