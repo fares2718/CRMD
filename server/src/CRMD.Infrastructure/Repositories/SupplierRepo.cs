@@ -1,5 +1,6 @@
 using CRMD.Domain.Entities;
 using CRMD.Domain.Repos.Interfaces;
+using CRMD.Infrastructure.Mappers;
 using CRMD.Infrastructure.Persistence.Databases;
 using Microsoft.Data.SqlClient;
 using System.Data;
@@ -32,7 +33,6 @@ public class SupplierRepo : ISupplierRepo
             }
         }
     }
-
     public async Task<bool> DeleteSupplierAsync(string supplierId)
     {
         using (var conn = SqlConnectionFactory.CreateSqlConnection())
@@ -47,7 +47,6 @@ public class SupplierRepo : ISupplierRepo
             }
         }
     }
-
     public async Task<List<clsSupplier>> GetAllSuppliersAsync()
     {
         using (var conn = SqlConnectionFactory.CreateSqlConnection())
@@ -61,16 +60,7 @@ public class SupplierRepo : ISupplierRepo
                 {
                     while (await reader.ReadAsync())
                     {
-                        var supplier = new clsSupplier
-                        {
-                            SupplierId = reader.GetString(reader.GetOrdinal("Id")),
-                            SupplierName = reader.GetString(reader.GetOrdinal("Name")),
-                            Address = reader.GetString(reader.GetOrdinal("Address")),
-                            Phone = reader.GetString(reader.GetOrdinal("Phone")),
-                            Email = reader.GetString(reader.GetOrdinal("Email")),
-                            Rating = reader.GetDecimal(reader.GetOrdinal("Rating")),
-                            CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt"))
-                        };
+                        var supplier = Mapper.MapSupplier(reader);
                         suppliers.Add(supplier);
                     }
                 }
@@ -78,7 +68,6 @@ public class SupplierRepo : ISupplierRepo
             }
         }
     }
-
     public async Task<clsSupplier?> GetSupplierByIdAsync(int supplierId)
     {
         using (var conn = SqlConnectionFactory.CreateSqlConnection())
@@ -109,7 +98,43 @@ public class SupplierRepo : ISupplierRepo
             }
         }
     }
-
+    public async Task<List<clsPurchaseInvoice>> GetSupplierInvoices(string supplierId)
+    {
+        using (var conn = SqlConnectionFactory.CreateSqlConnection())
+        {
+            using (var cmd = new SqlCommand("SP_GetSupplierInvoices",conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                var supplierInvoices = new List<clsPurchaseInvoice>();
+                cmd.Parameters.AddWithValue("@Id", supplierId);
+                await conn.OpenAsync();
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        var invoice = Mapper.MapInvoice(reader);
+                        supplierInvoices.Add(invoice);
+                    }  
+                }
+                return supplierInvoices;
+            }
+        }
+    }
+    public async Task<bool> RateSupplierAsync(string supplierId, decimal rating)
+    {
+        using (var conn = SqlConnectionFactory.CreateSqlConnection())
+        {
+            using (var cmd = new SqlCommand("SP_RateSupplier", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Id", supplierId);
+                cmd.Parameters.AddWithValue("@Rating", rating);
+                await conn.OpenAsync();
+                var rowsAffected = await cmd.ExecuteNonQueryAsync();
+                return rowsAffected > 0;
+            }
+        }
+    }
     public async Task<bool> UpdateSupplierPhoneAsync(string SupplierId,string newPhone)
     {
         using (var conn = SqlConnectionFactory.CreateSqlConnection())
@@ -124,7 +149,6 @@ public class SupplierRepo : ISupplierRepo
                 return rowsAffected > 0;
             }
         }
-    }
+    } 
 
-    
 }
