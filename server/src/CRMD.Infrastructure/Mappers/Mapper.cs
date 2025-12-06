@@ -64,4 +64,18 @@ public class Mapper
                        };
         return item;
     }
+
+    public static clsInventoryTransaction MapInventoryTransaction(SqlDataReader reader)
+    {
+        var transaction = new clsInventoryTransaction
+                              {
+                                  Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                  ItemId = reader.GetInt32(reader.GetOrdinal("ItemId")),
+                                  TransactionType = (clsInventoryTransaction.enTransactionType)
+                                  reader.GetInt16(reader.GetOrdinal("TransactionType")),
+                                  TransactionDate = reader.GetDateTime(reader.GetOrdinal("TransactionDate")),
+                                  ReferenceId = reader.GetInt32(reader.GetOrdinal("ReferenceId"))
+                              };
+        return transaction;
+    }
 }
