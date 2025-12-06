@@ -20,7 +20,7 @@ public class PurchaseInvoiceItemRepo : IPurchaseInvoiceItemRepo
         while (purchaseInvoiceItems.Count > 0)
         {
             clsPurchaseInvoiceItem item = purchaseInvoiceItems.Dequeue();
-            purchaseInvoiceItemsTable.Rows.Add(item.PurchaseInvoiceId, item.ItemId, item.Quantity, item.UnitPrice, item.TotalPrice);
+            purchaseInvoiceItemsTable.Rows.Add(item.InvoiceId, item.ItemId, item.Quantity, item.UnitPrice, item.TotalPrice);
         }
         using (var conn = SqlConnectionFactory.CreateSqlConnection())
         {

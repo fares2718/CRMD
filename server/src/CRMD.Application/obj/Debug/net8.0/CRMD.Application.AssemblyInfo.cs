@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CRMD.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f8939a4cfb97382e48393976beecdaed4cbc6bb7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+57b710541898708fc9fca24d04f185cb4bb743f8")]
 [assembly: System.Reflection.AssemblyProductAttribute("CRMD.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CRMD.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

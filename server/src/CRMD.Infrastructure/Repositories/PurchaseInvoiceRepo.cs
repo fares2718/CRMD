@@ -2,6 +2,7 @@ using System;
 using System.Data;
 using CRMD.Domain.Entities;
 using CRMD.Domain.Repos.Interfaces;
+using CRMD.Infrastructure.Mappers;
 using CRMD.Infrastructure.Persistence.Databases;
 using Microsoft.Data.SqlClient;
 
@@ -62,20 +63,7 @@ public class PurchaseInvoiceRepo : IPurchaseInvoiceRepo
                     var purchaseInvoices = new List<clsPurchaseInvoice>();
                     while (await reader.ReadAsync())
                     {
-                        var invoice = new clsPurchaseInvoice
-                        {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            SupplierId = reader.GetString(reader.GetOrdinal("SupplierId")),
-                            InvoiceDate = reader.GetDateTime(reader.GetOrdinal("InvoiceDate")),
-                            TotalAmount = reader.GetDecimal(reader.GetOrdinal("TotalAmount")),
-                            PaymentStatus = (clsPurchaseInvoice.enPaymentStatus)reader.GetInt32(reader.GetOrdinal("PaymentStatus")),
-                            Notes = reader.GetString(reader.GetOrdinal("Notes")),
-                            DueDate = reader.GetDateTime(reader.GetOrdinal("DueDate")),
-                            RecevingDate = reader.GetDateTime(reader.GetOrdinal("RecevingDate")),
-                            InvoiceNumber = reader.GetInt32(reader.GetOrdinal("InvoiceNumber")),
-                            CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt")),
-                            UpdatedAt = reader.GetDateTime(reader.GetOrdinal("UpdatedAt"))
-                        };
+                        var invoice = Mapper.MapInvoice(reader);
                         purchaseInvoices.Add(invoice);
                     }
                     return purchaseInvoices;
@@ -96,20 +84,7 @@ public class PurchaseInvoiceRepo : IPurchaseInvoiceRepo
                     var purchaseInvoices = new List<clsPurchaseInvoice>();
                     while (await reader.ReadAsync())
                     {
-                        var invoice = new clsPurchaseInvoice
-                        {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            SupplierId = reader.GetString(reader.GetOrdinal("SupplierId")),
-                            InvoiceDate = reader.GetDateTime(reader.GetOrdinal("InvoiceDate")),
-                            TotalAmount = reader.GetDecimal(reader.GetOrdinal("TotalAmount")),
-                            PaymentStatus = (clsPurchaseInvoice.enPaymentStatus)reader.GetInt32(reader.GetOrdinal("PaymentStatus")),
-                            Notes = reader.GetString(reader.GetOrdinal("Notes")),
-                            DueDate = reader.GetDateTime(reader.GetOrdinal("DueDate")),
-                            RecevingDate = reader.GetDateTime(reader.GetOrdinal("RecevingDate")),
-                            InvoiceNumber = reader.GetInt32(reader.GetOrdinal("InvoiceNumber")),
-                            CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt")),
-                            UpdatedAt = reader.GetDateTime(reader.GetOrdinal("UpdatedAt"))
-                        };
+                        var invoice = Mapper.MapInvoice(reader);
                         purchaseInvoices.Add(invoice);
                     }
                     return purchaseInvoices;
@@ -131,20 +106,7 @@ public class PurchaseInvoiceRepo : IPurchaseInvoiceRepo
                 {
                     if (await reader.ReadAsync())
                     {
-                        var invoice = new clsPurchaseInvoice
-                        {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            SupplierId = reader.GetString(reader.GetOrdinal("SupplierId")),
-                            InvoiceDate = reader.GetDateTime(reader.GetOrdinal("InvoiceDate")),
-                            TotalAmount = reader.GetDecimal(reader.GetOrdinal("TotalAmount")),
-                            PaymentStatus = (clsPurchaseInvoice.enPaymentStatus)reader.GetInt32(reader.GetOrdinal("PaymentStatus")),
-                            Notes = reader.GetString(reader.GetOrdinal("Notes")),
-                            DueDate = reader.GetDateTime(reader.GetOrdinal("DueDate")),
-                            RecevingDate = reader.GetDateTime(reader.GetOrdinal("RecevingDate")),
-                            InvoiceNumber = reader.GetInt32(reader.GetOrdinal("InvoiceNumber")),
-                            CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt")),
-                            UpdatedAt = reader.GetDateTime(reader.GetOrdinal("UpdatedAt"))
-                        };
+                        var invoice = Mapper.MapInvoice(reader);
                         return invoice;
                     }
                     return null;
@@ -165,20 +127,7 @@ public class PurchaseInvoiceRepo : IPurchaseInvoiceRepo
                     var purchaseInvoices = new List<clsPurchaseInvoice>();
                     while (await reader.ReadAsync())
                     {
-                        var invoice = new clsPurchaseInvoice
-                        {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            SupplierId = reader.GetString(reader.GetOrdinal("SupplierId")),
-                            InvoiceDate = reader.GetDateTime(reader.GetOrdinal("InvoiceDate")),
-                            TotalAmount = reader.GetDecimal(reader.GetOrdinal("TotalAmount")),
-                            PaymentStatus = (clsPurchaseInvoice.enPaymentStatus)reader.GetInt32(reader.GetOrdinal("PaymentStatus")),
-                            Notes = reader.GetString(reader.GetOrdinal("Notes")),
-                            DueDate = reader.GetDateTime(reader.GetOrdinal("DueDate")),
-                            RecevingDate = reader.GetDateTime(reader.GetOrdinal("RecevingDate")),
-                            InvoiceNumber = reader.GetInt32(reader.GetOrdinal("InvoiceNumber")),
-                            CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt")),
-                            UpdatedAt = reader.GetDateTime(reader.GetOrdinal("UpdatedAt"))
-                        };
+                        var invoice = Mapper.MapInvoice(reader);
                         purchaseInvoices.Add(invoice);
                     }
                     return purchaseInvoices;
