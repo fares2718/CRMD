@@ -78,4 +78,17 @@ public class Mapper
                               };
         return transaction;
     }
+
+    public static clsDailyConsumption MapDailyConsumption(SqlDataReader reader)
+    {
+        var consumption = new clsDailyConsumption
+        {
+            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+            MenuItemId = reader.GetInt32(reader.GetOrdinal("MenuItemId")),
+            Quantity = reader.GetDecimal(reader.GetOrdinal("Quantity")),
+            ConsumeDate = reader.GetDateTime(reader.GetOrdinal("ConsumeDate")),
+            Notes = reader.GetString(reader.GetOrdinal("Notes"))
+        };
+        return consumption;
+    }
 }
