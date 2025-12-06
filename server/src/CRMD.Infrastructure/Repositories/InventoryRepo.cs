@@ -2,6 +2,7 @@ using System;
 using System.Data;
 using CRMD.Domain.Entities;
 using CRMD.Domain.Repos.Interfaces;
+using CRMD.Infrastructure.Mappers;
 using CRMD.Infrastructure.Persistence.Databases;
 using Microsoft.Data.SqlClient;
 
@@ -24,12 +25,7 @@ public class InventoryRepo : IInventoryRepo
                 {
                     while (await reader.ReadAsync())
                     {
-                        var item = new clsInventory
-                        {
-                            ItemId = reader.GetInt32(reader.GetOrdinal("ItemId")),
-                            Quantity = reader.GetDecimal(reader.GetOrdinal("Quantity")),
-                            LastUpdated = reader.GetDateTime(reader.GetOrdinal("LastUpdated"))
-                        };
+                        var item = Mapper.MapInventoryItem(reader);
                         inventoryItems.Add(item);
                     }
                 }

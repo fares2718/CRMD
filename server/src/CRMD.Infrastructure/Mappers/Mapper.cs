@@ -53,4 +53,15 @@ public class Mapper
                        };
         return item;
     }
+
+    public static clsInventory MapInventoryItem(SqlDataReader reader)
+    {
+        var item = new clsInventory
+                       {
+                           ItemId = reader.GetInt32(reader.GetOrdinal("ItemId")),
+                           Quantity = reader.GetDecimal(reader.GetOrdinal("Quantity")),
+                           LastUpdated = reader.GetDateTime(reader.GetOrdinal("LastUpdated"))
+                       };
+        return item;
+    }
 }
