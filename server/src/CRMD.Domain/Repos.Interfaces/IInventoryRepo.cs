@@ -5,6 +5,7 @@ namespace CRMD.Domain.Repos.Interfaces;
 
 public interface IInventoryRepo
 {
+    public Task AddInventoryItemAsync(clsInventory objInventory);
     public Task<int> AddInventoryTransactionAsync(clsInventoryTransaction objInventoryTransaction);
     public Task<List<clsInventory>> GetAllInventrotyItemsAsync();
     public Task<clsInventory?> GetInventoryItemByIdAsync(int itemId);

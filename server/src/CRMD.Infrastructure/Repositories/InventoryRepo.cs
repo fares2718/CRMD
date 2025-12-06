@@ -10,6 +10,22 @@ namespace CRMD.Infrastructure.Repositories;
 
 public class InventoryRepo : IInventoryRepo
 {
+    public async Task AddInventoryItemAsync(clsInventory objInventory)
+    {
+        using (var conn = SqlConnectionFactory.CreateSqlConnection())
+        {
+            using (var cmd = new SqlCommand("SP_AddInventoryItem", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@ItemId", objInventory.ItemId);
+                cmd.Parameters.AddWithValue("@Quantity", objInventory.Quantity); 
+                await conn.OpenAsync();
+                await cmd.ExecuteNonQueryAsync();
+                
+            }
+        }
+    }
     public async Task<int> AddInventoryTransactionAsync(clsInventoryTransaction objInventoryTransaction)
     {
         using (var conn = SqlConnectionFactory.CreateSqlConnection())
