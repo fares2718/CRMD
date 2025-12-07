@@ -91,4 +91,16 @@ public class Mapper
         };
         return consumption;
     }
+
+    public static clsTable MapTable(SqlDataReader reader)
+    {
+        var table = new clsTable
+        {
+            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+            Name = reader.GetString(reader.GetOrdinal("TableName")),
+            WaiterId = reader.GetString(reader.GetOrdinal("WaiterId")),
+            Status = reader.GetInt16(reader.GetOrdinal("Status"))
+        };
+        return table;
+    }
 }
