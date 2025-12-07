@@ -103,4 +103,32 @@ public class Mapper
         };
         return table;
     }
+
+    public static clsOrder MapOrder(SqlDataReader reader)
+    {
+        var order = new clsOrder
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            TableId = reader.GetInt32(reader.GetOrdinal("TableId")),
+                            WaiterId = reader.GetString(reader.GetOrdinal("WaiterId")),
+                            Status = reader.GetInt16(reader.GetOrdinal("Status")),
+                            CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt")),
+                            ClosedAt = reader.IsDBNull(reader.GetOrdinal("ClosedAt")) ? null : reader.GetDateTime(reader.GetOrdinal("ClosedAt"))
+                        };
+        return order;
+    }
+
+    public static clsOrderItem MapOrderItem(SqlDataReader reader)
+    {
+        var item = new clsOrderItem
+                       {
+                           Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                           OrderId = reader.GetInt32(reader.GetOrdinal("OrderId")),
+                           MenuItemId = reader.GetInt32(reader.GetOrdinal("MenuItemId")),
+                           Quantity = reader.GetDecimal(reader.GetOrdinal("Quantity")),
+                           Price = reader.GetDecimal(reader.GetOrdinal("Price")),
+                           Notes = reader.GetString(reader.GetOrdinal("Notes"))
+                       };
+        return item;
+    }
 }

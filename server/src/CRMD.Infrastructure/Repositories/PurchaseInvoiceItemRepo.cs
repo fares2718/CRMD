@@ -29,6 +29,7 @@ public class PurchaseInvoiceItemRepo : IPurchaseInvoiceItemRepo
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlParameter tvpParam = cmd.Parameters.AddWithValue("@Items", purchaseInvoiceItemsTable);
                 tvpParam.SqlDbType = SqlDbType.Structured;
+                tvpParam.TypeName = "PurchaseInvoiceItemsVar";
                 await conn.OpenAsync();
                 int rowsAffected = await cmd.ExecuteNonQueryAsync();
                 return rowsAffected;

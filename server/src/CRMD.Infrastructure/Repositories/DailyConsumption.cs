@@ -29,6 +29,7 @@ public class DailyConsumption : IDailyConsumption
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlParameter tvpParam = cmd.Parameters.AddWithValue("@Consumption", tvpConsumption);
                 tvpParam.SqlDbType = SqlDbType.Structured;
+                tvpParam.TypeName = "ConsumeVar";
                 await conn.OpenAsync();
                 int rowsAffected = await cmd.ExecuteNonQueryAsync();
                 return rowsAffected;
