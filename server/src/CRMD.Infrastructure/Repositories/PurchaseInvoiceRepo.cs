@@ -35,6 +35,33 @@ public class PurchaseInvoiceRepo : IPurchaseInvoiceRepo
             }
         }
     }
+    public async Task<int> AddPurchaseInvoiceItemsAsync(Queue<clsPurchaseInvoiceItem> purchaseInvoiceItems)
+    {
+        DataTable purchaseInvoiceItemsTable = new DataTable();
+        purchaseInvoiceItemsTable.Columns.Add("InvoiceId", typeof(int));
+        purchaseInvoiceItemsTable.Columns.Add("ItemId", typeof(int));
+        purchaseInvoiceItemsTable.Columns.Add("Quantity", typeof(decimal)); 
+        purchaseInvoiceItemsTable.Columns.Add("UnitPrice", typeof(decimal));
+        purchaseInvoiceItemsTable.Columns.Add("TotalPrice", typeof(decimal));
+        while (purchaseInvoiceItems.Count > 0)
+        {
+            clsPurchaseInvoiceItem item = purchaseInvoiceItems.Dequeue();
+            purchaseInvoiceItemsTable.Rows.Add(item.InvoiceId, item.ItemId, item.Quantity, item.UnitPrice, item.TotalPrice);
+        }
+        using (var conn = SqlConnectionFactory.CreateSqlConnection())
+        {
+            using (var cmd = new SqlCommand("SP_AddPurchaseInvoiceItems", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlParameter tvpParam = cmd.Parameters.AddWithValue("@Items", purchaseInvoiceItemsTable);
+                tvpParam.SqlDbType = SqlDbType.Structured;
+                tvpParam.TypeName = "PurchaseInvoiceItemsVar";
+                await conn.OpenAsync();
+                int rowsAffected = await cmd.ExecuteNonQueryAsync();
+                return rowsAffected;
+            }
+        }
+    }
     public async Task<bool> DeletePurchaseInvoiceAsync(int purchaseInvoiceId)
     {
         using (var conn = SqlConnectionFactory.CreateSqlConnection())
