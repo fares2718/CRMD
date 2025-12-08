@@ -10,7 +10,7 @@ namespace CRMD.Infrastructure.Repositories;
 
 public class SupplierRepo : ISupplierRepo
 {
-    public async Task<int> AddSupplierAsync(clsSupplier supplier)
+    public async Task<string> AddSupplierAsync(clsSupplier supplier)
     {
         using (var conn = SqlConnectionFactory.CreateSqlConnection())
         {
@@ -29,7 +29,7 @@ public class SupplierRepo : ISupplierRepo
                 cmd.Parameters.Add(returnIdParam);
                 await conn.OpenAsync();
                 await cmd.ExecuteNonQueryAsync();
-                return (int)returnIdParam.Value; 
+                return returnIdParam.Value.ToString()!;
             }
         }
     }
