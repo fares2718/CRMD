@@ -452,9 +452,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/fares/My_Projects/CRMD/CRMD/server/src/CRMD.Presentation/CRMD.Presentation.csproj",
-      "projectName": "CRMD.Presentation",
-      "projectPath": "/home/fares/My_Projects/CRMD/CRMD/server/src/CRMD.Presentation/CRMD.Presentation.csproj",
+      "projectUniqueName": "/home/fares/My_Projects/CRMD/CRMD/server/src/CRMD.Presentation/CRMD.API.csproj",
+      "projectName": "CRMD.API",
+      "projectPath": "/home/fares/My_Projects/CRMD/CRMD/server/src/CRMD.Presentation/CRMD.API.csproj",
       "packagesPath": "/home/fares/.nuget/packages/",
       "outputPath": "/home/fares/My_Projects/CRMD/CRMD/server/src/CRMD.Presentation/obj/",
       "projectStyle": "PackageReference",
