@@ -131,4 +131,18 @@ public class Mapper
                        };
         return item;
     }
+
+    public static clsDiscount MapDiscount(SqlDataReader reader)
+    {
+        var discount = new clsDiscount
+        {
+            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+            Name = reader.GetString(reader.GetOrdinal("Name")),
+            Value = reader.GetDecimal(reader.GetOrdinal("Value")),
+            Type = reader.GetString(reader.GetOrdinal("Type")),
+            Promocode = reader.GetString(reader.GetOrdinal("Promocode")),
+            IsActive = reader.GetBoolean(reader.GetOrdinal("IsActive"))
+        };
+        return discount;
+    }
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CRMD.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2e5592eda870b35f1c21e11c542275c6e86968d6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7045a9fba1ecd6635603f5779f5b38ef0a3ab46a")]
 [assembly: System.Reflection.AssemblyProductAttribute("CRMD.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CRMD.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
