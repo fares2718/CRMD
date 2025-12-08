@@ -19,4 +19,5 @@ public class clsEmployee
     public string Password { get; set; } = null!;
     public bool IsActive { get; set; }
     public DateTime HieredAt { get; set; }
+    public decimal Salary { get; set; }
 }
