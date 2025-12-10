@@ -120,5 +120,29 @@ public class InventoryRepo : IInventoryRepo
             }
         }
     }
+    public async Task<List<clsInventoryTransaction>> GetInventoryTransactionsReportAsync(DateTime startDate, DateTime endDate)
+    {
+        using (var conn = SqlConnectionFactory.CreateSqlConnection())
+        {
+            using (var cmd = new SqlCommand("SP_GetInventoryTransactionsReport", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
 
+                cmd.Parameters.AddWithValue("@StartDate", startDate);
+                cmd.Parameters.AddWithValue("@EndDate", endDate);
+
+                await conn.OpenAsync();
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    var transactions = new List<clsInventoryTransaction>();
+                    while (await reader.ReadAsync())
+                    {
+                        var transaction = Mapper.MapInventoryTransaction(reader);
+                        transactions.Add(transaction);
+                    }
+                    return transactions;
+                }
+            }
+        }
+    }
 }
