@@ -1,6 +1,8 @@
 using System;
 using System.Data;
+using CRMD.Domain.Entities;
 using CRMD.Domain.Repos.Interfaces;
+using CRMD.Infrastructure.Mappers;
 using CRMD.Infrastructure.Persistence.Databases;
 using Microsoft.Data.SqlClient;
 
@@ -27,6 +29,30 @@ public class WasteLogRepo : IWasteLogRepo
                 await conn.OpenAsync();
                 await cmd.ExecuteNonQueryAsync();
                 return (decimal)outputParam.Value;
+            }
+        }
+    }
+
+    public async Task<List<clsWasteLog>> GetWasteLogsReportAsync(DateTime startDate, DateTime endDate)
+    {
+        using (var conn = SqlConnectionFactory.CreateSqlConnection())
+        {
+            using (var cmd = new SqlCommand("SP_GetWasteLogsReport", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@StartDate", startDate);
+                cmd.Parameters.AddWithValue("@EndDate", endDate);
+                var wasteLogs = new List<clsWasteLog>();
+                await conn.OpenAsync();
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        var wasteLog = Mapper.MappWasteLog(reader);
+                        wasteLogs.Add(wasteLog);
+                    }
+                }
+                return wasteLogs;
             }
         }
     }

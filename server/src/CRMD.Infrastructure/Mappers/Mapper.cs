@@ -145,4 +145,16 @@ public class Mapper
         };
         return discount;
     }
+
+    public static clsWasteLog MappWasteLog(SqlDataReader reader)
+    {
+        var wasteLog = new clsWasteLog
+        {
+            Id = reader.GetInt32(reader.GetOrdinal("WasteLogId")),
+            ItemId = reader.GetInt32(reader.GetOrdinal("ItemId")),
+            Quantity = reader.GetDecimal(reader.GetOrdinal("Quantity")),
+            LoggedAt = reader.GetDateTime(reader.GetOrdinal("LoggedAt"))
+        };
+        return wasteLog;
+    }
 }
