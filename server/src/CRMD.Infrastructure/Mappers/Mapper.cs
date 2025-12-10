@@ -157,4 +157,18 @@ public class Mapper
         };
         return wasteLog;
     }
+
+    public static clsMenuItem MapMenuItem(SqlDataReader reader)
+    {
+        var menuItem = new clsMenuItem
+        {
+            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+            Name = reader.GetString(reader.GetOrdinal("Name")),
+            CategoryId = reader.GetInt32(reader.GetOrdinal("MenuItemCategoryId")),
+            Price = reader.GetDecimal(reader.GetOrdinal("Price")),
+            IsAvailable = reader.GetBoolean(reader.GetOrdinal("IsAvailable")),
+            CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt"))
+        };
+        return menuItem;
+    }
 }
