@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "u6Eon7st6kA=",
+  "dgSpecHash": "KQWCWgZJh+/InFwiODH+2nIQZhcduSMnWKImmUDTmMaHTLh6qq5IgNrz1dFi5jfHhe/JHW3xJAcbMVj4TCH7yw==",
   "success": true,
   "projectFilePath": "/home/fares/My_Projects/CRMD/CRMD/server/src/CRMD.Application/CRMD.Application.csproj",
   "expectedPackageFiles": [
-    "/home/fares/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.21/microsoft.aspnetcore.app.ref.8.0.21.nupkg.sha512"
+    "/home/fares/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.22/microsoft.aspnetcore.app.ref.8.0.22.nupkg.sha512"
   ],
   "logs": []
 }

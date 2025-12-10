@@ -141,6 +141,30 @@ public class PurchaseInvoiceRepo : IPurchaseInvoiceRepo
             }
         }
     }
+    public async Task<List<clsPurchaseInvoice>> GetPurchaseReportInPeriodAsync(DateTime startDate, DateTime endDate)
+    {
+        using (var conn = SqlConnectionFactory.CreateSqlConnection())
+        {
+            using (var cmd = new SqlCommand("SP_GetPurchaseReportInPeriod", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@StartDate", startDate);
+                cmd.Parameters.AddWithValue("@EndDate", endDate);
+                await conn.OpenAsync();
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    var purchaseInvoices = new List<clsPurchaseInvoice>();
+                    while (await reader.ReadAsync())
+                    {
+                        var invoice = Mapper.MapInvoice(reader);
+                        purchaseInvoices.Add(invoice);
+                    }
+                    return purchaseInvoices;
+                }
+            }
+        }
+    }
     public async Task<List<clsPurchaseInvoice>> GetUnPaidPurchaseInvoices()
     {
         using (var conn = SqlConnectionFactory.CreateSqlConnection())

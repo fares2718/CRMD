@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "CvwEUNtfqzM=",
+  "dgSpecHash": "bGrt8Ti8GaeDqDuOuUvexQw6snaObORKV1/ij+SwCZBXQoLk7q5hgZYJenWiYeeFPNBfPcDdPf1E/RNXnRIX0Q==",
   "success": true,
   "projectFilePath": "/home/fares/My_Projects/CRMD/CRMD/server/src/CRMD.Presentation/CRMD.API.csproj",
   "expectedPackageFiles": [
@@ -10,7 +10,7 @@
     "/home/fares/.nuget/packages/swashbuckle.aspnetcore.swagger/6.6.2/swashbuckle.aspnetcore.swagger.6.6.2.nupkg.sha512",
     "/home/fares/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.6.2/swashbuckle.aspnetcore.swaggergen.6.6.2.nupkg.sha512",
     "/home/fares/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.6.2/swashbuckle.aspnetcore.swaggerui.6.6.2.nupkg.sha512",
-    "/home/fares/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.21/microsoft.aspnetcore.app.ref.8.0.21.nupkg.sha512"
+    "/home/fares/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.22/microsoft.aspnetcore.app.ref.8.0.22.nupkg.sha512"
   ],
   "logs": []
 }
