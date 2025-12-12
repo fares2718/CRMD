@@ -1,4 +1,5 @@
 using System;
+using CRMD.Domain.Repos.Interfaces;
 
 namespace CRMD.Domain.Entities;
 

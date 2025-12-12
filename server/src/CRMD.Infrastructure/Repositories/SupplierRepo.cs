@@ -81,16 +81,7 @@ public class SupplierRepo : ISupplierRepo
                 {
                     if (await reader.ReadAsync())
                     {
-                        var supplier = new clsSupplier
-                        {
-                            SupplierId = reader.GetString(reader.GetOrdinal("Id")),
-                            SupplierName = reader.GetString(reader.GetOrdinal("Name")),
-                            Address = reader.GetString(reader.GetOrdinal("Address")),
-                            Phone = reader.GetString(reader.GetOrdinal("Phone")),
-                            Email = reader.GetString(reader.GetOrdinal("Email")),
-                            Rating = reader.GetDecimal(reader.GetOrdinal("Rating")),
-                            CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt"))
-                        };
+                        var supplier = Mapper.MapSupplier(reader);
                         return supplier;
                     }
                 }
