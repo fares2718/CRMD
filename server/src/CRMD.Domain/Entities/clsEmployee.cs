@@ -7,10 +7,9 @@ public class clsEmployee
     public enum enRole
     {
         Witer = 1,
-        Accountant = 2,
-        Manager = 3,
-        Bartender = 4,
-        Owner = 5
+        Bartender = 2,
+        Accountan = 4,
+        Manager = 8
     }
     public string EmployeeID { get; set; } = null!;
     public string UserName { get; set; } = null!;

@@ -9,7 +9,13 @@
   <ItemGroup>
     <Folder Include="DTO%27s/" />
     <Folder Include="Services.Interfaces/" />
-    <Folder Include="UseCases/" />
+    <Folder Include="UseCases/Bartender/" />
+    <Folder Include="UseCases/Manager/" />
+    <Folder Include="UseCases/Waiter/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../CRMD.Domain/CRMD.Domain.csproj" />
   </ItemGroup>
 
 </Project>
