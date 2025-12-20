@@ -13,6 +13,7 @@
     <ItemGroup>
       <ProjectReference Include="..\CRMD.Application\CRMD.Application.csproj" />
       <ProjectReference Include="..\CRMD.Contracts\CRMD.Contracts.csproj" />
+      <ProjectReference Include="..\CRMD.Infrastructure\CRMD.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

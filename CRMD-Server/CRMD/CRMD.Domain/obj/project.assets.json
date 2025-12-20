@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Domain/CRMD.Domain.csproj",
+      "projectUniqueName": "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Domain/CRMD.Domain.csproj",
       "projectName": "CRMD.Domain",
-      "projectPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Domain/CRMD.Domain.csproj",
+      "projectPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Domain/CRMD.Domain.csproj",
       "packagesPath": "/home/meshfares/.nuget/packages/",
-      "outputPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Domain/obj/",
+      "outputPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Domain/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/meshfares/.nuget/NuGet/NuGet.Config"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Lz0CKvns6LA=",
+  "dgSpecHash": "bpIww4/n7+c=",
   "success": true,
-  "projectFilePath": "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Contracts/CRMD.Contracts.csproj",
+  "projectFilePath": "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/CRMD.Contracts.csproj",
   "expectedPackageFiles": [
     "/home/meshfares/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.22/microsoft.aspnetcore.app.ref.8.0.22.nupkg.sha512"
   ],

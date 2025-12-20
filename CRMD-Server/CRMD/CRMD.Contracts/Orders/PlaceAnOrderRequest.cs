@@ -1,3 +1,3 @@
 namespace CRMD.Contracts.Orders;
 
-public record PlaceAnOrderRequest(int[] OrderItemsIds , EnOrderType OrderType);
+public record PlaceAnOrderRequest(List<int> OrderItemsIds , EnOrderType OrderType);

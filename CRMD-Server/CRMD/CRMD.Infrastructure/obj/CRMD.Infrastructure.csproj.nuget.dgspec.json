@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Infrastructure/CRMD.Infrastructure.csproj": {}
+    "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Infrastructure/CRMD.Infrastructure.csproj": {}
   },
   "projects": {
-    "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Application/CRMD.Application.csproj": {
+    "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Application/CRMD.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Application/CRMD.Application.csproj",
+        "projectUniqueName": "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Application/CRMD.Application.csproj",
         "projectName": "CRMD.Application",
-        "projectPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Application/CRMD.Application.csproj",
+        "projectPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Application/CRMD.Application.csproj",
         "packagesPath": "/home/meshfares/.nuget/packages/",
-        "outputPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Application/obj/",
+        "outputPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Application/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/meshfares/.nuget/NuGet/NuGet.Config"
@@ -26,8 +26,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Domain/CRMD.Domain.csproj": {
-                "projectPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Domain/CRMD.Domain.csproj"
+              "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Domain/CRMD.Domain.csproj": {
+                "projectPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Domain/CRMD.Domain.csproj"
               }
             }
           }
@@ -41,6 +41,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[10.0.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -67,14 +73,14 @@
         }
       }
     },
-    "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Domain/CRMD.Domain.csproj": {
+    "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Domain/CRMD.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Domain/CRMD.Domain.csproj",
+        "projectUniqueName": "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Domain/CRMD.Domain.csproj",
         "projectName": "CRMD.Domain",
-        "projectPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Domain/CRMD.Domain.csproj",
+        "projectPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Domain/CRMD.Domain.csproj",
         "packagesPath": "/home/meshfares/.nuget/packages/",
-        "outputPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Domain/obj/",
+        "outputPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/meshfares/.nuget/NuGet/NuGet.Config"
@@ -126,14 +132,14 @@
         }
       }
     },
-    "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Infrastructure/CRMD.Infrastructure.csproj": {
+    "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Infrastructure/CRMD.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Infrastructure/CRMD.Infrastructure.csproj",
+        "projectUniqueName": "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Infrastructure/CRMD.Infrastructure.csproj",
         "projectName": "CRMD.Infrastructure",
-        "projectPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Infrastructure/CRMD.Infrastructure.csproj",
+        "projectPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Infrastructure/CRMD.Infrastructure.csproj",
         "packagesPath": "/home/meshfares/.nuget/packages/",
-        "outputPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Infrastructure/obj/",
+        "outputPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/meshfares/.nuget/NuGet/NuGet.Config"
@@ -148,8 +154,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Application/CRMD.Application.csproj": {
-                "projectPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Application/CRMD.Application.csproj"
+              "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Application/CRMD.Application.csproj": {
+                "projectPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Application/CRMD.Application.csproj"
               }
             }
           }
@@ -163,6 +169,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[10.0.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

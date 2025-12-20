@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Contracts/CRMD.Contracts.csproj": {}
+    "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/CRMD.Contracts.csproj": {}
   },
   "projects": {
-    "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Contracts/CRMD.Contracts.csproj": {
+    "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/CRMD.Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Contracts/CRMD.Contracts.csproj",
+        "projectUniqueName": "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/CRMD.Contracts.csproj",
         "projectName": "CRMD.Contracts",
-        "projectPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Contracts/CRMD.Contracts.csproj",
+        "projectPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/CRMD.Contracts.csproj",
         "packagesPath": "/home/meshfares/.nuget/packages/",
-        "outputPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Contracts/obj/",
+        "outputPath": "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/meshfares/.nuget/NuGet/NuGet.Config"

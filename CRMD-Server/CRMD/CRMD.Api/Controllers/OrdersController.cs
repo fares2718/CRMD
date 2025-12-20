@@ -1,3 +1,4 @@
+using CRMD.Application.Services;
 using CRMD.Contracts.Orders;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,8 +8,17 @@ namespace CRMD.Api.Controllers;
 [Route("[controller]")]
 public class OrdersController : ControllerBase
 {
-    public IActionResult PlaceAnOrder(PlaceAnOrderRequest placeAnOrderRequest)
+    private readonly IOrdersService _ordersService;
+
+    public OrdersController(IOrdersService ordersService)
     {
-        return Ok((placeAnOrderRequest));
+        _ordersService = ordersService;
+    }
+    [HttpPost]
+    public IActionResult PlaceAnOrder(PlaceAnOrderRequest request)
+    {
+        var orderId = _ordersService.PlaceAnOrder(request.OrderItemsIds, (short)request.OrderType);
+        var response = new PlaceAnOrderResponse(orderId);
+        return Ok(response);
     }
 }
