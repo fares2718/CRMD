@@ -9,3 +9,15 @@
 /home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Contracts/obj/Debug/net8.0/refint/CRMD.Contracts.dll
 /home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Contracts/obj/Debug/net8.0/CRMD.Contracts.pdb
 /home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Contracts/obj/Debug/net8.0/ref/CRMD.Contracts.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/bin/Debug/net8.0/CRMD.Contracts.deps.json
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/bin/Debug/net8.0/CRMD.Contracts.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/bin/Debug/net8.0/CRMD.Contracts.pdb
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/obj/Debug/net8.0/CRMD.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/obj/Debug/net8.0/CRMD.Contracts.AssemblyInfoInputs.cache
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/obj/Debug/net8.0/CRMD.Contracts.AssemblyInfo.cs
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/obj/Debug/net8.0/CRMD.Contracts.csproj.CoreCompileInputs.cache
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/obj/Debug/net8.0/CRMD.Contracts.sourcelink.json
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/obj/Debug/net8.0/CRMD.Contracts.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/obj/Debug/net8.0/refint/CRMD.Contracts.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/obj/Debug/net8.0/CRMD.Contracts.pdb
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/obj/Debug/net8.0/ref/CRMD.Contracts.dll

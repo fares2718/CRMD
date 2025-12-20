@@ -20,3 +20,15 @@
 /home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Domain/obj/Debug/net8.0/refint/CRMD.Domain.dll
 /home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Domain/obj/Debug/net8.0/CRMD.Domain.pdb
 /home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Domain/obj/Debug/net8.0/ref/CRMD.Domain.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Domain/bin/Debug/net8.0/CRMD.Domain.deps.json
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Domain/bin/Debug/net8.0/CRMD.Domain.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Domain/bin/Debug/net8.0/CRMD.Domain.pdb
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Domain/obj/Debug/net8.0/CRMD.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Domain/obj/Debug/net8.0/CRMD.Domain.AssemblyInfoInputs.cache
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Domain/obj/Debug/net8.0/CRMD.Domain.AssemblyInfo.cs
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Domain/obj/Debug/net8.0/CRMD.Domain.csproj.CoreCompileInputs.cache
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Domain/obj/Debug/net8.0/CRMD.Domain.sourcelink.json
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Domain/obj/Debug/net8.0/CRMD.Domain.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Domain/obj/Debug/net8.0/refint/CRMD.Domain.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Domain/obj/Debug/net8.0/CRMD.Domain.pdb
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Domain/obj/Debug/net8.0/ref/CRMD.Domain.dll
