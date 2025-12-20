@@ -1,0 +1,15 @@
+@host=http://localhost:5145
+@AccountantId=1
+
+POST {{host}}/Orders
+Content-Type: application/json
+
+{
+  "orderItemsIds": [
+    1,
+    2,
+    3
+  ],
+  "OrderType" : "Table",
+  "AccountantId" : "{AccountantId}"
+}

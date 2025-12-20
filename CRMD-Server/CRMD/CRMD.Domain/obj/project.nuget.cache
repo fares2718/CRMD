@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "mTfjOY/8RjA=",
+  "success": true,
+  "projectFilePath": "/home/meshfares/My_Projects/CRMD-Full/CRMD-Server/CRMD/CRMD.Domain/CRMD.Domain.csproj",
+  "expectedPackageFiles": [
+    "/home/meshfares/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.22/microsoft.aspnetcore.app.ref.8.0.22.nupkg.sha512"
+  ],
+  "logs": []
+}

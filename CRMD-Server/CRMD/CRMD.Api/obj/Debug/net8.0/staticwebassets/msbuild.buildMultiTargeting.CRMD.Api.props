@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/CRMD.Api.props" />
+</Project>
