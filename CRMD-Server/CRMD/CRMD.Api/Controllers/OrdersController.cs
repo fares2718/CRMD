@@ -22,7 +22,7 @@ public class OrdersController : ControllerBase
         var placeAnOrderResult = await _mediator.Send(cmd);
         return placeAnOrderResult.MatchFirst(
             orderId => Ok(new PlaceAnOrderResponse(orderId)),
-            error => Problem()
+            error => Problem(error.Description)
         );
     }
 }
