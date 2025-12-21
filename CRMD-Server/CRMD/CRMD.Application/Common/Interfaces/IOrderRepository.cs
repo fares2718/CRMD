@@ -4,5 +4,5 @@ namespace CRMD.Application.Common.Interfaces;
 
 public interface IOrderRepository
 {
-    public Task<int> AddOrderAsync(Order order);
+    public Task AddOrderAsync(Order order);
 }
