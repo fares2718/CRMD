@@ -1,5 +1,6 @@
-using CRMD.Application.Services;
+using CRMD.Application.Orders.Commands;
 using CRMD.Contracts.Orders;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CRMD.Api.Controllers;
@@ -8,17 +9,20 @@ namespace CRMD.Api.Controllers;
 [Route("[controller]")]
 public class OrdersController : ControllerBase
 {
-    private readonly IOrdersService _ordersService;
+    private readonly ISender _mediator;
 
-    public OrdersController(IOrdersService ordersService)
+    public OrdersController(ISender mediator)
     {
-        _ordersService = ordersService;
+        _mediator = mediator;
     }
     [HttpPost]
-    public IActionResult PlaceAnOrder(PlaceAnOrderRequest request)
+    public async Task<IActionResult> PlaceAnOrder(PlaceAnOrderRequest request)
     {
-        var orderId = _ordersService.PlaceAnOrder(request.OrderItemsIds, (short)request.OrderType);
-        var response = new PlaceAnOrderResponse(orderId);
-        return Ok(response);
+        var cmd = new PlaceAnOrderCommand(request.OrderItemsIds,(short)request.OrderType);
+        var placeAnOrderResult = await _mediator.Send(cmd);
+        return placeAnOrderResult.MatchFirst(
+            orderId => Ok(new PlaceAnOrderResponse(orderId)),
+            error => Problem()
+        );
     }
 }

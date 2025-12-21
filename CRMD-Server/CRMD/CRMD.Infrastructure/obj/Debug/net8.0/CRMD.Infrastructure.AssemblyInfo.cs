@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CRMD.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f9d7ebf9b94a0c609a0c50f816ad8105f639e92f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e0ccbaf1fd77b90b6c150653cb4413a921e0c34e")]
 [assembly: System.Reflection.AssemblyProductAttribute("CRMD.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CRMD.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

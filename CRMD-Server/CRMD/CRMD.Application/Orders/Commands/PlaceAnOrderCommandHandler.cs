@@ -1,11 +1,12 @@
 using MediatR;
+using ErrorOr;
 
 namespace CRMD.Application.Orders.Commands;
 
-public class PlaceAnOrderCommandHandler : IRequestHandler<PlaceAnOrderCommand,int>
+public class PlaceAnOrderCommandHandler : IRequestHandler<PlaceAnOrderCommand,ErrorOr<int>>
 {
-    public Task<int> Handle(PlaceAnOrderCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<int>> Handle(PlaceAnOrderCommand request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(1);
+        return 1;
     }
 }
