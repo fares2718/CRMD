@@ -6,9 +6,12 @@ namespace CRMD.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructures(this IServiceCollection services)
+    public static IServiceCollection AddInfrastructures(
+        this IServiceCollection services,
+        string connectionString)
     {
-        services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<IOrderRepository>(
+            _ => new OrderRepository(connectionString));
         return services;
     }
 }

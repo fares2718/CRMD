@@ -145,6 +145,23 @@
           }
         }
       },
+      "Npgsql/10.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.0",
+          "System.Diagnostics.DiagnosticSource": "9.0.11"
+        },
+        "compile": {
+          "lib/net8.0/Npgsql.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Npgsql.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.Diagnostics.DiagnosticSource/10.0.0": {
         "type": "package",
         "compile": {
@@ -444,6 +461,25 @@
         "microsoft.identitymodel.tokens.nuspec"
       ]
     },
+    "Npgsql/10.0.1": {
+      "sha512": "XyUcxEfqlFomhNTG/ZdGlec+uSOQArKz0Mzz8jYKP/Jj9GM2YabU5CVZtp0yiC4f9hRp+tRZTnHMatJeJ3rwgw==",
+      "type": "package",
+      "path": "npgsql/10.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net10.0/Npgsql.dll",
+        "lib/net10.0/Npgsql.xml",
+        "lib/net8.0/Npgsql.dll",
+        "lib/net8.0/Npgsql.xml",
+        "lib/net9.0/Npgsql.dll",
+        "lib/net9.0/Npgsql.xml",
+        "npgsql.10.0.1.nupkg.sha512",
+        "npgsql.nuspec",
+        "postgresql.png"
+      ]
+    },
     "System.Diagnostics.DiagnosticSource/10.0.0": {
       "sha512": "0KdBK+h7G13PuOSC2R/DalAoFMvdYMznvGRuICtkdcUMXgl/gYXsG6z4yUvTxHSMACorWgHCU1Faq0KUHU6yAQ==",
       "type": "package",
@@ -486,7 +522,8 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "CRMD.Application >= 1.0.0",
-      "Microsoft.Extensions.DependencyInjection.Abstractions >= 10.0.1"
+      "Microsoft.Extensions.DependencyInjection.Abstractions >= 10.0.1",
+      "Npgsql >= 10.0.1"
     ]
   },
   "packageFolders": {
@@ -531,6 +568,10 @@
         "targetAlias": "net8.0",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": {
+            "target": "Package",
+            "version": "[10.0.1, )"
+          },
+          "Npgsql": {
             "target": "Package",
             "version": "[10.0.1, )"
           }

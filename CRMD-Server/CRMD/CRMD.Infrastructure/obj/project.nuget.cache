@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "GCX5p0dHwDk=",
+  "dgSpecHash": "9tgxC76P+nc=",
   "success": true,
   "projectFilePath": "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Infrastructure/CRMD.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,7 @@
     "/home/meshfares/.nuget/packages/microsoft.identitymodel.jsonwebtokens/8.14.0/microsoft.identitymodel.jsonwebtokens.8.14.0.nupkg.sha512",
     "/home/meshfares/.nuget/packages/microsoft.identitymodel.logging/8.14.0/microsoft.identitymodel.logging.8.14.0.nupkg.sha512",
     "/home/meshfares/.nuget/packages/microsoft.identitymodel.tokens/8.14.0/microsoft.identitymodel.tokens.8.14.0.nupkg.sha512",
+    "/home/meshfares/.nuget/packages/npgsql/10.0.1/npgsql.10.0.1.nupkg.sha512",
     "/home/meshfares/.nuget/packages/system.diagnostics.diagnosticsource/10.0.0/system.diagnostics.diagnosticsource.10.0.0.nupkg.sha512",
     "/home/meshfares/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.22/microsoft.aspnetcore.app.ref.8.0.22.nupkg.sha512"
   ],

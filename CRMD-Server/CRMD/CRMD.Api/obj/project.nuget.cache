@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "O5mMndHNalA=",
+  "dgSpecHash": "S1YWIiaJnms=",
   "success": true,
   "projectFilePath": "/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Api/CRMD.Api.csproj",
   "expectedPackageFiles": [
@@ -15,6 +15,7 @@
     "/home/meshfares/.nuget/packages/microsoft.identitymodel.logging/8.14.0/microsoft.identitymodel.logging.8.14.0.nupkg.sha512",
     "/home/meshfares/.nuget/packages/microsoft.identitymodel.tokens/8.14.0/microsoft.identitymodel.tokens.8.14.0.nupkg.sha512",
     "/home/meshfares/.nuget/packages/microsoft.openapi/1.6.14/microsoft.openapi.1.6.14.nupkg.sha512",
+    "/home/meshfares/.nuget/packages/npgsql/10.0.1/npgsql.10.0.1.nupkg.sha512",
     "/home/meshfares/.nuget/packages/swashbuckle.aspnetcore/6.6.2/swashbuckle.aspnetcore.6.6.2.nupkg.sha512",
     "/home/meshfares/.nuget/packages/swashbuckle.aspnetcore.swagger/6.6.2/swashbuckle.aspnetcore.swagger.6.6.2.nupkg.sha512",
     "/home/meshfares/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.6.2/swashbuckle.aspnetcore.swaggergen.6.6.2.nupkg.sha512",
