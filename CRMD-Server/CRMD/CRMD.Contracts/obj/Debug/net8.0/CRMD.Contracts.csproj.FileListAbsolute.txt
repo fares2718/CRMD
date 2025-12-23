@@ -21,3 +21,9 @@
 /home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/obj/Debug/net8.0/refint/CRMD.Contracts.dll
 /home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/obj/Debug/net8.0/CRMD.Contracts.pdb
 /home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/obj/Debug/net8.0/ref/CRMD.Contracts.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/bin/Debug/net8.0/CRMD.Application.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/bin/Debug/net8.0/CRMD.Domain.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/bin/Debug/net8.0/CRMD.Application.pdb
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/bin/Debug/net8.0/CRMD.Domain.pdb
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/obj/Debug/net8.0/CRMD.Contracts.csproj.AssemblyReference.cache
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Contracts/obj/Debug/net8.0/CRMD.Contracts.csproj.CopyComplete

@@ -4,7 +4,10 @@ public class Order
 {
     public int Id { get; set; }
     public int TableId { get; set; }
-    public decimal Price { get; set; }
+    public int CaptainId { get; set; }
+    public decimal TotalAmount { get; set; }
     public short OrderType { get; set; }
-    private List<OrderItems> OrderItems { get; set; } = new List<OrderItems>();
+    public DateTime CreatedAt { get; set; }
+    public DateTime LeftAt { get; } = DateTime.Now;
+    public List<OrderItems> OrderItems { get; set; } = new List<OrderItems>();
 }

@@ -122,3 +122,8 @@
 /home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Api/obj/Debug/net8.0/CRMD.Api.pdb
 /home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Api/obj/Debug/net8.0/CRMD.Api.genruntimeconfig.cache
 /home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Api/obj/Debug/net8.0/ref/CRMD.Api.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Api/bin/Debug/net8.0/AutoMapper.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Api/bin/Debug/net8.0/ErrorOr.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Api/bin/Debug/net8.0/Microsoft.Extensions.Options.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Api/bin/Debug/net8.0/Microsoft.Extensions.Primitives.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Api/bin/Debug/net8.0/Npgsql.dll

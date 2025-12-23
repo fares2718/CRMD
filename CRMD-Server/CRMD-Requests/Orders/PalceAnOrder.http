@@ -5,11 +5,16 @@ POST {{host}}/Orders
 Content-Type: application/json
 
 {
-  "orderItemsIds": [
-    1,
-    2,
-    3
+  "orderItemsDtos": [
+    {
+      "itemId": 1,
+      "quantity": 2,
+      "price": 10
+    }
   ],
-  "OrderType" : "Table",
-  "AccountantId" : "{AccountantId}"
+  "orderType": "Table",
+  "tableId": 1,
+  "captainId": 1,
+  "totalAmount": 10,
+  "createdAt": "2025-12-23T15:37:15.601Z"
 }

@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CRMD.Application\CRMD.Application.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,3 +1,4 @@
+using CRMD.Application.Map;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CRMD.Application;
@@ -10,6 +11,7 @@ public static class DependencyInjection
         {
             options.RegisterServicesFromAssemblyContaining(typeof(DependencyInjection));
         });
+        services.AddAutoMapper(cfg => { }, typeof(MappingProfile));
         return services;
     }
 }

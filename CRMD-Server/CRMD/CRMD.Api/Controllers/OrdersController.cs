@@ -18,10 +18,15 @@ public class OrdersController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> PlaceAnOrder(PlaceAnOrderRequest request)
     {
-        var cmd = new PlaceAnOrderCommand(request.OrderItemsIds,(short)request.OrderType);
+        var cmd = new PlaceAnOrderCommand(request.OrderItemsDtos,
+            (short)request.OrderType,
+            request.TableId,
+            request.CaptainId,
+            request.TotalAmount,
+            request.CreatedAt);
         var placeAnOrderResult = await _mediator.Send(cmd);
         return placeAnOrderResult.MatchFirst(
-            orderId => Ok(new PlaceAnOrderResponse(orderId)),
+            created => Created(),
             error => Problem(error.Description)
         );
     }

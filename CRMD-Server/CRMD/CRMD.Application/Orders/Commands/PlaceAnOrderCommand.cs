@@ -1,7 +1,12 @@
+using CRMD.Application.DTOs;
 using MediatR;
 using ErrorOr;
 namespace CRMD.Application.Orders.Commands;
 
 public record PlaceAnOrderCommand(
-    List<int> OrderItemsIds, 
-    short OrderType) : IRequest<ErrorOr<int>>;
+    List<OrderItemsDto> OrderItemsDtos, 
+    short OrderType,
+    int TableId,
+    int CaptainId,
+    decimal TotalAmount,
+    DateTime CreatedAt) : IRequest<ErrorOr<Created>>;
