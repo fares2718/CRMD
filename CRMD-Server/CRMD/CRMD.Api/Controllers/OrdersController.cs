@@ -15,7 +15,7 @@ public class OrdersController : ControllerBase
     {
         _mediator = mediator;
     }
-    [HttpPost]
+    [HttpPost(Name = "place-order")]
     public async Task<IActionResult> PlaceAnOrder(PlaceAnOrderRequest request)
     {
         var cmd = new PlaceAnOrderCommand(request.OrderItemsDtos,
@@ -26,7 +26,7 @@ public class OrdersController : ControllerBase
             request.CreatedAt);
         var placeAnOrderResult = await _mediator.Send(cmd);
         return placeAnOrderResult.MatchFirst(
-            created => Created(),
+            created => CreatedAtRoute("place-order",new {request.CaptainId}),
             error => Problem(error.Description)
         );
     }

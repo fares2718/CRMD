@@ -25,8 +25,8 @@ public class OrderRepository : IOrderRepository
                 cmd.Parameters.AddWithValue("captainid", order.CaptainId);
                 cmd.Parameters.Add("totalamount",NpgsqlDbType.Money).Value=order.TotalAmount;
                 cmd.Parameters.AddWithValue("ordertype",order.OrderType);
-                cmd.Parameters.Add("createdat",NpgsqlDbType.Timestamp).Value=order.CreatedAt;
-                cmd.Parameters.Add("leftat",NpgsqlDbType.Timestamp).Value=order.LeftAt;
+                cmd.Parameters.AddWithValue("createdat",order.CreatedAt);
+                cmd.Parameters.AddWithValue("leftat",order.LeftAt);
                 await conn.OpenAsync();
                 await cmd.ExecuteNonQueryAsync();
             }
