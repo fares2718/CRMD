@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CRMD.Infrastructure;
 
-public static class DependencyInjuction
+public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructures(this IServiceCollection services)
     {
