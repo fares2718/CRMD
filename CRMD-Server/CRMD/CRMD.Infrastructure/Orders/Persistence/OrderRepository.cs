@@ -1,6 +1,7 @@
 using System.Data;
 using CRMD.Application.Common.Interfaces;
 using CRMD.Domain.Orders;
+using CRMD.Infrastructure.EntityMapping;
 using Npgsql;
 using NpgsqlTypes;
 
@@ -14,6 +15,7 @@ public class OrderRepository : IOrderRepository
     {
         _connectionString = connectionString;
     }
+
     public async Task AddOrderAsync(Order order)
     {
         using (var conn = new NpgsqlConnection(_connectionString))
@@ -31,5 +33,28 @@ public class OrderRepository : IOrderRepository
                 await cmd.ExecuteNonQueryAsync();
             }
         }
+    }
+
+    public async Task<List<Order>> GetOrdersByDateAsync(DateTime date)
+    {
+        var orders = new List<Order>();
+        using (var conn = new NpgsqlConnection(_connectionString))
+        {
+            using (var cmd = new NpgsqlCommand("getordersbydate", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("orderdate", date);
+                await conn.OpenAsync();
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        var order = Mapper.Map<Order>(reader);
+                        orders.Add(order);
+                    }
+                }
+            }
+        }
+        return orders;
     }
 }

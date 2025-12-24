@@ -11,5 +11,6 @@ public class MappingProfile : Profile
     {
         CreateMap<PlaceAnOrderCommand, Order>();
         CreateMap<OrderItemsDto,OrderItems> ();
+        CreateMap<Order, OrderDto>();
     }
 }
