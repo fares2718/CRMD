@@ -1,4 +1,5 @@
 using System.Data;
+using System.Text.Json;
 using CRMD.Application.Common.Interfaces;
 using CRMD.Domain.Orders;
 using CRMD.Infrastructure.EntityMapping;
@@ -23,12 +24,12 @@ public class OrderRepository : IOrderRepository
             using (var cmd = new NpgsqlCommand("addorder", conn))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("tableid",order.TableId);
+                cmd.Parameters.AddWithValue("tableid", order.TableId);
                 cmd.Parameters.AddWithValue("captainid", order.CaptainId);
-                cmd.Parameters.Add("totalamount",NpgsqlDbType.Money).Value=order.TotalAmount;
-                cmd.Parameters.AddWithValue("ordertype",order.OrderType);
-                cmd.Parameters.AddWithValue("createdat",order.CreatedAt);
-                cmd.Parameters.AddWithValue("leftat",order.LeftAt);
+                cmd.Parameters.Add("totalamount", NpgsqlDbType.Money).Value = order.TotalAmount;
+                cmd.Parameters.AddWithValue("ordertype", order.OrderType);
+                cmd.Parameters.AddWithValue("createdat", order.CreatedAt);
+                cmd.Parameters.AddWithValue("leftat", order.LeftAt);
                 await conn.OpenAsync();
                 await cmd.ExecuteNonQueryAsync();
             }
@@ -50,6 +51,8 @@ public class OrderRepository : IOrderRepository
                     while (await reader.ReadAsync())
                     {
                         var order = Mapper.Map<Order>(reader);
+                        order.OrderItems = JsonSerializer.Deserialize<List<OrderItems>>(
+                            reader.GetString(reader.GetOrdinal("orderitems")))!;
                         orders.Add(order);
                     }
                 }
