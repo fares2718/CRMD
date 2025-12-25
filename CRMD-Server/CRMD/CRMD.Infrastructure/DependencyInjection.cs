@@ -1,4 +1,5 @@
 using CRMD.Application.Common.Interfaces;
+using CRMD.Infrastructure.Menu;
 using CRMD.Infrastructure.Orders.Persistence;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +13,8 @@ public static class DependencyInjection
     {
         services.AddScoped<IOrderRepository>(
             _ => new OrderRepository(connectionString));
+        services.AddScoped<IMenuRepository>(
+            _ => new MenuRepository(connectionString));
         return services;
     }
 }

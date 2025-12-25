@@ -53,3 +53,10 @@
 /home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Api/obj/Debug/net8.0/CRMD.Api.pdb
 /home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Api/obj/Debug/net8.0/CRMD.Api.genruntimeconfig.cache
 /home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Api/obj/Debug/net8.0/ref/CRMD.Api.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Api/bin/Debug/net8.0/Microsoft.AspNet.SignalR.Core.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Api/bin/Debug/net8.0/Microsoft.AspNet.SignalR.SystemWeb.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Api/bin/Debug/net8.0/Microsoft.Owin.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Api/bin/Debug/net8.0/Microsoft.Owin.Host.SystemWeb.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Api/bin/Debug/net8.0/Microsoft.Owin.Security.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Api/bin/Debug/net8.0/Newtonsoft.Json.dll
+/home/meshfares/My_Projects/CRMD-Full/CRMD/CRMD-Server/CRMD/CRMD.Api/bin/Debug/net8.0/Owin.dll

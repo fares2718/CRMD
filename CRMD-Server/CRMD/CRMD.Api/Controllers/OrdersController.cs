@@ -16,6 +16,7 @@ public class OrdersController : ControllerBase
     {
         _mediator = mediator;
     }
+
     [HttpPost(Name = "place-order")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -23,7 +24,7 @@ public class OrdersController : ControllerBase
 
     public async Task<IActionResult> PlaceAnOrder(PlaceAnOrderRequest request)
     {
-        if(request.CaptainId < 1
+        if (request.CaptainId < 1
            || request.TableId < 1 || request.OrderItemsDtos.Count <= 0)
             return BadRequest("Invalid request");
         var cmd = new PlaceAnOrderCommand(request.OrderItemsDtos,
@@ -34,7 +35,7 @@ public class OrdersController : ControllerBase
             request.CreatedAt);
         var placeAnOrderResult = await _mediator.Send(cmd);
         return placeAnOrderResult.MatchFirst(
-            created => CreatedAtRoute("place-order",new {request.CaptainId}),
+            created => CreatedAtRoute("place-order", new { request.CaptainId }),
             error => Problem(error.Description)
         );
     }
