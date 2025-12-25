@@ -25,12 +25,12 @@ namespace CRMD.Api.Hubs
              conn.Username, $"Joined room {conn.ConnectionRoom}");
         }
 
-        public async Task SendOrderMessage(OrderDto order)
+        public async Task SendOrderMessage(string orderJson)
         {
             if (_sessionConnections.Connections.TryGetValue(Context.ConnectionId, out UserConnection? conn))
             {
                 await Clients.Group(conn.ConnectionRoom).SendAsync("ReceiveOrder", conn.Username,
-                 order);
+                 orderJson);
             }
         }
     }
