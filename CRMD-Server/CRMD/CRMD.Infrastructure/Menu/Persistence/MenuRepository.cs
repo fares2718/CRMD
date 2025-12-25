@@ -1,11 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CRMD.Application.Common.Interfaces;
-using CRMD.Domain.Menu;
-using Npgsql;
-
 namespace CRMD.Infrastructure.Menu
 {
     public class MenuRepository : IMenuRepository
@@ -28,6 +20,27 @@ namespace CRMD.Infrastructure.Menu
                     //ToDo: Implement AddMenuItemAsync method
                 }
 
+            }
+        }
+
+        public async Task<List<MenuItemDto>> GetAllMenuItemsAsync()
+        {
+            using (var conn = new NpgsqlConnection(_connectionString))
+            {
+                await conn.OpenAsync();
+                using (var cmd = new NpgsqlCommand("getmenuitems", conn))
+                {
+                    var menuItems = new List<MenuItemDto>();
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            var menuItem = Mapper.Map<MenuItemDto>(reader);
+                            menuItems.Add(menuItem);
+                        }
+                    }
+                    return menuItems;
+                }
             }
         }
     }

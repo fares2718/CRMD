@@ -1,0 +1,9 @@
+global using Npgsql;
+global using CRMD.Application.Common.Interfaces;
+global using CRMD.Application.DTOs;
+global using CRMD.Domain.Menu;
+global using CRMD.Infrastructure.EntityMapping;
+global using System.Data;
+global using System.Text.Json;
+global using CRMD.Domain.Orders;
+global using NpgsqlTypes;

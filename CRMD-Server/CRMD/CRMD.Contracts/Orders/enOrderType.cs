@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace CRMD.Contracts.Orders;
 
 [JsonConverter(typeof(JsonStringEnumConverter))]

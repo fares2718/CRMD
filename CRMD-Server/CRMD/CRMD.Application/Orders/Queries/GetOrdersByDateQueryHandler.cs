@@ -1,9 +1,3 @@
-using AutoMapper;
-using CRMD.Application.Common.Interfaces;
-using CRMD.Application.DTOs;
-using ErrorOr;
-using MediatR;
-
 namespace CRMD.Application.Orders.Queries;
 
 public class GetOrdersByDateQueryHandler : IRequestHandler<GetOrdersByDateQuery, ErrorOr<List<OrderDto>>>

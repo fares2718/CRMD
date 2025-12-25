@@ -1,5 +1,3 @@
-using Npgsql;
-
 namespace CRMD.Infrastructure.EntityMapping
 {
     public static class Mapper
@@ -24,7 +22,7 @@ namespace CRMD.Infrastructure.EntityMapping
                 }
             }
 
-                return entity;
+            return entity;
         }
 
     }

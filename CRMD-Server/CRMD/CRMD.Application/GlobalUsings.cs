@@ -1,0 +1,9 @@
+global using CRMD.Application.DTOs;
+global using MediatR;
+global using ErrorOr;
+global using AutoMapper;
+global using CRMD.Application.Common.Interfaces;
+global using CRMD.Domain.Orders;
+global using CRMD.Domain.Menu;
+global using CRMD.Application.MenuItems.Commands;
+global using CRMD.Application.Orders.Commands;

@@ -1,7 +1,3 @@
-using CRMD.Application.DTOs;
-using ErrorOr;
-using MediatR;
-
 namespace CRMD.Application.MenuItems.Commands;
 
 public record AddNewMenuItemCommand(

@@ -1,9 +1,3 @@
-using AutoMapper;
-using CRMD.Application.Common.Interfaces;
-using CRMD.Domain.Menu;
-using ErrorOr;
-using MediatR;
-
 namespace CRMD.Application.MenuItems.Commands
 {
     public class AddNewMenuItemCommandHandler :

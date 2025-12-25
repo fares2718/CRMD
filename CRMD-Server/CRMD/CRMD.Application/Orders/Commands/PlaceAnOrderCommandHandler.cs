@@ -1,12 +1,6 @@
-using AutoMapper;
-using CRMD.Application.Common.Interfaces;
-using CRMD.Domain.Orders;
-using MediatR;
-using ErrorOr;
-
 namespace CRMD.Application.Orders.Commands;
 
-public class PlaceAnOrderCommandHandler : IRequestHandler<PlaceAnOrderCommand,ErrorOr<Created>>
+public class PlaceAnOrderCommandHandler : IRequestHandler<PlaceAnOrderCommand, ErrorOr<Created>>
 {
     private readonly IOrderRepository _orderRepository;
     private readonly IMapper _mapper;

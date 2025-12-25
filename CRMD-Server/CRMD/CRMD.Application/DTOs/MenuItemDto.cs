@@ -1,11 +1,10 @@
-namespace CRMD.Domain.Menu
+namespace CRMD.Application.DTOs
 {
-    public class MenuItem
+    public class MenuItemDto
     {
         public int MenuItemId { get; set; }
         public string Name { get; set; } = null!;
         public decimal Price { get; set; }
-        public Recipe Recipe { get; set; } = null!;
-        public short CategoryId { get; set; }
+        public string Category { get; set; } = null!;
     }
 }

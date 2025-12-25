@@ -1,11 +1,3 @@
-using System.Data;
-using System.Text.Json;
-using CRMD.Application.Common.Interfaces;
-using CRMD.Domain.Orders;
-using CRMD.Infrastructure.EntityMapping;
-using Npgsql;
-using NpgsqlTypes;
-
 namespace CRMD.Infrastructure.Orders.Persistence;
 
 public class OrderRepository : IOrderRepository

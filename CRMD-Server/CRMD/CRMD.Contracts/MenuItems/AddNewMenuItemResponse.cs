@@ -1,5 +1,3 @@
-using ErrorOr;
-
 namespace CRMD.Contracts.MenuItems
 {
     public record AddNewMenuItemResponse

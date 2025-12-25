@@ -1,10 +1,7 @@
-using CRMD.Application.DTOs;
-using MediatR;
-using ErrorOr;
 namespace CRMD.Application.Orders.Commands;
 
 public record PlaceAnOrderCommand(
-    List<OrderItemsDto> OrderItemsDtos, 
+    List<OrderItemsDto> OrderItemsDtos,
     short OrderType,
     int TableId,
     int CaptainId,

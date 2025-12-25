@@ -1,5 +1,3 @@
-using CRMD.Application.DTOs;
-
 namespace CRMD.Contracts.MenuItems
 {
     public record AddNewMenuItemRequest
