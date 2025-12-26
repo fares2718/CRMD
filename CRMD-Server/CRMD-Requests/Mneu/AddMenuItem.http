@@ -1,0 +1,17 @@
+@host=http://localhost:5145
+
+POST {{host}}/Menu/add-menu-item
+Content-Type: application/json
+
+{
+    "Name" : "",
+    "recipedto": {
+        "Items" : [
+            1,
+            2,
+        ],
+
+    },
+    "peice" : ,
+    "categoryid" : 
+}

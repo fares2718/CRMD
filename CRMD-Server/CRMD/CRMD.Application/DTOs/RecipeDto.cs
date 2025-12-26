@@ -4,6 +4,6 @@ namespace CRMD.Application.DTOs
     {
         public List<RecipeItemDto> Items { get; set; } =
         new List<RecipeItemDto>();
-        public decimal TotalCost { get; set; }
+        public decimal TotalCost { get; }
     }
 }

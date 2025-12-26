@@ -22,8 +22,9 @@ public class OrderRepository : IOrderRepository
                 cmd.Parameters.AddWithValue("ordertype", order.OrderType);
                 cmd.Parameters.AddWithValue("createdat", order.CreatedAt);
                 cmd.Parameters.AddWithValue("leftat", order.LeftAt);
+                var orderItemsJson = JsonSerializer.Serialize(order.OrderItems);
                 cmd.Parameters.AddWithValue("orderitems",
-                order.OrderItems.ToArray());
+                orderItemsJson);
                 await conn.OpenAsync();
                 await cmd.ExecuteNonQueryAsync();
             }

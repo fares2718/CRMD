@@ -1,6 +1,0 @@
-@CRMD.Api_HostAddress = http://localhost:5145
-
-GET {{CRMD.Api_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CRMD.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4f0bff996c6f63eaffa3443bf7462ff047f82701")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+db1d1ec61a9210983870da6911cec0a541671908")]
 [assembly: System.Reflection.AssemblyProductAttribute("CRMD.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CRMD.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

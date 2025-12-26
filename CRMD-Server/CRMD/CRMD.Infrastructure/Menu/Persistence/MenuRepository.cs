@@ -19,8 +19,8 @@ namespace CRMD.Infrastructure.Menu
                     cmd.Parameters.AddWithValue("name", menuItem.Name);
                     cmd.Parameters.AddWithValue("price", menuItem.Price);
                     cmd.Parameters.AddWithValue("categoryid", menuItem.CategoryId);
-                    cmd.Parameters.AddWithValue("ingredients", menuItem.Recipe.
-                    Ingredients.ToArray());
+                    var itemsJson = JsonSerializer.Serialize(menuItem.Recipe.Ingredients);
+                    cmd.Parameters.AddWithValue("ingredients", itemsJson);
                     await conn.OpenAsync();
                     await cmd.ExecuteNonQueryAsync();
                 }
