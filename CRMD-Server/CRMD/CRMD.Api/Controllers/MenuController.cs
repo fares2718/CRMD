@@ -60,5 +60,20 @@ namespace CRMD.Api.Controllers
 
         }
 
+        [HttpPut(Name = "update-recipe")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+
+        public async Task<IActionResult> UpdateRecipe(UpdateRecipeRequest request)
+        {
+            var cmd = new UpdateRecipeCommand(request.RecipeItems);
+            var updateRecipeResult = await _mediator.Send(cmd);
+            return updateRecipeResult.MatchFirst(
+                updated => Ok(new { Message = "Recipe updated successfully." }),
+                error => Problem(error.Description, error.Code)
+            );
+        }
+
     }
 }

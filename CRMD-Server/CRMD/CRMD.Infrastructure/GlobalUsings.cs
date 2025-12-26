@@ -7,3 +7,6 @@ global using System.Data;
 global using System.Text.Json;
 global using CRMD.Domain.Orders;
 global using NpgsqlTypes;
+global using CRMD.Infrastructure.Menu;
+global using CRMD.Infrastructure.Orders.Persistence;
+global using Microsoft.Extensions.DependencyInjection;
