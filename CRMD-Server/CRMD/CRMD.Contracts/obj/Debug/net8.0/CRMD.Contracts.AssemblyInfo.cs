@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CRMD.Contracts")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4f0bff996c6f63eaffa3443bf7462ff047f82701")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f5f2e762718ee1254b0c4f104c458f1726c588fd")]
 [assembly: System.Reflection.AssemblyProductAttribute("CRMD.Contracts")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CRMD.Contracts")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
