@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CRMD.Application.MenuItems.Commands;
+using CRMD.Application.MenuItems.Queries;
 using CRMD.Contracts.MenuItems;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -32,7 +34,31 @@ namespace CRMD.Api.Controllers
              request.CategoryId <= 0)
                 return BadRequest("Invalid request");
 
-            return StatusCode(StatusCodes.Status501NotImplemented);
+            var cmd = new AddNewMenuItemCommand(request.Name,
+                request.Recipe,
+                request.Price,
+                request.CategoryId);
+            var addMenuItemResult = await _mediator.Send(cmd);
+            return addMenuItemResult.MatchFirst(
+                created => CreatedAtRoute("add-menu-item", created),
+                error => Problem(error.Description));
         }
+
+        [HttpGet(Name = "get-menu-items")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+
+        public async Task<IActionResult> GetMenuItems()
+        {
+            var query = new GetMenuItemsQuery();
+            var getMenuItemsResult = await _mediator.Send(query);
+            return getMenuItemsResult.MatchFirst(
+                menuItems => Ok(new GetMenuItemsResponse(menuItems)),
+                error => Problem(error.Description, error.Code)
+            );
+
+        }
+
     }
 }
