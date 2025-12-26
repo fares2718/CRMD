@@ -13,14 +13,14 @@ namespace CRMD.Infrastructure.Menu
         {
             using (var conn = new NpgsqlConnection(_connectionString))
             {
-                using (var cmd = new NpgsqlCommand("addmenuitem", conn))
+                using (var cmd = new NpgsqlCommand("restocafe.addmenuitem", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("name", menuItem.Name);
-                    cmd.Parameters.AddWithValue("price", menuItem.Price);
+                    cmd.Parameters.AddWithValue("name", NpgsqlDbType.Varchar, menuItem.Name);
+                    cmd.Parameters.Add("price", NpgsqlDbType.Money).Value = menuItem.Price;
                     cmd.Parameters.AddWithValue("categoryid", menuItem.CategoryId);
                     var itemsJson = JsonSerializer.Serialize(menuItem.Recipe.Ingredients);
-                    cmd.Parameters.AddWithValue("ingredients", itemsJson);
+                    cmd.Parameters.AddWithValue("ingredients", NpgsqlDbType.Jsonb, itemsJson);
                     await conn.OpenAsync();
                     await cmd.ExecuteNonQueryAsync();
                 }
@@ -33,7 +33,7 @@ namespace CRMD.Infrastructure.Menu
             using (var conn = new NpgsqlConnection(_connectionString))
             {
                 await conn.OpenAsync();
-                using (var cmd = new NpgsqlCommand("select * from restocafe.getmenuitems()", conn))
+                using (var cmd = new NpgsqlCommand("select * from restocafe.getallmenuitems()", conn))
                 {
                     var menuItems = new List<MenuItemDto>();
                     using (var reader = await cmd.ExecuteReaderAsync())

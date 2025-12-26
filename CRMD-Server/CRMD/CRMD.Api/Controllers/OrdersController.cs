@@ -15,7 +15,7 @@ public class OrdersController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpPost(Name = "place-order")]
+    [HttpPost("place-order", Name = "place-order")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -38,7 +38,7 @@ public class OrdersController : ControllerBase
         );
     }
 
-    [HttpGet(Name = "get-orders-by-date")]
+    [HttpGet("get-orders-by-date", Name = "get-orders-by-date")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

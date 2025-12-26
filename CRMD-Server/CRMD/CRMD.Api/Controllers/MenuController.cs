@@ -16,7 +16,7 @@ namespace CRMD.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost(Name = "add-menu-item")]
+        [HttpPost("add-menu-item", Name = "add-menu-item")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -38,7 +38,7 @@ namespace CRMD.Api.Controllers
                 error => Problem(error.Description));
         }
 
-        [HttpGet(Name = "get-menu-items")]
+        [HttpGet("get-menu-items", Name = "get-menu-items")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -54,7 +54,7 @@ namespace CRMD.Api.Controllers
 
         }
 
-        [HttpPut(Name = "update-recipe")]
+        [HttpPut("update-recipe", Name = "update-recipe")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

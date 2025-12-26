@@ -23,7 +23,7 @@ public class OrderRepository : IOrderRepository
                 cmd.Parameters.AddWithValue("createdat", order.CreatedAt);
                 cmd.Parameters.AddWithValue("leftat", order.LeftAt);
                 var orderItemsJson = JsonSerializer.Serialize(order.OrderItems);
-                cmd.Parameters.AddWithValue("orderitems",
+                cmd.Parameters.AddWithValue("orderitems", NpgsqlDbType.Jsonb,
                 orderItemsJson);
                 await conn.OpenAsync();
                 await cmd.ExecuteNonQueryAsync();
