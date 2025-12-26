@@ -1,8 +1,6 @@
 using CRMD.Application.Orders.Commands;
 using CRMD.Application.Orders.Queries;
 using CRMD.Contracts.Orders;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace CRMD.Api.Controllers;
 

@@ -1,6 +1,5 @@
 using CRMD.Api.Models;
 using CRMD.Api.Session;
-using CRMD.Application.DTOs;
 using Microsoft.AspNetCore.SignalR;
 
 namespace CRMD.Api.Hubs

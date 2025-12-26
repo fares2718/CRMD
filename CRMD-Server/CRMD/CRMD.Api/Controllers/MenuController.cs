@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CRMD.Application.MenuItems.Commands;
 using CRMD.Application.MenuItems.Queries;
 using CRMD.Contracts.MenuItems;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace CRMD.Api.Controllers
 {
