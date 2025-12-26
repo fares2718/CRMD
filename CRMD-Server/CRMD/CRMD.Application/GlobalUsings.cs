@@ -7,3 +7,5 @@ global using CRMD.Domain.Orders;
 global using CRMD.Domain.Menu;
 global using CRMD.Application.MenuItems.Commands;
 global using CRMD.Application.Orders.Commands;
+global using CRMD.Application.Employees.Commands;
+global using CRMD.Domain.Employees;

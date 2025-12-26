@@ -33,7 +33,7 @@ namespace CRMD.Infrastructure.Menu
             using (var conn = new NpgsqlConnection(_connectionString))
             {
                 await conn.OpenAsync();
-                using (var cmd = new NpgsqlCommand("getmenuitems", conn))
+                using (var cmd = new NpgsqlCommand("select * from restocafe.getmenuitems()", conn))
                 {
                     var menuItems = new List<MenuItemDto>();
                     using (var reader = await cmd.ExecuteReaderAsync())

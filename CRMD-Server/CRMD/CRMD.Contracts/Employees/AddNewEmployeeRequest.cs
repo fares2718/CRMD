@@ -3,8 +3,8 @@ namespace CRMD.Contracts.Employees
     public record AddNewEmployeeRequest(
     string Name,
     string[] Phones,
-    enRole[] Role,
+    enRole[] Roles,
     decimal Salary,
-    int departmentId
+    int DepartmentId
     );
 }

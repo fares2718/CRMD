@@ -10,5 +10,6 @@ public class MappingProfile : Profile
         CreateMap<AddNewMenuItemCommand, MenuItem>();
         CreateMap<RecipeDto, Recipe>();
         CreateMap<RecipeItemDto, RecipeItem>();
+        CreateMap<AddNewEmployeeCommand, Employee>();
     }
 }
