@@ -1,4 +1,6 @@
+using CRMD.Application.DTOs;
 using CRMD.Application.Employees.Commands;
+using CRMD.Application.Employees.Queries;
 using CRMD.Contracts.Employees;
 using ErrorOr;
 
@@ -38,6 +40,20 @@ namespace CRMD.Api.Controllers
             return addEmployeeResult.MatchFirst(
                 created => CreatedAtRoute("add-employee", Result.Created),
                 error => Problem(error.Description)
+            );
+        }
+
+        [HttpGet("get-all-employees", Name = "get-all-employees")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+        public async Task<IActionResult> GetAllEmployees()
+        {
+            var query = new GetAllEmployeesQuery();
+            var getAllEMployeesResult = await _mediator.Send(query);
+            return getAllEMployeesResult.MatchFirst(
+                employees => Ok(employees),
+                error => Problem(error.Description, error.Code)
             );
         }
     }

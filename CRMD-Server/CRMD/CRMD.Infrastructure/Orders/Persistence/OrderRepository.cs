@@ -36,7 +36,7 @@ public class OrderRepository : IOrderRepository
         var orders = new List<Order>();
         using (var conn = new NpgsqlConnection(_connectionString))
         {
-            using (var cmd = new NpgsqlCommand("select * from getordersbydate(@orderdate)", conn))
+            using (var cmd = new NpgsqlCommand("select * from restocafe.getordersbydate(@orderdate)", conn))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("orderdate", date);

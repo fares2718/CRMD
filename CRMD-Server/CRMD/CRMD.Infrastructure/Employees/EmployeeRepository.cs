@@ -15,7 +15,7 @@ namespace CRMD.Infrastructure.Employees
         {
             using (var conn = new NpgsqlConnection(_connectionString))
             {
-                using (var cmd = new NpgsqlCommand("addnewemployee", conn))
+                using (var cmd = new NpgsqlCommand("restocafe.addnewemployee", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("name", employee.Name);
@@ -27,6 +27,29 @@ namespace CRMD.Infrastructure.Employees
                     await cmd.ExecuteNonQueryAsync();
                 }
             }
+        }
+
+        public async Task<List<EmployeeDto>> GetAllEmployeesAsync()
+        {
+            var employees = new List<EmployeeDto>();
+            using (var conn = new NpgsqlConnection(_connectionString))
+            {
+                using (var cmd = new NpgsqlCommand("select * from restocafe.getallemployees()"))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    await conn.OpenAsync();
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (reader.Read())
+                        {
+                            var employee = Mapper.Map<EmployeeDto>(reader);
+                            employees.Add(employee);
+                        }
+                    }
+                }
+            }
+            return employees;
         }
     }
 }
