@@ -1,4 +1,4 @@
-namespace CRMD.Contracts.Employees
+namespace CRMD.Contracts.Employees.Post
 {
     public record AddNewEmployeeRequest(
     string Name,

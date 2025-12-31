@@ -50,5 +50,21 @@ namespace CRMD.Infrastructure.Employees
             }
             return employees;
         }
+
+        public async Task<EmployeeDto> GetEmployeeByIdAsync(int Id)
+        {
+            using (var conn = new NpgsqlConnection(_connectionString))
+            {
+                using (var cmd = new NpgsqlCommand("select * from restocafe.getemployeebyid", conn))
+                {
+                    cmd.Parameters.AddWithValue("id", Id);
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        var employee = Mapper.Map<EmployeeDto>(reader);
+                        return employee;
+                    }
+                }
+            }
+        }
     }
 }
