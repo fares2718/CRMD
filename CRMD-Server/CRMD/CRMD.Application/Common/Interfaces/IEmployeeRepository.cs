@@ -5,5 +5,6 @@ namespace CRMD.Application.Common.Interfaces
         public Task AddNewEmployeeAsync(Employee employee);
         public Task<List<EmployeeDto>> GetAllEmployeesAsync();
         public Task<EmployeeDto> GetEmployeeByIdAsync(int Id);
+        public Task UpdateEmployeeSalary(int Id, decimal newSalary);
     }
 }

@@ -2,6 +2,7 @@ using CRMD.Application.Employees.Commands;
 using CRMD.Application.Employees.Queries;
 using CRMD.Contracts.Employees.Get;
 using CRMD.Contracts.Employees.Post;
+using CRMD.Contracts.Employees.Put;
 using ErrorOr;
 
 namespace CRMD.Api.Controllers
@@ -43,7 +44,7 @@ namespace CRMD.Api.Controllers
             );
         }
 
-        [HttpGet("get-all-employees", Name = "get-all-employees")]
+        [HttpGet("get-all", Name = "get-all")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
 
@@ -52,21 +53,36 @@ namespace CRMD.Api.Controllers
             var query = new GetAllEmployeesQuery();
             var getAllEMployeesResult = await _mediator.Send(query);
             return getAllEMployeesResult.MatchFirst(
-                employees => Ok(employees),
+                employees => Ok(new GetAllEmployeesResponse(employees)),
                 error => Problem(error.Description, error.Code)
             );
         }
 
-        [HttpGet("get-employee-by-id", Name = "get-employee-by-id")]
+        [HttpGet("get-by-id/{Id}", Name = "get-by-id")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
 
-        public async Task<IActionResult> GetEmployeeById(GetEmployeeByIdRequest request)
+        public async Task<IActionResult> GetEmployeeById(int Id)
         {
-            var query = new GetEmployeeByIdQuery(request.Id);
+            var query = new GetEmployeeByIdQuery(Id);
             var getEmployeeByIdResult = await _mediator.Send(query);
             return getEmployeeByIdResult.MatchFirst(
-                employee => Ok(employee),
+                employee => Ok(new GetEmployeeByIdResponse(employee)),
+                error => Problem(error.Description, error.Code)
+            );
+        }
+
+        [HttpPut("update-salary", Name = "update-salary")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+        public async Task<IActionResult> UpdateEmployeeSalary(UpdateEmployeeSalaryRequest request)
+        {
+            var cmd = new UpdateEmployeeSalaryCommand(request.Id, request.newSalary);
+            var updateResult = await _mediator.Send(cmd);
+            return updateResult.MatchFirst(
+                updated => Ok(new UpdateEmployeeSalaryResponse(updated)),
                 error => Problem(error.Description, error.Code)
             );
         }

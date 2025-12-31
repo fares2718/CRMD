@@ -55,14 +55,30 @@ namespace CRMD.Infrastructure.Employees
         {
             using (var conn = new NpgsqlConnection(_connectionString))
             {
-                using (var cmd = new NpgsqlCommand("select * from restocafe.getemployeebyid", conn))
+                using (var cmd = new NpgsqlCommand("select * from restocafe.getemployeebyid(@id)", conn))
                 {
                     cmd.Parameters.AddWithValue("id", Id);
+                    await conn.OpenAsync();
                     using (var reader = await cmd.ExecuteReaderAsync())
                     {
                         var employee = Mapper.Map<EmployeeDto>(reader);
                         return employee;
                     }
+                }
+            }
+        }
+
+        public async Task UpdateEmployeeSalary(int Id, decimal newSalary)
+        {
+            using (var conn = new NpgsqlConnection(_connectionString))
+            {
+                using (var cmd = new NpgsqlCommand("restocafe.updateemployeesalary", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("id", Id);
+                    cmd.Parameters.AddWithValue("newsalary", NpgsqlDbType.Money, newSalary);
+                    await conn.OpenAsync();
+                    await cmd.ExecuteNonQueryAsync();
                 }
             }
         }
