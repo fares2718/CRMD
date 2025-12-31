@@ -13,7 +13,7 @@ public class OrderRepository : IOrderRepository
     {
         using (var conn = new NpgsqlConnection(_connectionString))
         {
-            using (var cmd = new NpgsqlCommand("addorder", conn))
+            using (var cmd = new NpgsqlCommand("restocafe.addorder", conn))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("tableid", order.TableId);
@@ -38,7 +38,6 @@ public class OrderRepository : IOrderRepository
         {
             using (var cmd = new NpgsqlCommand("select * from restocafe.getordersbydate(@orderdate)", conn))
             {
-                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("orderdate", date);
                 await conn.OpenAsync();
                 using (var reader = await cmd.ExecuteReaderAsync())

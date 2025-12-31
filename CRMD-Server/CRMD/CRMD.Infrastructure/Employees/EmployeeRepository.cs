@@ -34,14 +34,13 @@ namespace CRMD.Infrastructure.Employees
             var employees = new List<EmployeeDto>();
             using (var conn = new NpgsqlConnection(_connectionString))
             {
-                using (var cmd = new NpgsqlCommand("select * from restocafe.getallemployees()"))
+                await conn.OpenAsync();
+                using (var cmd = new NpgsqlCommand("SELECT * FROM restocafe.getallemployees()", conn))
                 {
 
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    await conn.OpenAsync();
                     using (var reader = await cmd.ExecuteReaderAsync())
                     {
-                        while (reader.Read())
+                        while (await reader.ReadAsync())
                         {
                             var employee = Mapper.Map<EmployeeDto>(reader);
                             employees.Add(employee);
