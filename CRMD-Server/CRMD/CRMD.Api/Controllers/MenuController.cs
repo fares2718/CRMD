@@ -1,6 +1,8 @@
 using CRMD.Application.MenuItems.Commands;
 using CRMD.Application.MenuItems.Queries;
-using CRMD.Contracts.MenuItems;
+using CRMD.Contracts.MenuItems.Get;
+using CRMD.Contracts.MenuItems.Post;
+using CRMD.Contracts.MenuItems.Put;
 
 namespace CRMD.Api.Controllers
 {

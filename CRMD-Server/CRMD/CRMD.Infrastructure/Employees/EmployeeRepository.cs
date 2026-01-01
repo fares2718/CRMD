@@ -61,8 +61,12 @@ namespace CRMD.Infrastructure.Employees
                     await conn.OpenAsync();
                     using (var reader = await cmd.ExecuteReaderAsync())
                     {
-                        var employee = Mapper.Map<EmployeeDto>(reader);
-                        return employee;
+                        if (await reader.ReadAsync())
+                        {
+                            var employee = Mapper.Map<EmployeeDto>(reader);
+                            return employee;
+                        }
+                        return new EmployeeDto();
                     }
                 }
             }

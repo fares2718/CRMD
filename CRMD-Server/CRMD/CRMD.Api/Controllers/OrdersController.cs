@@ -1,6 +1,7 @@
 using CRMD.Application.Orders.Commands;
 using CRMD.Application.Orders.Queries;
-using CRMD.Contracts.Orders;
+using CRMD.Contracts.Orders.Get;
+using CRMD.Contracts.Orders.Post;
 
 namespace CRMD.Api.Controllers;
 
@@ -54,4 +55,6 @@ public class OrdersController : ControllerBase
             error => Problem(error.Description)
         );
     }
+
+
 }

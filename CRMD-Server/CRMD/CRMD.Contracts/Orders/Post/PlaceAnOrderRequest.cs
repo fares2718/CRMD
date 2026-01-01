@@ -1,4 +1,4 @@
-namespace CRMD.Contracts.Orders;
+namespace CRMD.Contracts.Orders.Post;
 
 public record PlaceAnOrderRequest(List<OrderItemsDto> OrderItemsDtos,
     EnOrderType OrderType,
