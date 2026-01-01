@@ -1,3 +1,6 @@
+using CRMD.Application.PerchaseInvoices;
+using CRMD.Domain.PerchaseInvoices;
+
 namespace CRMD.Application.Map;
 
 public class MappingProfile : Profile
@@ -11,5 +14,6 @@ public class MappingProfile : Profile
         CreateMap<RecipeDto, Recipe>();
         CreateMap<RecipeItemDto, RecipeItem>();
         CreateMap<AddNewEmployeeCommand, Employee>();
+        CreateMap<AddPerchaseInvoiceCommand, PerchaseInvoice>();
     }
 }
