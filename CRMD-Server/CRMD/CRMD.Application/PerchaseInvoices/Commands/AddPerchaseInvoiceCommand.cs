@@ -4,5 +4,6 @@ public record AddPerchaseInvoiceCommand(
     int supplierId,
     decimal totalAmount,
     short paymentStatus,
-    DateTime date
+    DateTime date,
+    List<PerchaseInvoiceItemDto> invoiceItems
 ) : IRequest<ErrorOr<Created>>;

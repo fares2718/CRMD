@@ -6,5 +6,6 @@ public record AddPerchaseInvoiceRequest(
     int supplierId,
     decimal totalAmount,
     enPaymentStatus paymentStatus,
-    DateTime date
+    DateTime date,
+    List<PerchaseInvoiceItemDto> invoiceItems
 );
