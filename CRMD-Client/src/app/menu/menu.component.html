@@ -1,0 +1,13 @@
+<main>
+  @for (category of groupedMenuItems() | keyvalue; track category.key) {
+    <h2>{{ category.key }}</h2>
+
+    <ul>
+      @for (item of category.value; track item.menuItemId) {
+        <li>
+          {{ item.name }} - {{ item.price | currency: "USD" : "symbol" }}$
+        </li>
+      }
+    </ul>
+  }
+</main>
