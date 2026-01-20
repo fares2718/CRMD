@@ -1,7 +1,9 @@
 using CRMD.Application.Orders.Commands;
 using CRMD.Application.Orders.Queries;
+using CRMD.Contracts.Employees.Post;
 using CRMD.Contracts.Orders.Get;
 using CRMD.Contracts.Orders.Post;
+using ErrorOr;
 
 namespace CRMD.Api.Controllers;
 
@@ -34,7 +36,7 @@ public class OrdersController : ControllerBase
             request.CreatedAt);
         var placeAnOrderResult = await _mediator.Send(cmd);
         return placeAnOrderResult.MatchFirst(
-            created => CreatedAtRoute("place-order", new { request.CaptainId }),
+            created => CreatedAtRoute("place-order", new AddNewEmployeeResponse(created)),
             error => Problem(error.Description)
         );
     }
