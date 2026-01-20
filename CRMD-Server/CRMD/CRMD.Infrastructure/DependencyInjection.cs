@@ -1,5 +1,6 @@
 using CRMD.Infrastructure.Employees;
 using CRMD.Infrastructure.PerchaseInvoices.Persistence;
+using CRMD.Infrastructure.Suppliers.Persistence;
 
 namespace CRMD.Infrastructure;
 
@@ -22,6 +23,9 @@ public static class DependencyInjection
             _ => new EmployeeRepository(connectionString));
         services.AddScoped<IPerchaseInvoiceRepository>(
             _ => new PerchaseInvoiceRepository(connectionString)
+        );
+        services.AddScoped<ISupplierRepository>(
+            _ => new SupplierRepository(connectionString)
         );
         return services;
     }
