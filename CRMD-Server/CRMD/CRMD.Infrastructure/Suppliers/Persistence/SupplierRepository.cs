@@ -34,7 +34,7 @@ namespace CRMD.Infrastructure.Suppliers.Persistence
                 using (var cmd = new NpgsqlCommand("external.deletesupplier", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("supplierid", supplierId);
+                    cmd.Parameters.AddWithValue("id", supplierId);
                     await conn.OpenAsync();
                     await cmd.ExecuteNonQueryAsync();
                 }
@@ -68,6 +68,7 @@ namespace CRMD.Infrastructure.Suppliers.Persistence
             {
                 using (var cmd = new NpgsqlCommand("select * from external.getsuppliers()", conn))
                 {
+                    await conn.OpenAsync();
                     using (var reader = await cmd.ExecuteReaderAsync())
                     {
                         while (await reader.ReadAsync())
