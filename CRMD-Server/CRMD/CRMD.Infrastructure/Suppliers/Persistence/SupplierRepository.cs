@@ -18,9 +18,9 @@ namespace CRMD.Infrastructure.Suppliers.Persistence
                 using (var cmd = new NpgsqlCommand("external.addsupplier", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("name", supplier.Name);
-                    cmd.Parameters.AddWithValue("phones", supplier.Phones);
-                    cmd.Parameters.AddWithValue("Address", supplier.Address);
+                    cmd.Parameters.AddWithValue("name", NpgsqlDbType.Varchar, supplier.Name);
+                    cmd.Parameters.AddWithValue("phones", NpgsqlDbType.Array | NpgsqlDbType.Varchar, supplier.Phones);
+                    cmd.Parameters.AddWithValue("address", NpgsqlDbType.Varchar, supplier.Address);
                     await conn.OpenAsync();
                     await cmd.ExecuteNonQueryAsync();
                 }

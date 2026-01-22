@@ -18,11 +18,11 @@ namespace CRMD.Infrastructure.Employees
                 using (var cmd = new NpgsqlCommand("restocafe.addnewemployee", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("name", employee.Name);
-                    cmd.Parameters.AddWithValue("roles", employee.Roles);
-                    cmd.Parameters.AddWithValue("phones", employee.Phones);
+                    cmd.Parameters.AddWithValue("name", NpgsqlDbType.Varchar, employee.Name);
+                    cmd.Parameters.AddWithValue("roles", NpgsqlDbType.Array | NpgsqlDbType.Smallint, employee.Roles);
+                    cmd.Parameters.AddWithValue("phones", NpgsqlDbType.Array | NpgsqlDbType.Varchar, employee.Phones);
                     cmd.Parameters.AddWithValue("departmentid", employee.DepartmentId);
-                    cmd.Parameters.AddWithValue("salary", employee.Salary);
+                    cmd.Parameters.AddWithValue("salary", NpgsqlDbType.Money, employee.Salary);
                     await conn.OpenAsync();
                     await cmd.ExecuteNonQueryAsync();
                 }
