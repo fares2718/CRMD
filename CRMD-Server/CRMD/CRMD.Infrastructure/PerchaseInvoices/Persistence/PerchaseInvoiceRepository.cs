@@ -31,6 +31,23 @@ namespace CRMD.Infrastructure.PerchaseInvoices.Persistence
             }
         }
 
+        public async Task AddPerchaseInvoiceItem(PerchaseInvoiceItem item)
+        {
+            using (var conn = new NpgsqlConnection(_connectionString))
+            {
+                using (var cmd = new NpgsqlCommand("external.addperchaseinvoiceitem", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("itemid", item.ItemId);
+                    cmd.Parameters.AddWithValue("invoiceid", item.InvoiceId);
+                    cmd.Parameters.AddWithValue("quantity", item.Quntity);
+                    cmd.Parameters.AddWithValue("qtyprice", NpgsqlDbType.Money, item.qtyPrice);
+                    await conn.OpenAsync();
+                    await cmd.ExecuteNonQueryAsync();
+                }
+            }
+        }
+
         public async Task DeletePerchaseInvoice(int id)
         {
             using (var conn = new NpgsqlConnection(_connectionString))
@@ -39,6 +56,21 @@ namespace CRMD.Infrastructure.PerchaseInvoices.Persistence
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("invoiceid", id);
+                    await conn.OpenAsync();
+                    await cmd.ExecuteNonQueryAsync();
+                }
+            }
+        }
+
+        public async Task DeletePerchaseInvoiceItem(int invoiceId, int itemId)
+        {
+            using (var conn = new NpgsqlConnection(_connectionString))
+            {
+                using (var cmd = new NpgsqlCommand("external.deleteperchaseinvoiceitem", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("itemid", itemId);
+                    cmd.Parameters.AddWithValue("invoiceid", invoiceId);
                     await conn.OpenAsync();
                     await cmd.ExecuteNonQueryAsync();
                 }
