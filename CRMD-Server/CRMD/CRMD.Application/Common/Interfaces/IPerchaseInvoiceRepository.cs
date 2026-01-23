@@ -4,7 +4,10 @@ namespace CRMD.Application.Common.Interfaces
 {
     public interface IPerchaseInvoiceRepository
     {
-        public Task AddPerchaseInvoiceAsync(PerchaseInvoice perchaseInvoice);
-
+        Task AddPerchaseInvoiceAsync(PerchaseInvoice perchaseInvoice);
+        Task DeletePerchaseInvoice(int id);
+        Task<PerchaseInvoiceDto?> GetPerchaseIncoiceByDate(DateTime date);
+        Task<PerchaseInvoiceDto?> GetPerchaseIncoiceById(int id);
+        Task<List<PerchaseInvoiceItemDto>> GetPerchaseInvoiceItems(int invoiceId);
     }
 }

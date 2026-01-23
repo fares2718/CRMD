@@ -1,8 +1,9 @@
+using System.Transactions;
 using CRMD.Domain.PerchaseInvoices;
 
 namespace CRMD.Infrastructure.PerchaseInvoices.Persistence
 {
-    public class PerchaseInvoiceRepository : IPerchaseInvoiceRepository
+    internal class PerchaseInvoiceRepository : IPerchaseInvoiceRepository
     {
         private readonly string _connectionString;
 
@@ -29,5 +30,87 @@ namespace CRMD.Infrastructure.PerchaseInvoices.Persistence
                 }
             }
         }
+
+        public async Task DeletePerchaseInvoice(int id)
+        {
+            using (var conn = new NpgsqlConnection(_connectionString))
+            {
+                using (var cmd = new NpgsqlCommand("external.deleteperchaseinvoice", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("invoiceid", id);
+                    await conn.OpenAsync();
+                    await cmd.ExecuteNonQueryAsync();
+                }
+            }
+        }
+
+        public async Task<PerchaseInvoiceDto?> GetPerchaseIncoiceByDate(DateTime date)
+        {
+            using (var conn = new NpgsqlConnection(_connectionString))
+            {
+                using (var cmd = new NpgsqlCommand("select * from external.getperchaseinvoicebydate(@invoicedate)", conn))
+                {
+                    cmd.Parameters.AddWithValue("invoicedate", date);
+                    await conn.OpenAsync();
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        if (reader.Read())
+                        {
+                            var invoice = Mapper.Map<PerchaseInvoiceDto>(reader);
+                            return invoice;
+                        }
+                        return null;
+                    }
+                }
+            }
+        }
+
+        public async Task<PerchaseInvoiceDto?> GetPerchaseIncoiceById(int id)
+        {
+            using (var conn = new NpgsqlConnection(_connectionString))
+            {
+                using (var cmd = new NpgsqlCommand("select * from external.getperchaseinvoicebyid(@invoiceid)", conn))
+                {
+                    cmd.Parameters.AddWithValue("invoiceid", id);
+                    await conn.OpenAsync();
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        if (reader.Read())
+                        {
+                            var invoice = Mapper.Map<PerchaseInvoiceDto>(reader);
+                            return invoice;
+                        }
+                        return null;
+                    }
+                }
+            }
+        }
+
+        public async Task<List<PerchaseInvoiceItemDto>> GetPerchaseInvoiceItems(int invoiceId)
+        {
+            var items = new List<PerchaseInvoiceItemDto>();
+            using (var conn = new NpgsqlConnection(_connectionString))
+            {
+
+                using (var cmd = new NpgsqlCommand("SELECT * FROM external.getperchaseinvoiceitems(@invoiceid)", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("invoiceid", invoiceId);
+                    await conn.OpenAsync();
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            var item = Mapper.Map<PerchaseInvoiceItemDto>(reader);
+                            items.Add(item);
+                        }
+                    }
+                }
+            }
+            return items;
+        }
+
+
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CRMD.Application.DTOs
 {
-    public class PechaseInvoiceDto
+    public class PerchaseInvoiceDto
     {
         public int InvoiceId { get; set; }
         public int SupplierId { get; set; }

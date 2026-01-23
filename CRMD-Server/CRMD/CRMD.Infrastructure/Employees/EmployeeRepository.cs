@@ -48,10 +48,10 @@ namespace CRMD.Infrastructure.Employees
             var employees = new List<EmployeeDto>();
             using (var conn = new NpgsqlConnection(_connectionString))
             {
-                await conn.OpenAsync();
+
                 using (var cmd = new NpgsqlCommand("SELECT * FROM restocafe.getallemployees()", conn))
                 {
-
+                    await conn.OpenAsync();
                     using (var reader = await cmd.ExecuteReaderAsync())
                     {
                         while (await reader.ReadAsync())
