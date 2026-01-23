@@ -1,5 +1,6 @@
 using CRMD.Application.Employees.Commands;
 using CRMD.Application.Employees.Queries;
+using CRMD.Contracts.Employees.Delete;
 using CRMD.Contracts.Employees.Get;
 using CRMD.Contracts.Employees.Post;
 using CRMD.Contracts.Employees.Put;
@@ -43,6 +44,22 @@ namespace CRMD.Api.Controllers
                 error => Problem(error.Description)
             );
         }
+
+        [HttpDelete("delete-employee/{id}", Name = "delete-employee")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+
+        public async Task<IActionResult> DeleteEmployee(int id)
+        {
+            var cmd = new DeleteEmployeeCommand(id);
+            var deleteEmployeeResult = await _mediator.Send(cmd);
+            return deleteEmployeeResult.MatchFirst(
+                deleted => Ok(new DeleteEmployeeResponse(deleted)),
+                error => error.Type == ErrorType.Validation ? BadRequest(new DeleteEmployeeResponse(error)) : Problem(new DeleteEmployeeResponse(error).ToString())
+            );
+        }
+
 
         [HttpGet("get-all", Name = "get-all")]
         [ProducesResponseType(StatusCodes.Status200OK)]

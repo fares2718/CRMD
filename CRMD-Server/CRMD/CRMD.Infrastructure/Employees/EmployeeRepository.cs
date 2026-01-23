@@ -15,7 +15,7 @@ namespace CRMD.Infrastructure.Employees
         {
             using (var conn = new NpgsqlConnection(_connectionString))
             {
-                using (var cmd = new NpgsqlCommand("restocafe.addnewemployee", conn))
+                using (var cmd = new NpgsqlCommand("restocafe.addemployee", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("name", NpgsqlDbType.Varchar, employee.Name);
@@ -23,6 +23,20 @@ namespace CRMD.Infrastructure.Employees
                     cmd.Parameters.AddWithValue("phones", NpgsqlDbType.Array | NpgsqlDbType.Varchar, employee.Phones);
                     cmd.Parameters.AddWithValue("departmentid", employee.DepartmentId);
                     cmd.Parameters.AddWithValue("salary", NpgsqlDbType.Money, employee.Salary);
+                    await conn.OpenAsync();
+                    await cmd.ExecuteNonQueryAsync();
+                }
+            }
+        }
+
+        public async Task DeleteEmployee(int id)
+        {
+            using (var conn = new NpgsqlConnection(_connectionString))
+            {
+                using (var cmd = new NpgsqlCommand("restocafe.deleteemployee", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("id", id);
                     await conn.OpenAsync();
                     await cmd.ExecuteNonQueryAsync();
                 }
