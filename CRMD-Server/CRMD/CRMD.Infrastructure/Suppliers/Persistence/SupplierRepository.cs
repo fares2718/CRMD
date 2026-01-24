@@ -46,7 +46,7 @@ namespace CRMD.Infrastructure.Suppliers.Persistence
 
         public async Task<Supplier?> GetSupplierByIdAsync(int supplierId)
         {
-            using (var conn = new NpgsqlConnection(_connectionString))
+            /*using (var conn = new NpgsqlConnection(_connectionString))
             {
                 using (var cmd = new NpgsqlCommand("select * from external.getsupplierbyid(@supplierid)", conn))
                 {
@@ -61,13 +61,24 @@ namespace CRMD.Infrastructure.Suppliers.Persistence
                     }
                 }
             }
-            return null;
+            return null;*/
+            using (var reader = await GenericRepository<Supplier>
+            .GetByIdAsync(supplierId, _connectionString, "external.getsupplierbyid(@supplierid)"))
+            {
+                Supplier supplier = new Supplier();
+                if (reader != null && await reader.ReadAsync())
+                {
+                    supplier = Mapper.Map<Supplier>(reader);
+                }
+                NpgsqlConnection.ClearAllPools();
+                return supplier;
+            }
         }
 
         public async Task<List<Supplier>> GetSuppliersAsync()
         {
             var suppliers = new List<Supplier>();
-            using (var conn = new NpgsqlConnection(_connectionString))
+            /*using (var conn = new NpgsqlConnection(_connectionString))
             {
                 using (var cmd = new NpgsqlCommand("select * from external.getsuppliers()", conn))
                 {
@@ -82,7 +93,18 @@ namespace CRMD.Infrastructure.Suppliers.Persistence
                     }
                 }
             }
-            return suppliers;
+            return suppliers;*/
+            using (var reader = await GenericRepository<Supplier>
+            .GetAllAsync(_connectionString, "external.getsuppliers(@supplierid)"))
+            {
+                while (await reader.ReadAsync())
+                {
+                    var supplier = Mapper.Map<Supplier>(reader);
+                    suppliers.Add(supplier);
+                }
+                NpgsqlConnection.ClearAllPools();
+                return suppliers;
+            }
         }
     }
 }
