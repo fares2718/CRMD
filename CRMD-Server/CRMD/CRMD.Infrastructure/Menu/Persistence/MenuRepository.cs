@@ -1,6 +1,8 @@
+using CRMD.Infrastructure.Generics;
+
 namespace CRMD.Infrastructure.Menu
 {
-    public class MenuRepository : IMenuRepository
+    internal class MenuRepository : IMenuRepository
     {
         private readonly string _connectionString;
 
@@ -11,7 +13,7 @@ namespace CRMD.Infrastructure.Menu
 
         public async Task AddMenuItemAsync(MenuItem menuItem)
         {
-            using (var conn = new NpgsqlConnection(_connectionString))
+            /*using (var conn = new NpgsqlConnection(_connectionString))
             {
                 using (var cmd = new NpgsqlCommand("restocafe.addmenuitem", conn))
                 {
@@ -25,17 +27,24 @@ namespace CRMD.Infrastructure.Menu
                     await cmd.ExecuteNonQueryAsync();
                 }
 
-            }
+            }*/
+            await GenericRepository<MenuItem>.AddAsync(menuItem, _connectionString, "restocafe.addmenuitem");
+        }
+
+        public async Task DeleteMenuItemAsync(int Id)
+        {
+            await GenericRepository<MenuItem>.DeleteAsync(Id, _connectionString, "restocafe.deletemenuitem");
         }
 
         public async Task<List<MenuItemDto>> GetAllMenuItemsAsync()
         {
-            using (var conn = new NpgsqlConnection(_connectionString))
+            var menuItems = new List<MenuItemDto>();
+            /*using (var conn = new NpgsqlConnection(_connectionString))
             {
                 await conn.OpenAsync();
                 using (var cmd = new NpgsqlCommand("select * from restocafe.getallmenuitems()", conn))
                 {
-                    var menuItems = new List<MenuItemDto>();
+                    
                     using (var reader = await cmd.ExecuteReaderAsync())
                     {
                         while (await reader.ReadAsync())
@@ -46,12 +55,38 @@ namespace CRMD.Infrastructure.Menu
                     }
                     return menuItems;
                 }
+            }*/
+            using (var reader = await GenericRepository<List<EmployeeDto>>.
+                GetAllAsync(_connectionString, "restocafe.getallmenuitems()"))
+            {
+                while (await reader.ReadAsync())
+                {
+                    var menuItem = Mapper.Map<MenuItemDto>(reader);
+                    menuItems.Add(menuItem);
+                }
+                NpgsqlConnection.ClearAllPools();
+                return menuItems;
             }
         }
 
-        public async Task UpdateRecipeAsync(List<RecipeItem> recipeItems)
+        public async Task<MenuItemDto> GetMenuItemByIdAsync(int Id)
         {
-            using (var conn = new NpgsqlConnection(_connectionString))
+            using (var reader = await GenericRepository<MenuItemDto>
+            .GetByIdAsync(Id, _connectionString, "restocafe.getmenuitembyid(@id)"))
+            {
+                MenuItemDto item = new MenuItemDto();
+                if (reader != null && await reader.ReadAsync())
+                {
+                    item = Mapper.Map<MenuItemDto>(reader);
+                }
+                NpgsqlConnection.ClearAllPools();
+                return item;
+            }
+        }
+
+        public async Task UpdateRecipeAsync(Recipe newRecipe)
+        {
+            /*using (var conn = new NpgsqlConnection(_connectionString))
             {
                 using (var cmd = new NpgsqlCommand("updaterecipe", conn))
                 {
@@ -61,7 +96,8 @@ namespace CRMD.Infrastructure.Menu
                     await conn.OpenAsync();
                     await cmd.ExecuteNonQueryAsync();
                 }
-            }
+            }*/
+            await GenericRepository<Recipe>.UpdateAsync(newRecipe, _connectionString, "restocafe.updaterecipe");
         }
     }
 }

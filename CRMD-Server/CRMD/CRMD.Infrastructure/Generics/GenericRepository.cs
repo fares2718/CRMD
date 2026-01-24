@@ -86,7 +86,8 @@ namespace CRMD.Infrastructure.Generics
                 var param = new NpgsqlParameter
                 {
                     ParameterName = prop.Name.ToLower(),
-                    Value = value,
+                    Value = dbType == NpgsqlDbType.Jsonb ?
+                    JsonSerializer.Serialize(value) : value,
                     NpgsqlDbType = dbType
                 };
 
@@ -104,8 +105,9 @@ namespace CRMD.Infrastructure.Generics
             if (type == typeof(bool)) return NpgsqlDbType.Boolean;
             if (type == typeof(DateTime)) return NpgsqlDbType.TimestampTz;
             if (type == typeof(decimal)) return NpgsqlDbType.Numeric;
+            if (type == typeof(List<>)) return NpgsqlDbType.Jsonb;
 
-            return NpgsqlDbType.Text; // fallback
+            return NpgsqlDbType.Jsonb; // fallback
         }
     }
 }
