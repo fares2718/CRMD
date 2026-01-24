@@ -25,7 +25,7 @@ namespace CRMD.Infrastructure.Items.Persistence
         public async Task<ItemDto?> GetItemByIdAsync(int Id)
         {
             using (var reader = await GenericRepository<ItemDto>
-            .GetByIdAsync(Id, _connectionString, "getitembyid(@id)"))
+            .GetByIdAsync(Id, _connectionString, "inventory.getitembyid(@id)"))
             {
                 ItemDto item = new ItemDto();
                 if (reader != null && await reader.ReadAsync())
@@ -41,7 +41,7 @@ namespace CRMD.Infrastructure.Items.Persistence
         {
             var items = new List<ItemDto>();
             using (var reader = await GenericRepository<ItemDto>
-            .GetAllAsync(_connectionString, "getitems()"))
+            .GetAllAsync(_connectionString, "inventory.getitems()"))
             {
                 while (await reader.ReadAsync())
                 {
@@ -51,6 +51,11 @@ namespace CRMD.Infrastructure.Items.Persistence
                 NpgsqlConnection.ClearAllPools();
                 return items;
             }
+        }
+
+        public async Task UpdateItemAsync(Item newItemData)
+        {
+            await GenericRepository<Item>.UpdateAsync(newItemData, _connectionString, "inventory.updateitem");
         }
     }
 }
