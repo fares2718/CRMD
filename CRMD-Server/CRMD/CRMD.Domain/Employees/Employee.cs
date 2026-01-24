@@ -1,7 +1,10 @@
+using CRMD.Domain.Attributes;
+
 namespace CRMD.Domain.Employees
 {
     public class Employee
     {
+        [IgnoreOn(enOperationMode.Add)]
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         public short[] Roles { get; set; } = null!;

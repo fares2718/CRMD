@@ -1,4 +1,5 @@
 using CRMD.Domain.Employees;
+using CRMD.Infrastructure.Generics;
 
 namespace CRMD.Infrastructure.Employees
 {
@@ -13,7 +14,7 @@ namespace CRMD.Infrastructure.Employees
 
         public async Task AddNewEmployeeAsync(Employee employee)
         {
-            using (var conn = new NpgsqlConnection(_connectionString))
+            /*using (var conn = new NpgsqlConnection(_connectionString))
             {
                 using (var cmd = new NpgsqlCommand("restocafe.addemployee", conn))
                 {
@@ -26,12 +27,13 @@ namespace CRMD.Infrastructure.Employees
                     await conn.OpenAsync();
                     await cmd.ExecuteNonQueryAsync();
                 }
-            }
+            }*/
+            await GenericRepository<Employee>.AddAsync(employee, _connectionString, "restocafe.addemployee");
         }
 
         public async Task DeleteEmployee(int id)
         {
-            using (var conn = new NpgsqlConnection(_connectionString))
+            /*using (var conn = new NpgsqlConnection(_connectionString))
             {
                 using (var cmd = new NpgsqlCommand("restocafe.deleteemployee", conn))
                 {
@@ -40,13 +42,14 @@ namespace CRMD.Infrastructure.Employees
                     await conn.OpenAsync();
                     await cmd.ExecuteNonQueryAsync();
                 }
-            }
+            }*/
+            await GenericRepository<Employee>.DeleteAsync(id, _connectionString, "restocafe.deleteemployee");
         }
 
         public async Task<List<EmployeeDto>> GetAllEmployeesAsync()
         {
             var employees = new List<EmployeeDto>();
-            using (var conn = new NpgsqlConnection(_connectionString))
+            /*using (var conn = new NpgsqlConnection(_connectionString))
             {
 
                 using (var cmd = new NpgsqlCommand("SELECT * FROM restocafe.getallemployees()", conn))
@@ -62,12 +65,23 @@ namespace CRMD.Infrastructure.Employees
                     }
                 }
             }
-            return employees;
+            return employees;*/
+            using (var reader = await GenericRepository<List<EmployeeDto>>.
+                GetAllAsync(_connectionString, "restocafe.getallemployees()"))
+            {
+                while (await reader.ReadAsync())
+                {
+                    var employee = Mapper.Map<EmployeeDto>(reader);
+                    employees.Add(employee);
+                }
+                NpgsqlConnection.ClearAllPools();
+                return employees;
+            }
         }
 
         public async Task<EmployeeDto> GetEmployeeByIdAsync(int Id)
         {
-            using (var conn = new NpgsqlConnection(_connectionString))
+            /*using (var conn = new NpgsqlConnection(_connectionString))
             {
                 using (var cmd = new NpgsqlCommand("select * from restocafe.getemployeebyid(@id)", conn))
                 {
@@ -83,6 +97,17 @@ namespace CRMD.Infrastructure.Employees
                         return new EmployeeDto();
                     }
                 }
+            }*/
+            using (var reader = await GenericRepository<EmployeeDto>
+            .GetByIdAsync(Id, _connectionString, "restocafe.getemployeebyid(@id)"))
+            {
+                EmployeeDto employee = new EmployeeDto();
+                if (reader != null && await reader.ReadAsync())
+                {
+                    employee = Mapper.Map<EmployeeDto>(reader);
+                }
+                NpgsqlConnection.ClearAllPools();
+                return employee;
             }
         }
 
