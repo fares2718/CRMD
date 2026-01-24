@@ -3,11 +3,11 @@ using CRMD.Infrastructure.Generics;
 
 namespace CRMD.Infrastructure.Items.Persistence
 {
-    internal class ItemsRepository
+    internal class ItemRepository : IItemRepository
     {
         private readonly string _connectionString;
 
-        public ItemsRepository(string connectionString)
+        public ItemRepository(string connectionString)
         {
             _connectionString = connectionString;
         }
