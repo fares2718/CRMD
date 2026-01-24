@@ -14,25 +14,7 @@ namespace CRMD.Infrastructure.Generics
                 using (var cmd = new NpgsqlCommand(procedureName, conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    foreach (var prop in typeof(T).GetProperties())
-                    {
-                        var ignoreAttrs = prop.GetCustomAttributes<IgnoreOnAttribute>();
-                        if (ignoreAttrs.Any(a => a.operationMode == enOperationMode.Add))
-                            continue;
-
-                        var value = prop.GetValue(entity) ?? DBNull.Value;
-                        var dbType = _MapType(prop.PropertyType);
-
-                        var param = new NpgsqlParameter
-                        {
-                            ParameterName = prop.Name.ToLower(),
-                            Value = value,
-                            NpgsqlDbType = dbType
-                        };
-
-                        cmd.Parameters.Add(param);
-
-                    }
+                    _AddCommandParameters(cmd, entity, enOperationMode.Add);
                     await conn.OpenAsync();
                     await cmd.ExecuteNonQueryAsync();
                 }
@@ -76,7 +58,42 @@ namespace CRMD.Infrastructure.Generics
             return reader;
         }
 
+        public static async Task UpdateAsync(T newEntityData, string connectionString, string procedureName)
+        {
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                using (var cmd = new NpgsqlCommand(procedureName, conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    _AddCommandParameters(cmd, newEntityData, enOperationMode.Update);
+                    await conn.OpenAsync();
+                    await cmd.ExecuteNonQueryAsync();
+                }
+            }
+        }
 
+        private static void _AddCommandParameters(NpgsqlCommand cmd, T entity, enOperationMode ignoreMode)
+        {
+            foreach (var prop in typeof(T).GetProperties())
+            {
+                var ignoreAttrs = prop.GetCustomAttributes<IgnoreOnAttribute>();
+                if (ignoreAttrs.Any(a => a.operationMode == ignoreMode))
+                    continue;
+
+                var value = prop.GetValue(entity) ?? DBNull.Value;
+                var dbType = _MapType(prop.PropertyType);
+
+                var param = new NpgsqlParameter
+                {
+                    ParameterName = prop.Name.ToLower(),
+                    Value = value,
+                    NpgsqlDbType = dbType
+                };
+
+                cmd.Parameters.Add(param);
+
+            }
+        }
         private static NpgsqlDbType _MapType(Type type)
         {
             if (type == typeof(int)) return NpgsqlDbType.Integer;
