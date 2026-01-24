@@ -1,3 +1,5 @@
+using CRMD.Infrastructure.Generics;
+
 namespace CRMD.Infrastructure.Orders.Persistence;
 
 public class OrderRepository : IOrderRepository
@@ -11,7 +13,7 @@ public class OrderRepository : IOrderRepository
 
     public async Task AddOrderAsync(Order order)
     {
-        using (var conn = new NpgsqlConnection(_connectionString))
+        /*using (var conn = new NpgsqlConnection(_connectionString))
         {
             using (var cmd = new NpgsqlCommand("restocafe.addorder", conn))
             {
@@ -28,7 +30,8 @@ public class OrderRepository : IOrderRepository
                 await conn.OpenAsync();
                 await cmd.ExecuteNonQueryAsync();
             }
-        }
+        }*/
+        await GenericRepository<Order>.AddAsync(order, _connectionString, "restocafe.addorder");
     }
 
     public async Task<List<Order>> GetOrdersByDateAsync(DateTime date)

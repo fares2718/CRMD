@@ -1,7 +1,10 @@
+using CRMD.Domain.Attributes;
+
 namespace CRMD.Domain.Orders;
 
 public class Order
 {
+    [IgnoreOn(enOperationMode.Add)]
     public int Id { get; set; }
     public int TableId { get; set; }
     public int CaptainId { get; set; }
