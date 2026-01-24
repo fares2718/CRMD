@@ -1,6 +1,6 @@
 namespace CRMD.Domain.Attributes
 {
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true)]
     public class IgnoreOnAttribute : Attribute
     {
         public enOperationMode operationMode { get; }
