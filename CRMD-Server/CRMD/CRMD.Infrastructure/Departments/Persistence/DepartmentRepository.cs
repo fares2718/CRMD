@@ -57,5 +57,6 @@ namespace CRMD.Infrastructure.Departments.Persistence
         {
             await GenericRepository<Department>.UpdateAsync(newDepartmentData, _connectionString, "restocafe.updatedepartmen");
         }
+
     }
 }
