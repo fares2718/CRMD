@@ -4,9 +4,9 @@ namespace CRMD.Application.Common.Interfaces
 {
     public interface ISupplierRepository
     {
-        Task AddSupplier(Supplier supplier);
-        Task DeleteSupplier(int supplierId);
-        Task<Supplier?> GetSupplierById(int supplierId);
-        Task<List<Supplier>> GetSuppliers();
+        Task AddSupplierAsync(Supplier supplier);
+        Task DeleteSupplierAsync(int supplierId);
+        Task<Supplier?> GetSupplierByIdAsync(int supplierId);
+        Task<List<Supplier>> GetSuppliersAsync();
     }
 }

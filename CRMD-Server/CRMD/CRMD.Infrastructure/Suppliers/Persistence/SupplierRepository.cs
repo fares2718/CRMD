@@ -1,4 +1,5 @@
 using CRMD.Domain.Suppliers;
+using CRMD.Infrastructure.Generics;
 
 namespace CRMD.Infrastructure.Suppliers.Persistence
 {
@@ -11,9 +12,9 @@ namespace CRMD.Infrastructure.Suppliers.Persistence
             _connectionString = connectionString;
         }
 
-        public async Task AddSupplier(Supplier supplier)
+        public async Task AddSupplierAsync(Supplier supplier)
         {
-            using (var conn = new NpgsqlConnection(_connectionString))
+            /*using (var conn = new NpgsqlConnection(_connectionString))
             {
                 using (var cmd = new NpgsqlCommand("external.addsupplier", conn))
                 {
@@ -24,12 +25,13 @@ namespace CRMD.Infrastructure.Suppliers.Persistence
                     await conn.OpenAsync();
                     await cmd.ExecuteNonQueryAsync();
                 }
-            }
+            }*/
+            await GenericRepository<Supplier>.AddAsync(supplier, _connectionString, "external.addsupplier");
         }
 
-        public async Task DeleteSupplier(int supplierId)
+        public async Task DeleteSupplierAsync(int Id)
         {
-            using (var conn = new NpgsqlConnection(_connectionString))
+            /*using (var conn = new NpgsqlConnection(_connectionString))
             {
                 using (var cmd = new NpgsqlCommand("external.deletesupplier", conn))
                 {
@@ -38,10 +40,11 @@ namespace CRMD.Infrastructure.Suppliers.Persistence
                     await conn.OpenAsync();
                     await cmd.ExecuteNonQueryAsync();
                 }
-            }
+            }*/
+            await GenericRepository<Supplier>.DeleteAsync(Id, _connectionString, "external.deletesupplier");
         }
 
-        public async Task<Supplier?> GetSupplierById(int supplierId)
+        public async Task<Supplier?> GetSupplierByIdAsync(int supplierId)
         {
             using (var conn = new NpgsqlConnection(_connectionString))
             {
@@ -61,7 +64,7 @@ namespace CRMD.Infrastructure.Suppliers.Persistence
             return null;
         }
 
-        public async Task<List<Supplier>> GetSuppliers()
+        public async Task<List<Supplier>> GetSuppliersAsync()
         {
             var suppliers = new List<Supplier>();
             using (var conn = new NpgsqlConnection(_connectionString))
