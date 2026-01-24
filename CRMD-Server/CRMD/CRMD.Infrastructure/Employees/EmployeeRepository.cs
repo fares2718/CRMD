@@ -31,7 +31,7 @@ namespace CRMD.Infrastructure.Employees
             await GenericRepository<Employee>.AddAsync(employee, _connectionString, "restocafe.addemployee");
         }
 
-        public async Task DeleteEmployee(int id)
+        public async Task DeleteEmployeeAsync(int id)
         {
             /*using (var conn = new NpgsqlConnection(_connectionString))
             {
