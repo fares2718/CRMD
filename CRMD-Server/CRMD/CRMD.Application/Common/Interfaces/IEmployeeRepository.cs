@@ -6,6 +6,6 @@ namespace CRMD.Application.Common.Interfaces
         Task DeleteEmployee(int id);
         public Task<List<EmployeeDto>> GetAllEmployeesAsync();
         public Task<EmployeeDto> GetEmployeeByIdAsync(int Id);
-        public Task UpdateEmployeeSalary(int Id, decimal newSalary);
+        public Task UpdateEmployeeAsync(Employee newEmployeeData);
     }
 }

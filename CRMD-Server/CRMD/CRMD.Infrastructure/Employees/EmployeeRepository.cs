@@ -111,19 +111,9 @@ namespace CRMD.Infrastructure.Employees
             }
         }
 
-        public async Task UpdateEmployeeSalary(int Id, decimal newSalary)
+        public async Task UpdateEmployeeAsync(Employee newEmployeeDtat)
         {
-            using (var conn = new NpgsqlConnection(_connectionString))
-            {
-                using (var cmd = new NpgsqlCommand("restocafe.updateemployeesalary", conn))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("id", Id);
-                    cmd.Parameters.AddWithValue("newsalary", NpgsqlDbType.Money, newSalary);
-                    await conn.OpenAsync();
-                    await cmd.ExecuteNonQueryAsync();
-                }
-            }
+            await GenericRepository<Employee>.UpdateAsync(newEmployeeDtat, _connectionString, "restocafe.updateemployee");
         }
     }
 }

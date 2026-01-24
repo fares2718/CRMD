@@ -6,6 +6,7 @@ namespace CRMD.Domain.Employees
     {
         [IgnoreOn(enOperationMode.Add)]
         public int Id { get; set; }
+        [IgnoreOn(enOperationMode.Update)]
         public string Name { get; set; } = null!;
         public short[] Roles { get; set; } = null!;
         public int DepartmentId { get; set; }
