@@ -24,9 +24,7 @@ namespace CRMD.Application.Departments.Commands
             }
             catch (Exception ex)
             {
-                if (ex.Equals(ErrorType.NotFound))
-                    return Error.NotFound();
-                return Error.Failure();
+                return Error.Failure(ex.Message);
             }
 
 
