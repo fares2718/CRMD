@@ -44,8 +44,8 @@ namespace CRMD.Api.Controllers
             var deleteDepartmentResult = await _mediator.Send(cmd);
             return deleteDepartmentResult.MatchFirst(
                 deleted => Ok(new DeleteDepartmentResponse(deleted)),
-                error => error.Type == ErrorType.NotFound ? NotFound(new DeleteDepartmentResponse(error))
-                : Problem(new DeleteDepartmentResponse(error).ToString())
+                error => error.Type == ErrorType.Validation ? BadRequest(new DeleteDepartmentResponse(error))
+                : error.Type == ErrorType.NotFound ? NotFound(new DeleteDepartmentResponse(error)) : Problem(new DeleteDepartmentResponse(error).ToString())
             );
         }
     }
