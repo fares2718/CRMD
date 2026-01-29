@@ -9,6 +9,7 @@ namespace CRMD.Domain.InventoryItems
         [IgnoreOn(enOperationMode.Update)]
         decimal MinLevel { get; set; }
         [IgnoreOn(enOperationMode.Update)]
+        [IgnoreOn(enOperationMode.Add)]
         DateTime CreatedAt { get; set; }
         [IgnoreOn(enOperationMode.Add)]
         [IgnoreOn(enOperationMode.Update)]
