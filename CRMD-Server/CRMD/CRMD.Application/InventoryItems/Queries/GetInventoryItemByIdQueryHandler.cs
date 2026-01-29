@@ -1,7 +1,7 @@
 using CRMD.Application.Generics.Queries;
 using CRMD.Domain.InventoryItems;
 
-namespace CRMD.Application.Users.Queries
+namespace CRMD.Application.InventoryItems.Queries
 {
     public class GetInventoryItemByIdQueryHandler : IRequestHandler<GetByIdQuery<InventoryItem>, ErrorOr<InventoryItem>>
     {
