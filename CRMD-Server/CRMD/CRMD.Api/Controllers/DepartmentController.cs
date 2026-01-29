@@ -1,9 +1,8 @@
 using CRMD.Application.Departments.Commands;
 using CRMD.Application.Departments.Queries;
-using CRMD.Contracts.Departments.Delete;
-using CRMD.Contracts.Departments.Get;
 using CRMD.Contracts.Departments.Post;
 using CRMD.Contracts.Departments.Put;
+using CRMD.Domain.Departments;
 using ErrorOr;
 
 namespace CRMD.Api.Controllers
@@ -29,9 +28,9 @@ namespace CRMD.Api.Controllers
             var cmd = new AddDepartmentCommand(request.Name, request.employeesCount);
             var addDepartmentResult = await _mediator.Send(cmd);
             return addDepartmentResult.MatchFirst(
-                created => CreatedAtRoute("add-department", new AddDepartmentResponse(created)),
-                error => error.Type == ErrorType.Validation ? BadRequest(new AddDepartmentResponse(error)) :
-                Problem(new AddDepartmentResponse(error).ToString())
+                created => CreatedAtRoute("add-department", new AddResponse(created)),
+                error => error.Type == ErrorType.Validation ? BadRequest(new AddResponse(error)) :
+                Problem(new AddResponse(error).ToString())
             );
         }
 
@@ -46,9 +45,9 @@ namespace CRMD.Api.Controllers
             var cmd = new DeleteDepartmentCommand(id);
             var deleteDepartmentResult = await _mediator.Send(cmd);
             return deleteDepartmentResult.MatchFirst(
-                deleted => Ok(new DeleteDepartmentResponse(deleted)),
-                error => error.Type == ErrorType.Validation ? BadRequest(new DeleteDepartmentResponse(error))
-                : Problem(new DeleteDepartmentResponse(error).ToString())
+                deleted => Ok(new DeleteResponse(deleted)),
+                error => error.Type == ErrorType.Validation ? BadRequest(new DeleteResponse(error))
+                : Problem(new DeleteResponse(error).ToString())
             );
         }
 
@@ -63,9 +62,9 @@ namespace CRMD.Api.Controllers
             var query = new GetAllDepartmentsQuery();
             var getDepartmentsResult = await _mediator.Send(query);
             return getDepartmentsResult.MatchFirst(
-                departments => Ok(new GetAllDepartmentsResponse(departments)),
-                error => error.Type == ErrorType.NotFound ? NotFound(new GetAllDepartmentsResponse(error))
-                : Problem(new GetAllDepartmentsResponse(error).ToString())
+                departments => Ok(new GetAllResponse<Department>(departments)),
+                error => error.Type == ErrorType.NotFound ? NotFound(new GetAllResponse<Department>(error))
+                : Problem(new GetAllResponse<Department>(error).ToString())
             );
         }
 
@@ -80,10 +79,10 @@ namespace CRMD.Api.Controllers
             var query = new GetDepartmentByIdQuery(Id);
             var getDepartmentResult = await _mediator.Send(query);
             return getDepartmentResult.MatchFirst(
-                department => Ok(new GetDepartmentByIdResponse(department)),
-                error => error.Type == ErrorType.Validation ? BadRequest(new GetDepartmentByIdResponse(error))
-                : error.Type == ErrorType.NotFound ? NotFound(new GetDepartmentByIdResponse(error))
-                : Problem(new GetDepartmentByIdResponse(error).ToString())
+                department => Ok(new GetByIdResponse<Department>(department)),
+                error => error.Type == ErrorType.Validation ? BadRequest(new GetByIdResponse<Department>(error))
+                : error.Type == ErrorType.NotFound ? NotFound(new GetByIdResponse<Department>(error))
+                : Problem(new GetByIdResponse<Department>(error).ToString())
             );
         }
 
@@ -98,9 +97,9 @@ namespace CRMD.Api.Controllers
             var cmd = new UpdateDepartmentCommand(request.Id, request.employeesCount);
             var updateDepartmentResult = await _mediator.Send(cmd);
             return updateDepartmentResult.MatchFirst(
-                updated => Ok(new UpdateDepartmentResponse(updated)),
-                error => error.Type == ErrorType.Validation ? BadRequest(new UpdateDepartmentResponse(error))
-                : Problem(new UpdateDepartmentResponse(error).ToString())
+                updated => Ok(new UpdateResponse(updated)),
+                error => error.Type == ErrorType.Validation ? BadRequest(new UpdateResponse(error))
+                : Problem(new UpdateResponse(error).ToString())
             );
         }
 

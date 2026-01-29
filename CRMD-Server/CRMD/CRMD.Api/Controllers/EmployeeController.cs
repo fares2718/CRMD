@@ -1,7 +1,6 @@
+using CRMD.Application.DTOs;
 using CRMD.Application.Employees.Commands;
 using CRMD.Application.Employees.Queries;
-using CRMD.Contracts.Employees.Delete;
-using CRMD.Contracts.Employees.Get;
 using CRMD.Contracts.Employees.Post;
 using CRMD.Contracts.Employees.Put;
 using ErrorOr;
@@ -40,8 +39,8 @@ namespace CRMD.Api.Controllers
 
             var addEmployeeResult = await _mediator.Send(cmd);
             return addEmployeeResult.MatchFirst(
-                created => CreatedAtRoute("add-employee", Result.Created),
-                error => Problem(error.Description)
+                created => CreatedAtRoute("add-employee", new AddResponse(created)),
+                error => Problem(new AddResponse(error).ToString())
             );
         }
 
@@ -55,8 +54,8 @@ namespace CRMD.Api.Controllers
             var cmd = new DeleteEmployeeCommand(id);
             var deleteEmployeeResult = await _mediator.Send(cmd);
             return deleteEmployeeResult.MatchFirst(
-                deleted => Ok(new DeleteEmployeeResponse(deleted)),
-                error => error.Type == ErrorType.Validation ? BadRequest(new DeleteEmployeeResponse(error)) : Problem(new DeleteEmployeeResponse(error).ToString())
+                deleted => Ok(new DeleteResponse(deleted)),
+                error => error.Type == ErrorType.Validation ? BadRequest(new DeleteResponse(error)) : Problem(new DeleteResponse(error).ToString())
             );
         }
 
@@ -70,8 +69,8 @@ namespace CRMD.Api.Controllers
             var query = new GetAllEmployeesQuery();
             var getAllEMployeesResult = await _mediator.Send(query);
             return getAllEMployeesResult.MatchFirst(
-                employees => Ok(new GetAllEmployeesResponse(employees)),
-                error => Problem(error.Description, error.Code)
+                employees => Ok(new GetAllResponse<EmployeeDto>(employees)),
+                error => Problem(new GetAllResponse<EmployeeDto>(error).ToString())
             );
         }
 
@@ -84,8 +83,8 @@ namespace CRMD.Api.Controllers
             var query = new GetEmployeeByIdQuery(Id);
             var getEmployeeByIdResult = await _mediator.Send(query);
             return getEmployeeByIdResult.MatchFirst(
-                employee => Ok(new GetEmployeeByIdResponse(employee)),
-                error => Problem(error.Description, error.Code)
+                employee => Ok(new GetByIdResponse<EmployeeDto>(employee)),
+                error => Problem(new GetByIdResponse<EmployeeDto>(error).ToString())
             );
         }
 
@@ -99,8 +98,8 @@ namespace CRMD.Api.Controllers
             var cmd = new UpdateEmployeeSalaryCommand(request.Id, request.newSalary);
             var updateResult = await _mediator.Send(cmd);
             return updateResult.MatchFirst(
-                updated => Ok(new UpdateEmployeeSalaryResponse(updated)),
-                error => Problem(error.Description, error.Code)
+                updated => Ok(new UpdateResponse(updated)),
+                error => Problem(new UpdateResponse(error).ToString())
             );
         }
     }
