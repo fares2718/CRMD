@@ -12,7 +12,7 @@ namespace CRMD.Application.Suppliers.Commands
             if (request.supplierId < 0)
                 return Error.Validation();
 
-            await _supplierRepository.DeleteSupplier(request.supplierId);
+            await _supplierRepository.DeleteSupplierAsync(request.supplierId);
             return Result.Deleted;
         }
     }

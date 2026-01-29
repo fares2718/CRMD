@@ -53,7 +53,7 @@ namespace CRMD.Api.Controllers
             );
         }
 
-        [HttpGet("get-all", Name = "get-all")]
+        [HttpGet("get-sections", Name = "get-sections")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -70,7 +70,7 @@ namespace CRMD.Api.Controllers
             );
         }
 
-        [HttpGet("get-Section/{id}", Name = "get-Section")]
+        [HttpGet("get-section/{id}", Name = "get-section")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

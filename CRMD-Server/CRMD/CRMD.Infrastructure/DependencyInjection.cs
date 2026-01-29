@@ -1,3 +1,4 @@
+using CRMD.Infrastructure.Departments.Persistence;
 using CRMD.Infrastructure.Employees;
 using CRMD.Infrastructure.InventoryItems.Persistence;
 using CRMD.Infrastructure.Items.Persistence;
@@ -46,6 +47,9 @@ public static class DependencyInjection
         );
         services.AddScoped<IUserRepository>(
             _ => new UserRepository(connectionString)
+        );
+        services.AddScoped<IDepartmentRepository>(
+            _ => new DepartmentRepository(connectionString)
         );
         return services;
     }

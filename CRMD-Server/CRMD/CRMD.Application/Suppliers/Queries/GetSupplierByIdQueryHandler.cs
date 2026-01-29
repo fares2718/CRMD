@@ -15,7 +15,7 @@ namespace CRMD.Application.Suppliers.Queries
         {
             try
             {
-                var supplier = await _supplierRepository.GetSupplierById(request.Id);
+                var supplier = await _supplierRepository.GetSupplierByIdAsync(request.Id);
                 if (supplier == null)
                     return Error.NotFound();
 

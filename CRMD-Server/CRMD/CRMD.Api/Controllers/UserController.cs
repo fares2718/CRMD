@@ -53,7 +53,7 @@ namespace CRMD.Api.Controllers
             );
         }
 
-        [HttpGet("get-all", Name = "get-all")]
+        [HttpGet("get-users", Name = "get-users")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -70,7 +70,7 @@ namespace CRMD.Api.Controllers
             );
         }
 
-        [HttpGet("get-User/{id}", Name = "get-User")]
+        [HttpGet("get-user/{id}", Name = "get-user")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

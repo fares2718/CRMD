@@ -13,7 +13,7 @@ namespace CRMD.Application.Suppliers.Queries
 
         public async Task<ErrorOr<List<Supplier>>> Handle(GetSuppliersQuery request, CancellationToken cancellationToken)
         {
-            var Suppliers = await _supplierRepository.GetSuppliers();
+            var Suppliers = await _supplierRepository.GetSuppliersAsync();
             if (Suppliers.Count == 0)
                 return Error.NotFound();
             return Suppliers;

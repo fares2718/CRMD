@@ -21,7 +21,7 @@ namespace CRMD.Application.Employees.Commands
 
             try
             {
-                await _employeeRepository.DeleteEmployee(request.id);
+                await _employeeRepository.DeleteEmployeeAsync(request.id);
                 return Result.Deleted;
             }
             catch (Exception ex)

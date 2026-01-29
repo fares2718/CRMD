@@ -17,8 +17,8 @@ namespace CRMD.Application.MenuItems.Commands
             if (request.RecipeItems == null || !request.RecipeItems.Any())
                 return Error.Validation("400", "Recipe items cannot be null or empty.");
 
-            var recipeItems = _mapper.Map<List<RecipeItem>>(request.RecipeItems);
-            await _menuRepository.UpdateRecipeAsync(recipeItems);
+            var recipe = _mapper.Map<Recipe>(request);
+            await _menuRepository.UpdateRecipeAsync(recipe);
             return Result.Updated;
         }
     }

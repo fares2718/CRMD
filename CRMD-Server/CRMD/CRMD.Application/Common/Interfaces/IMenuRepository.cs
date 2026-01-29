@@ -4,6 +4,6 @@ namespace CRMD.Application.Common.Interfaces
     {
         public Task AddMenuItemAsync(MenuItem menuItem);
         public Task<List<MenuItemDto>> GetAllMenuItemsAsync();
-        //public Task UpdateRecipeAsync(List<RecipeItem> recipeItems);
+        public Task UpdateRecipeAsync(Recipe recipe);
     }
 }

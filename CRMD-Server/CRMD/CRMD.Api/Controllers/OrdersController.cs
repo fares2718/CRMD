@@ -36,7 +36,7 @@ public class OrdersController : ControllerBase
             request.CreatedAt);
         var placeAnOrderResult = await _mediator.Send(cmd);
         return placeAnOrderResult.MatchFirst(
-            created => CreatedAtRoute("place-order", new AddNewEmployeeResponse(created)),
+            created => CreatedAtRoute("place-order", new AddResponse(created)),
             error => Problem(error.Description)
         );
     }

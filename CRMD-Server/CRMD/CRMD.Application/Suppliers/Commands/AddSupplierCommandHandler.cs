@@ -21,7 +21,7 @@ namespace CRMD.Application.Suppliers.Commands
                 return Error.Validation();
 
             var supplier = _mapper.Map<Supplier>(request);
-            await _supplierRepository.AddSupplier(supplier);
+            await _supplierRepository.AddSupplierAsync(supplier);
             return Result.Created;
         }
     }

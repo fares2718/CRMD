@@ -5,11 +5,11 @@ namespace CRMD.Domain.Items
     public class Item
     {
         [IgnoreOn(enOperationMode.Add)]
-        int ItemId { get; set; }
+        public int ItemId { get; set; }
         [IgnoreOn(enOperationMode.Update)]
-        int CategoryId { get; set; }
-        decimal Price { get; set; }
+        public int CategoryId { get; set; }
+        public decimal Price { get; set; }
         [IgnoreOn(enOperationMode.Update)]
-        string Name = null!;
+        public string Name = null!;
     }
 }

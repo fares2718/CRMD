@@ -52,7 +52,7 @@ namespace CRMD.Api.Controllers
             );
         }
 
-        [HttpGet("get-all", Name = "get-all")]
+        [HttpGet("get-inventory-items", Name = "get-inventory-items")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -69,7 +69,7 @@ namespace CRMD.Api.Controllers
             );
         }
 
-        [HttpGet("get-InventoryItem/{id}", Name = "get-InventoryItem")]
+        [HttpGet("get-inventory-item/{id}", Name = "get-inventory-item")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

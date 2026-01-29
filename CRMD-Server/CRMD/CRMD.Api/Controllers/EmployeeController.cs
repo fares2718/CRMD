@@ -60,7 +60,7 @@ namespace CRMD.Api.Controllers
         }
 
 
-        [HttpGet("get-all", Name = "get-all")]
+        [HttpGet("get-employees", Name = "get-employees")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
 
@@ -74,7 +74,7 @@ namespace CRMD.Api.Controllers
             );
         }
 
-        [HttpGet("get-by-id/{Id}", Name = "get-by-id")]
+        [HttpGet("get-employee/{Id}", Name = "get-employee")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
 

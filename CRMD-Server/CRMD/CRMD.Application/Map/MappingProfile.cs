@@ -1,7 +1,17 @@
+using CRMD.Application.Departments.Commands;
+using CRMD.Application.InventoryItems.Commands;
+using CRMD.Application.Items.Commands;
 using CRMD.Application.PerchaseInvoices;
-using CRMD.Application.Suppliers.Commands;
+using CRMD.Application.Sections.Commands;
+using CRMD.Application.Tables.Commands;
+using CRMD.Application.Users.Commands;
+using CRMD.Domain.Departments;
+using CRMD.Domain.InventoryItems;
+using CRMD.Domain.Items;
 using CRMD.Domain.PerchaseInvoices;
-using CRMD.Domain.Suppliers;
+using CRMD.Domain.Sections;
+using CRMD.Domain.Tables;
+using CRMD.Domain.Users;
 
 namespace CRMD.Application.Map;
 
@@ -9,14 +19,20 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<PlaceAnOrderCommand, Order>();
-        CreateMap<OrderItemsDto, OrderItems>();
-        CreateMap<Order, OrderDto>();
-        CreateMap<AddNewMenuItemCommand, MenuItem>();
-        CreateMap<RecipeDto, Recipe>();
-        CreateMap<RecipeItemDto, RecipeItem>();
+        CreateMap<AddDepartmentCommand, Department>();
+        CreateMap<UpdateDepartmentCommand, Department>();
         CreateMap<AddNewEmployeeCommand, Employee>();
+        CreateMap<UpdateEmployeeSalaryCommand, Employee>();
+        CreateMap<AddInventoryItemCommand, InventoryItem>();
+        CreateMap<UpdateInventoryItemCommand, InventoryItem>();
+        CreateMap<AddItemCommand, Item>();
+        CreateMap<UpdateItemCommand, Item>();
+        CreateMap<AddNewMenuItemCommand, MenuItem>();
+        CreateMap<UpdateRecipeCommand, Recipe>();
+        CreateMap<PlaceAnOrderCommand, Order>();
         CreateMap<AddPerchaseInvoiceCommand, PerchaseInvoice>();
-        CreateMap<AddSupplierCommand, Supplier>();
+        CreateMap<AddSectionCommand, Section>();
+        CreateMap<AddTableCommand, Table>();
+        CreateMap<AddUserCommand, User>();
     }
 }
