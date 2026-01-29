@@ -35,7 +35,7 @@ namespace CRMD.Api.Controllers
             );
         }
 
-        [HttpDelete("delete-department/{id}", Name = "add-department")]
+        [HttpDelete("delete-department/{id}", Name = "delete-department")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
