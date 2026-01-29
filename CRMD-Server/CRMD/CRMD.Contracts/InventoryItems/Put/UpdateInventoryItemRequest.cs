@@ -2,5 +2,5 @@ namespace CRMD.Contracts.InventoryItems.Put;
 
 public record UpdateInventoryItemRequest(
     int ItemId,
-    decimal Price
+    decimal Quantity
 );

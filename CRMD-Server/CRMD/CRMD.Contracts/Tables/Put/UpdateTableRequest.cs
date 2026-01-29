@@ -1,6 +1,7 @@
 namespace CRMD.Contracts.Tables.Put;
 
 public record UpdateTableRequest(
-    int ItemId,
-    decimal Price
+    int TableId,
+        int WaiterId,
+        short Capacity
 );
