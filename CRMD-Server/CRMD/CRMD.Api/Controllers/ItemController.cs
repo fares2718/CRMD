@@ -1,7 +1,6 @@
+using CRMD.Application.DTOs;
 using CRMD.Application.Items.Commands;
 using CRMD.Application.Items.Queries;
-using CRMD.Contracts.Items.Delete;
-using CRMD.Contracts.Items.Get;
 using CRMD.Contracts.Items.Post;
 using CRMD.Contracts.Items.Put;
 using ErrorOr;
@@ -29,9 +28,9 @@ namespace CRMD.Api.Controllers
             var cmd = new AddItemCommand(request.CategoryId, request.Price, request.Name);
             var addItemResult = await _mediator.Send(cmd);
             return addItemResult.MatchFirst(
-                created => CreatedAtRoute("add-item", new AddItemResponse(created)),
-                error => error.Type == ErrorType.Validation ? BadRequest(new AddItemResponse(error)) :
-                Problem(new AddItemResponse(error).ToString())
+                created => CreatedAtRoute("add-item", new AddResponse(created)),
+                error => error.Type == ErrorType.Validation ? BadRequest(new AddResponse(error)) :
+                Problem(new AddResponse(error).ToString())
             );
         }
 
@@ -46,9 +45,9 @@ namespace CRMD.Api.Controllers
             var cmd = new DeleteItemCommand(id);
             var deleteItemResult = await _mediator.Send(cmd);
             return deleteItemResult.MatchFirst(
-                deleted => Ok(new DeleteItemResponse(deleted)),
-                error => error.Type == ErrorType.Validation ? BadRequest(new DeleteItemResponse(error))
-                : Problem(new DeleteItemResponse(error).ToString())
+                deleted => Ok(new DeleteResponse(deleted)),
+                error => error.Type == ErrorType.Validation ? BadRequest(new DeleteResponse(error))
+                : Problem(new DeleteResponse(error).ToString())
             );
         }
 
@@ -63,9 +62,9 @@ namespace CRMD.Api.Controllers
             var query = new GetAllItemsQuery();
             var getItemsResult = await _mediator.Send(query);
             return getItemsResult.MatchFirst(
-                items => Ok(new GetAllItemsResponse(items)),
-                error => error.Type == ErrorType.NotFound ? NotFound(new GetAllItemsResponse(error))
-                : Problem(new GetAllItemsResponse(error).ToString())
+                items => Ok(new GetAllResponse<ItemDto>(items)),
+                error => error.Type == ErrorType.NotFound ? NotFound(new GetAllResponse<ItemDto>(error))
+                : Problem(new GetAllResponse<ItemDto>(error).ToString())
             );
         }
 
@@ -80,10 +79,10 @@ namespace CRMD.Api.Controllers
             var query = new GetItemByIdQuery(Id);
             var getItemResult = await _mediator.Send(query);
             return getItemResult.MatchFirst(
-                item => Ok(new GetItemByIdResponse(item)),
-                error => error.Type == ErrorType.Validation ? BadRequest(new GetItemByIdResponse(error))
-                : error.Type == ErrorType.NotFound ? NotFound(new GetItemByIdResponse(error))
-                : Problem(new GetItemByIdResponse(error).ToString())
+                item => Ok(new GetByIdResponse<ItemDto>(item)),
+                error => error.Type == ErrorType.Validation ? BadRequest(new GetByIdResponse<ItemDto>(error))
+                : error.Type == ErrorType.NotFound ? NotFound(new GetByIdResponse<ItemDto>(error))
+                : Problem(new GetByIdResponse<ItemDto>(error).ToString())
             );
         }
 
@@ -98,9 +97,9 @@ namespace CRMD.Api.Controllers
             var cmd = new UpdateItemCommand(request.ItemId, request.Price);
             var updateItemResult = await _mediator.Send(cmd);
             return updateItemResult.MatchFirst(
-                updated => Ok(new UpdateItemResponse(updated)),
-                error => error.Type == ErrorType.Validation ? BadRequest(new UpdateItemResponse(error))
-                : Problem(new UpdateItemResponse(error).ToString())
+                updated => Ok(new UpdateResponse(updated)),
+                error => error.Type == ErrorType.Validation ? BadRequest(new UpdateResponse(error))
+                : Problem(new UpdateResponse(error).ToString())
             );
         }
 

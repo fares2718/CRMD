@@ -1,3 +1,4 @@
+using CRMD.Application.DTOs;
 using CRMD.Application.MenuItems.Commands;
 using CRMD.Application.MenuItems.Queries;
 using CRMD.Contracts.MenuItems.Get;
@@ -36,8 +37,8 @@ namespace CRMD.Api.Controllers
                 request.CategoryId);
             var addMenuItemResult = await _mediator.Send(cmd);
             return addMenuItemResult.MatchFirst(
-                created => CreatedAtRoute("add-menu-item", created),
-                error => Problem(error.Description));
+                created => CreatedAtRoute("add-menu-item", new AddResponse(created)),
+                error => Problem(new AddResponse(error).ToString()));
         }
 
         [HttpGet("get-menu-items", Name = "get-menu-items")]
@@ -50,8 +51,8 @@ namespace CRMD.Api.Controllers
             var query = new GetMenuItemsQuery();
             var getMenuItemsResult = await _mediator.Send(query);
             return getMenuItemsResult.MatchFirst(
-                menuItems => Ok(new GetMenuItemsResponse(menuItems)),
-                error => Problem(error.Description, error.Code)
+                menuItems => Ok(new GetAllResponse<MenuItemDto>(menuItems)),
+                error => Problem(new GetAllResponse<MenuItemDto>(error).ToString())
             );
 
         }
@@ -66,8 +67,8 @@ namespace CRMD.Api.Controllers
             var cmd = new UpdateRecipeCommand(request.RecipeItems);
             var updateRecipeResult = await _mediator.Send(cmd);
             return updateRecipeResult.MatchFirst(
-                updated => Ok(new { Message = "Recipe updated successfully." }),
-                error => Problem(error.Description, error.Code)
+                updated => Ok(new UpdateResponse(updated)),
+                error => Problem(new UpdateResponse(error).ToString())
             );
         }
 
