@@ -56,7 +56,7 @@ namespace CRMD.Infrastructure.Users.Persistence
             }
         }
 
-        public async Task UpdateTableAsync(User newUserData)
+        public async Task UpdateUserAsync(User newUserData)
         {
             await GenericRepository<User>
             .UpdateAsync(newUserData, _connectionString, "restocafe.updateuser");

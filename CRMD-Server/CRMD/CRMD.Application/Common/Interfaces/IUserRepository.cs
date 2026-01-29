@@ -8,6 +8,6 @@ namespace CRMD.Application.Common.Interfaces
         Task DeleteUserAsync(int userId);
         Task<List<UserDto>> GetAllUsers();
         Task<UserDto?> GetUserByIdAsync(int userId);
-        Task UpdateTableAsync(User newUserData);
+        Task UpdateUserAsync(User newUserData);
     }
 }
