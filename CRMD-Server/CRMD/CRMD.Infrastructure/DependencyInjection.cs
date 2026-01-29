@@ -2,7 +2,10 @@ using CRMD.Infrastructure.Employees;
 using CRMD.Infrastructure.InventoryItems.Persistence;
 using CRMD.Infrastructure.Items.Persistence;
 using CRMD.Infrastructure.PerchaseInvoices.Persistence;
+using CRMD.Infrastructure.Sections.Persistence;
 using CRMD.Infrastructure.Suppliers.Persistence;
+using CRMD.Infrastructure.Tables.Persistence;
+using CRMD.Infrastructure.Users.Persistence;
 
 namespace CRMD.Infrastructure;
 
@@ -34,6 +37,15 @@ public static class DependencyInjection
         );
         services.AddScoped<IInventoryItemRepository>(
             _ => new InventoryItemRepository(connectionString)
+        );
+        services.AddScoped<ISectionRepository>(
+            _ => new SectionRepository(connectionString)
+        );
+        services.AddScoped<ITableRepository>(
+            _ => new TableRepository(connectionString)
+        );
+        services.AddScoped<IUserRepository>(
+            _ => new UserRepository(connectionString)
         );
         return services;
     }
