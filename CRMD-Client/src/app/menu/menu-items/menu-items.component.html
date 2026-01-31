@@ -4,9 +4,7 @@
 
     <ul>
       @for (item of category.value; track item.menuItemId) {
-        <li>
-          {{ item.name }} - {{ item.price | currency: "USD" : "symbol" }}$
-        </li>
+        <li>{{ item.name }} - {{ item.price | currency: "USD" : "symbol" }}</li>
       }
     </ul>
   </section>

@@ -1,5 +1,6 @@
 using CRMD.Infrastructure.Generics;
 
+
 namespace CRMD.Infrastructure.Menu
 {
     internal class MenuRepository : IMenuRepository
@@ -56,8 +57,7 @@ namespace CRMD.Infrastructure.Menu
                     return menuItems;
                 }
             }*/
-            using (var reader = await GenericRepository<List<EmployeeDto>>.
-                GetAllAsync(_connectionString, "restocafe.getallmenuitems()"))
+            using (var reader = await GenericRepository<List<EmployeeDto>>.GetAllAsync(_connectionString, "restocafe.getallmenuitems()"))
             {
                 while (await reader.ReadAsync())
                 {

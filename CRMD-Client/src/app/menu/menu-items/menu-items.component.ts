@@ -38,7 +38,7 @@ export class MenuItemsComponent implements OnInit {
     );
   });
   ngOnInit(): void {
-    const subsciption = this.menuService.fetchMenuItems().subscribe({
+    const subscription = this.menuService.fetchMenuItems().subscribe({
       next: (menuData) => {
         this.menuItems.set(menuData.menuItems);
       },
@@ -51,7 +51,7 @@ export class MenuItemsComponent implements OnInit {
     });
 
     this.destroyRef.onDestroy(() => {
-      subsciption.unsubscribe();
+      subscription.unsubscribe();
     });
   }
 }

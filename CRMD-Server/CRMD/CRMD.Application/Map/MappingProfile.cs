@@ -29,7 +29,7 @@ public class MappingProfile : Profile
         CreateMap<UpdateItemCommand, Item>();
         CreateMap<AddNewMenuItemCommand, MenuItem>();
         CreateMap<UpdateRecipeCommand, Recipe>();
-        CreateMap<PlaceAnOrderCommand, Order>();
+        CreateMap<AddOrderCommand, Order>();
         CreateMap<AddPerchaseInvoiceCommand, PerchaseInvoice>();
         CreateMap<AddSectionCommand, Section>();
         CreateMap<AddTableCommand, Table>();
