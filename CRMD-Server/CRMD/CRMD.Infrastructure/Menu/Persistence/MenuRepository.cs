@@ -1,3 +1,4 @@
+using CRMD.Domain.Categories;
 using CRMD.Infrastructure.Generics;
 
 
@@ -68,6 +69,23 @@ namespace CRMD.Infrastructure.Menu
                 }
                 NpgsqlConnection.ClearAllPools();
                 return menuItems;
+            }
+        }
+
+        public async Task<List<Category>?> GetMenuCategoriesAsync()
+        {
+            using (var reader = await GenericRepository<List<EmployeeDto>>.GetAllAsync(_connectionString, "restocafe.getmenucategories()"))
+            {
+                var menuCategories = new List<Category>();
+                if (reader == null || !reader.HasRows)
+                    return null;
+                while (await reader.ReadAsync())
+                {
+                    var menuCategory = Mapper.Map<Category>(reader);
+                    menuCategories.Add(menuCategory);
+                }
+                NpgsqlConnection.ClearAllPools();
+                return menuCategories;
             }
         }
 

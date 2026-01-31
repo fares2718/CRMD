@@ -1,10 +1,13 @@
+using CRMD.Domain.Categories;
+
 namespace CRMD.Application.Common.Interfaces
 {
     public interface IMenuRepository
     {
-        public Task AddMenuItemAsync(MenuItem menuItem);
-        public Task<List<MenuItemDto>?> GetAllMenuItemsAsync();
+        Task AddMenuItemAsync(MenuItem menuItem);
+        Task<List<MenuItemDto>?> GetAllMenuItemsAsync();
+        Task<List<Category>?> GetMenuCategoriesAsync();
         Task<MenuItemDto?> GetMenuItemByIdAsync(int Id);
-        public Task UpdateRecipeAsync(Recipe recipe);
+        Task UpdateRecipeAsync(Recipe recipe);
     }
 }

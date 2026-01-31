@@ -1,9 +1,12 @@
 using CRMD.Application.DTOs;
+using CRMD.Application.Generics.Queries;
 using CRMD.Application.MenuItems.Commands;
 using CRMD.Application.MenuItems.Queries;
 using CRMD.Contracts.MenuItems.Get;
 using CRMD.Contracts.MenuItems.Post;
 using CRMD.Contracts.MenuItems.Put;
+using CRMD.Domain.Categories;
+using ErrorOr;
 
 namespace CRMD.Api.Controllers
 {
@@ -39,6 +42,22 @@ namespace CRMD.Api.Controllers
             return addMenuItemResult.MatchFirst(
                 created => CreatedAtRoute("add-menu-item", new AddResponse(created)),
                 error => Problem(new AddResponse(error).ToString()));
+        }
+
+        [HttpGet("get-menu-categories", Name = "get-menu-categories")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+
+        public async Task<IActionResult> GetMenuCategories()
+        {
+            var query = new GetAllQuery<Category>();
+            var getmenucategoriesResult = await _mediator.Send(query);
+            return getmenucategoriesResult.MatchFirst(
+                categories => Ok(new GetAllResponse<Category>(categories)),
+                error => error.Type == ErrorType.NotFound ? NotFound(new GetAllResponse<Category>(error)) :
+                Problem(new GetAllResponse<Category>(error).ToString())
+            );
         }
 
         [HttpGet("get-menu-items", Name = "get-menu-items")]
