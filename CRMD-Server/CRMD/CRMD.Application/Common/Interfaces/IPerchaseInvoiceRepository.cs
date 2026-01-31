@@ -8,6 +8,6 @@ namespace CRMD.Application.Common.Interfaces
         Task DeletePerchaseInvoiceAsync(int id);
         Task<PerchaseInvoiceDto?> GetPerchaseInvoiceByDateAsync(DateTime date);
         Task<PerchaseInvoiceDto?> GetPerchaseInvoiceByIdAsync(int id);
-        Task<List<PerchaseInvoiceItemDto>> GetPerchaseInvoiceItemsAsync(int invoiceId);
+        Task<List<PerchaseInvoiceItemDto>?> GetPerchaseInvoiceItemsAsync(int invoiceId);
     }
 }

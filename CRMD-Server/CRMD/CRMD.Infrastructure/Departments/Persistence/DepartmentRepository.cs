@@ -1,5 +1,6 @@
 using CRMD.Domain.Departments;
 using CRMD.Infrastructure.Generics;
+using ErrorOr;
 
 namespace CRMD.Infrastructure.Departments.Persistence
 {
@@ -22,12 +23,14 @@ namespace CRMD.Infrastructure.Departments.Persistence
             await GenericRepository<Department>.DeleteAsync(Id, _connectionString, "restocafe.deletedepartment");
         }
 
-        public async Task<List<Department>> GetAllDepartmentsAsync()
+        public async Task<List<Department>?> GetAllDepartmentsAsync()
         {
             var departments = new List<Department>();
             using (var reader = await GenericRepository<Department>
             .GetAllAsync(_connectionString, "restocafe.getdepartments()"))
             {
+                if (reader == null || !reader.HasRows)
+                    return null;
                 while (await reader.ReadAsync())
                 {
                     var department = Mapper.Map<Department>(reader);
@@ -38,16 +41,16 @@ namespace CRMD.Infrastructure.Departments.Persistence
             }
         }
 
-        public async Task<Department> GetDepartmentByIdAsync(int Id)
+        public async Task<Department?> GetDepartmentByIdAsync(int Id)
         {
             using (var reader = await GenericRepository<Department>
             .GetByIdAsync(Id, _connectionString, "restocafe.getdepartmentbyid(@id)"))
             {
                 Department department = new Department();
-                if (reader != null && await reader.ReadAsync())
-                {
-                    department = Mapper.Map<Department>(reader);
-                }
+                if (reader == null || !reader.HasRows)
+                    return null;
+
+                department = Mapper.Map<Department>(reader);
                 NpgsqlConnection.ClearAllPools();
                 return department;
             }
@@ -55,7 +58,7 @@ namespace CRMD.Infrastructure.Departments.Persistence
 
         public async Task UpdateDepartmentAsync(Department newDepartmentData)
         {
-            await GenericRepository<Department>.UpdateAsync(newDepartmentData, _connectionString, "restocafe.updatedepartmen");
+            await GenericRepository<Department>.UpdateAsync(newDepartmentData, _connectionString, "restocafe.updatedepartment");
         }
 
     }

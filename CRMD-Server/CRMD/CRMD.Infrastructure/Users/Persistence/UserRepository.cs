@@ -25,12 +25,14 @@ namespace CRMD.Infrastructure.Users.Persistence
 
         }
 
-        public async Task<List<UserDto>> GetAllUsers()
+        public async Task<List<UserDto>?> GetAllUsers()
         {
             var users = new List<UserDto>();
             using (var reader = await GenericRepository<UserDto>
             .GetAllAsync(_connectionString, "restocafe.getusers()"))
             {
+                if (reader == null || !reader.HasRows)
+                    return null;
                 while (await reader.ReadAsync())
                 {
                     var user = Mapper.Map<UserDto>(reader);
@@ -47,10 +49,9 @@ namespace CRMD.Infrastructure.Users.Persistence
             .GetByIdAsync(userId, _connectionString, "restocafe.getuserbyid(@id)"))
             {
                 UserDto user = new UserDto();
-                if (reader != null && await reader.ReadAsync())
-                {
-                    user = Mapper.Map<UserDto>(reader);
-                }
+                if (reader == null || !reader.HasRows)
+                    return null;
+                user = Mapper.Map<UserDto>(reader);
                 NpgsqlConnection.ClearAllPools();
                 return user;
             }

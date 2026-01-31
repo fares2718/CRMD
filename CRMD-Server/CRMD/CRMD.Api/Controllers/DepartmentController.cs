@@ -74,9 +74,9 @@ namespace CRMD.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 
-        public async Task<IActionResult> GetDepartmentById(int Id)
+        public async Task<IActionResult> GetDepartmentById(int id)
         {
-            var query = new GetDepartmentByIdQuery(Id);
+            var query = new GetDepartmentByIdQuery(id);
             var getDepartmentResult = await _mediator.Send(query);
             return getDepartmentResult.MatchFirst(
                 department => Ok(new GetByIdResponse<Department>(department)),

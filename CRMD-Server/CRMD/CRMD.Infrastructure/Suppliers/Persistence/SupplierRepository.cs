@@ -66,16 +66,15 @@ namespace CRMD.Infrastructure.Suppliers.Persistence
             .GetByIdAsync(supplierId, _connectionString, "external.getsupplierbyid(@supplierid)"))
             {
                 Supplier supplier = new Supplier();
-                if (reader != null && await reader.ReadAsync())
-                {
-                    supplier = Mapper.Map<Supplier>(reader);
-                }
+                if (reader == null || !reader.HasRows)
+                    return null;
+                supplier = Mapper.Map<Supplier>(reader);
                 NpgsqlConnection.ClearAllPools();
                 return supplier;
             }
         }
 
-        public async Task<List<Supplier>> GetSuppliersAsync()
+        public async Task<List<Supplier>?> GetSuppliersAsync()
         {
             var suppliers = new List<Supplier>();
             /*using (var conn = new NpgsqlConnection(_connectionString))
@@ -97,6 +96,8 @@ namespace CRMD.Infrastructure.Suppliers.Persistence
             using (var reader = await GenericRepository<Supplier>
             .GetAllAsync(_connectionString, "external.getsuppliers(@supplierid)"))
             {
+                if (reader == null || !reader.HasRows)
+                    return null;
                 while (await reader.ReadAsync())
                 {
                     var supplier = Mapper.Map<Supplier>(reader);

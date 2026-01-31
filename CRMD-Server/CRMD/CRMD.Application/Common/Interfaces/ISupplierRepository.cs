@@ -7,6 +7,6 @@ namespace CRMD.Application.Common.Interfaces
         Task AddSupplierAsync(Supplier supplier);
         Task DeleteSupplierAsync(int supplierId);
         Task<Supplier?> GetSupplierByIdAsync(int supplierId);
-        Task<List<Supplier>> GetSuppliersAsync();
+        Task<List<Supplier>?> GetSuppliersAsync();
     }
 }

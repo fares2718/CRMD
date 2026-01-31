@@ -91,12 +91,11 @@ namespace CRMD.Infrastructure.PerchaseInvoices.Persistence
                     await conn.OpenAsync();
                     using (var reader = await cmd.ExecuteReaderAsync())
                     {
-                        if (reader.Read())
-                        {
-                            var invoice = Mapper.Map<PerchaseInvoiceDto>(reader);
-                            return invoice;
-                        }
-                        return null;
+                        if (reader == null || !reader.HasRows)
+                            return null;
+                        await reader.ReadAsync();
+                        var invoice = Mapper.Map<PerchaseInvoiceDto>(reader);
+                        return invoice;
                     }
                 }
             }
@@ -125,16 +124,15 @@ namespace CRMD.Infrastructure.PerchaseInvoices.Persistence
             .GetByIdAsync(id, _connectionString, "external.getperchaseinvoicebyid(@invoiceid)"))
             {
                 PerchaseInvoiceDto invoice = new PerchaseInvoiceDto();
-                if (reader != null && await reader.ReadAsync())
-                {
-                    invoice = Mapper.Map<PerchaseInvoiceDto>(reader);
-                }
+                if (reader == null || !reader.HasRows)
+                    return null;
+                invoice = Mapper.Map<PerchaseInvoiceDto>(reader);
                 NpgsqlConnection.ClearAllPools();
                 return invoice;
             }
         }
 
-        public async Task<List<PerchaseInvoiceItemDto>> GetPerchaseInvoiceItemsAsync(int invoiceId)
+        public async Task<List<PerchaseInvoiceItemDto>?> GetPerchaseInvoiceItemsAsync(int invoiceId)
         {
             var items = new List<PerchaseInvoiceItemDto>();
             using (var conn = new NpgsqlConnection(_connectionString))
@@ -147,6 +145,8 @@ namespace CRMD.Infrastructure.PerchaseInvoices.Persistence
                     await conn.OpenAsync();
                     using (var reader = await cmd.ExecuteReaderAsync())
                     {
+                        if (reader == null || !reader.HasRows)
+                            return null;
                         while (await reader.ReadAsync())
                         {
                             var item = Mapper.Map<PerchaseInvoiceItemDto>(reader);

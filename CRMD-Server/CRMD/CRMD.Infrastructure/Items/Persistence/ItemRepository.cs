@@ -28,21 +28,22 @@ namespace CRMD.Infrastructure.Items.Persistence
             .GetByIdAsync(Id, _connectionString, "inventory.getitembyid(@id)"))
             {
                 ItemDto item = new ItemDto();
-                if (reader != null && await reader.ReadAsync())
-                {
-                    item = Mapper.Map<ItemDto>(reader);
-                }
+                if (reader == null || !reader.HasRows)
+                    return null;
+                item = Mapper.Map<ItemDto>(reader);
                 NpgsqlConnection.ClearAllPools();
                 return item;
             }
         }
 
-        public async Task<List<ItemDto>> GetAllItemsAsync()
+        public async Task<List<ItemDto>?> GetAllItemsAsync()
         {
             var items = new List<ItemDto>();
             using (var reader = await GenericRepository<ItemDto>
             .GetAllAsync(_connectionString, "inventory.getitems()"))
             {
+                if (reader == null || !reader.HasRows)
+                    return null;
                 while (await reader.ReadAsync())
                 {
                     var item = Mapper.Map<ItemDto>(reader);

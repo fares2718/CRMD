@@ -28,7 +28,7 @@ namespace CRMD.Infrastructure.Generics
                 using (var cmd = new NpgsqlCommand(procedureName, conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("id", Id);
+                    cmd.Parameters.AddWithValue("p_id", Id);
                     await conn.OpenAsync();
                     await cmd.ExecuteNonQueryAsync();
                 }
@@ -85,7 +85,7 @@ namespace CRMD.Infrastructure.Generics
 
                 var param = new NpgsqlParameter
                 {
-                    ParameterName = prop.Name.ToLower(),
+                    ParameterName = $"p_{prop.Name.ToLower()}",
                     Value = dbType == NpgsqlDbType.Jsonb ?
                     JsonSerializer.Serialize(value) : value,
                     NpgsqlDbType = dbType

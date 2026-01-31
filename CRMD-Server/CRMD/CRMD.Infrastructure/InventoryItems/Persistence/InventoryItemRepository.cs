@@ -22,12 +22,14 @@ namespace CRMD.Infrastructure.InventoryItems.Persistence
             await GenericRepository<InventoryItem>.DeleteAsync(Id, _connectionString, "inventory.deleteinventoryitem");
         }
 
-        public async Task<List<InventoryItem>> GetAllInventoryItemsAsync()
+        public async Task<List<InventoryItem>?> GetAllInventoryItemsAsync()
         {
             var inventoryItems = new List<InventoryItem>();
             using (var reader = await GenericRepository<InventoryItem>
             .GetAllAsync(_connectionString, "inventory.getinventoryitems"))
             {
+                if (reader == null || !reader.HasRows)
+                    return null;
                 while (await reader.ReadAsync())
                 {
                     var inventoryItem = Mapper.Map<InventoryItem>(reader);
@@ -44,10 +46,9 @@ namespace CRMD.Infrastructure.InventoryItems.Persistence
             .GetAllAsync(_connectionString, "inventory.getinventoryitembyid(@id)"))
             {
                 InventoryItem inventoryItem = new InventoryItem();
-                if (reader != null && await reader.ReadAsync())
-                {
-                    inventoryItem = Mapper.Map<InventoryItem>(reader);
-                }
+                if (reader == null || !reader.HasRows)
+                    return null;
+                inventoryItem = Mapper.Map<InventoryItem>(reader);
                 NpgsqlConnection.ClearAllPools();
                 return inventoryItem;
             }

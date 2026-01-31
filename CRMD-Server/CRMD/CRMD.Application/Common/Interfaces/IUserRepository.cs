@@ -6,7 +6,7 @@ namespace CRMD.Application.Common.Interfaces
     {
         Task AddUserAsync(User user);
         Task DeleteUserAsync(int userId);
-        Task<List<UserDto>> GetAllUsers();
+        Task<List<UserDto>?> GetAllUsers();
         Task<UserDto?> GetUserByIdAsync(int userId);
         Task UpdateUserAsync(User newUserData);
     }

@@ -37,7 +37,7 @@ namespace CRMD.Infrastructure.Menu
             await GenericRepository<MenuItem>.DeleteAsync(Id, _connectionString, "restocafe.deletemenuitem");
         }
 
-        public async Task<List<MenuItemDto>> GetAllMenuItemsAsync()
+        public async Task<List<MenuItemDto>?> GetAllMenuItemsAsync()
         {
             var menuItems = new List<MenuItemDto>();
             /*using (var conn = new NpgsqlConnection(_connectionString))
@@ -59,6 +59,8 @@ namespace CRMD.Infrastructure.Menu
             }*/
             using (var reader = await GenericRepository<List<EmployeeDto>>.GetAllAsync(_connectionString, "restocafe.getallmenuitems()"))
             {
+                if (reader == null || !reader.HasRows)
+                    return null;
                 while (await reader.ReadAsync())
                 {
                     var menuItem = Mapper.Map<MenuItemDto>(reader);
@@ -69,16 +71,15 @@ namespace CRMD.Infrastructure.Menu
             }
         }
 
-        public async Task<MenuItemDto> GetMenuItemByIdAsync(int Id)
+        public async Task<MenuItemDto?> GetMenuItemByIdAsync(int Id)
         {
             using (var reader = await GenericRepository<MenuItemDto>
             .GetByIdAsync(Id, _connectionString, "restocafe.getmenuitembyid(@id)"))
             {
                 MenuItemDto item = new MenuItemDto();
-                if (reader != null && await reader.ReadAsync())
-                {
-                    item = Mapper.Map<MenuItemDto>(reader);
-                }
+                if (reader == null || !reader.HasRows)
+                    return null;
+                item = Mapper.Map<MenuItemDto>(reader);
                 NpgsqlConnection.ClearAllPools();
                 return item;
             }

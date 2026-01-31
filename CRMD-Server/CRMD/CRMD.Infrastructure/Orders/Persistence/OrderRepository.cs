@@ -34,7 +34,7 @@ public class OrderRepository : IOrderRepository
         await GenericRepository<Order>.AddAsync(order, _connectionString, "restocafe.addorder");
     }
 
-    public async Task<List<Order>> GetOrdersByDateAsync(DateTime date)
+    public async Task<List<Order>?> GetOrdersByDateAsync(DateTime date)
     {
         var orders = new List<Order>();
         using (var conn = new NpgsqlConnection(_connectionString))
@@ -45,6 +45,8 @@ public class OrderRepository : IOrderRepository
                 await conn.OpenAsync();
                 using (var reader = await cmd.ExecuteReaderAsync())
                 {
+                    if (reader == null || !reader.HasRows)
+                        return null;
                     while (await reader.ReadAsync())
                     {
                         var order = Mapper.Map<Order>(reader);

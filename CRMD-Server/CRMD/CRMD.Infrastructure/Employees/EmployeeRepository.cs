@@ -46,7 +46,7 @@ namespace CRMD.Infrastructure.Employees
             await GenericRepository<Employee>.DeleteAsync(id, _connectionString, "restocafe.deleteemployee");
         }
 
-        public async Task<List<EmployeeDto>> GetAllEmployeesAsync()
+        public async Task<List<EmployeeDto>?> GetAllEmployeesAsync()
         {
             var employees = new List<EmployeeDto>();
             /*using (var conn = new NpgsqlConnection(_connectionString))
@@ -69,6 +69,8 @@ namespace CRMD.Infrastructure.Employees
             using (var reader = await GenericRepository<List<EmployeeDto>>.
                 GetAllAsync(_connectionString, "restocafe.getallemployees()"))
             {
+                if (reader == null || !reader.HasRows)
+                    return null;
                 while (await reader.ReadAsync())
                 {
                     var employee = Mapper.Map<EmployeeDto>(reader);
@@ -79,7 +81,7 @@ namespace CRMD.Infrastructure.Employees
             }
         }
 
-        public async Task<EmployeeDto> GetEmployeeByIdAsync(int Id)
+        public async Task<EmployeeDto?> GetEmployeeByIdAsync(int Id)
         {
             /*using (var conn = new NpgsqlConnection(_connectionString))
             {
@@ -102,10 +104,9 @@ namespace CRMD.Infrastructure.Employees
             .GetByIdAsync(Id, _connectionString, "restocafe.getemployeebyid(@id)"))
             {
                 EmployeeDto employee = new EmployeeDto();
-                if (reader != null && await reader.ReadAsync())
-                {
-                    employee = Mapper.Map<EmployeeDto>(reader);
-                }
+                if (reader == null || !reader.HasRows)
+                    return null;
+                employee = Mapper.Map<EmployeeDto>(reader);
                 NpgsqlConnection.ClearAllPools();
                 return employee;
             }

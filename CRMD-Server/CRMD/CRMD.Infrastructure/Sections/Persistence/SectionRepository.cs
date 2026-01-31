@@ -28,21 +28,22 @@ namespace CRMD.Infrastructure.Sections.Persistence
             .GetByIdAsync(sectionId, _connectionString, "restocafe.getsectionbyid(@id)"))
             {
                 SectionDto section = new SectionDto();
-                if (reader != null && await reader.ReadAsync())
-                {
-                    section = Mapper.Map<SectionDto>(reader);
-                }
+                if (reader == null || !reader.HasRows)
+                    return null;
+                section = Mapper.Map<SectionDto>(reader);
                 NpgsqlConnection.ClearAllPools();
                 return section;
             }
         }
 
-        public async Task<List<SectionDto>> GetSectionsAsync()
+        public async Task<List<SectionDto>?> GetSectionsAsync()
         {
             var sections = new List<SectionDto>();
             using (var reader = await GenericRepository<SectionDto>
             .GetAllAsync(_connectionString, "restocafe.getsections()"))
             {
+                if (reader == null || !reader.HasRows)
+                    return null;
                 while (await reader.ReadAsync())
                 {
                     var section = Mapper.Map<SectionDto>(reader);

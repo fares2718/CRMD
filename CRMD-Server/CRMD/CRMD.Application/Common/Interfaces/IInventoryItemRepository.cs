@@ -7,7 +7,7 @@ namespace CRMD.Application.Common.Interfaces
         Task AddItemToInventoryAsync(InventoryItem inventoryItem);
         Task DeleteItemFromInventoryAsync(int Id);
         Task<InventoryItem?> GetInventoryItemByIdAsync(int Id);
-        Task<List<InventoryItem>> GetAllInventoryItemsAsync();
+        Task<List<InventoryItem>?> GetAllInventoryItemsAsync();
         Task UpdateInventoryItem(InventoryItem newInventoryItemData);
     }
 }

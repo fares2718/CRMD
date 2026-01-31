@@ -24,12 +24,14 @@ namespace CRMD.Infrastructure.Tables.Persistence
             .DeleteAsync(tableId, _connectionString, "restocafe.deletetable");
         }
 
-        public async Task<List<TableDto>> GetAllTables()
+        public async Task<List<TableDto>?> GetAllTables()
         {
             var tables = new List<TableDto>();
             using (var reader = await GenericRepository<TableDto>
             .GetAllAsync(_connectionString, "restocafe.gettables()"))
             {
+                if (reader == null || !reader.HasRows)
+                    return null;
                 while (await reader.ReadAsync())
                 {
                     var table = Mapper.Map<TableDto>(reader);
@@ -46,10 +48,9 @@ namespace CRMD.Infrastructure.Tables.Persistence
             .GetByIdAsync(tableId, _connectionString, "restocafe.gettablebyid(@id)"))
             {
                 TableDto table = new TableDto();
-                if (reader != null && await reader.ReadAsync())
-                {
-                    table = Mapper.Map<TableDto>(reader);
-                }
+                if (reader == null || !reader.HasRows)
+                    return null;
+                table = Mapper.Map<TableDto>(reader);
                 NpgsqlConnection.ClearAllPools();
                 return table;
             }

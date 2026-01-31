@@ -11,7 +11,7 @@ namespace CRMD.Infrastructure.EntityMapping
                     continue;
                 try
                 {
-                    var value = reader[prop.Name];
+                    var value = reader[prop.Name.ToLower()];
                     if (value == DBNull.Value)
                         continue;
                     prop.SetValue(entity, Convert.ChangeType(value, prop.PropertyType));
