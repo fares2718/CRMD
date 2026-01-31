@@ -13,8 +13,17 @@ public class GetOrdersByDateQueryHandler : IRequestHandler<GetOrdersByDateQuery,
 
     public async Task<ErrorOr<List<OrderDto>>> Handle(GetOrdersByDateQuery request, CancellationToken cancellationToken)
     {
-        var orders = await _orderRepository.GetOrdersByDateAsync(request.Date);
-        var ordersDto = _mapper.Map<List<OrderDto>>(orders);
-        return ordersDto;
+        if (request == null)
+            return Error.Validation();
+        try
+        {
+            var orders = await _orderRepository.GetOrdersByDateAsync(request.Date);
+            var ordersDto = _mapper.Map<List<OrderDto>>(orders);
+            return ordersDto;
+        }
+        catch (Exception ex)
+        {
+            return Error.Failure(ex.Message);
+        }
     }
 }

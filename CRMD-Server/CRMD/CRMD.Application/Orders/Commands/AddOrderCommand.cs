@@ -1,6 +1,6 @@
 namespace CRMD.Application.Orders.Commands;
 
-public record PlaceAnOrderCommand(
+public record AddOrderCommand(
     List<OrderItemsDto> OrderItemsDtos,
     short OrderType,
     int TableId,

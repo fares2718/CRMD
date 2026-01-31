@@ -18,9 +18,16 @@ namespace CRMD.Application.PerchaseInvoices.Commands
         {
             if (request.supplierId < 1 || request.totalAmount < 0)
                 return Error.Validation();
-            var invoice = _mapper.Map<PerchaseInvoice>(request);
-            await _perchaseInvoiceRepository.AddPerchaseInvoiceAsync(invoice);
-            return Result.Created;
+            try
+            {
+                var invoice = _mapper.Map<PerchaseInvoice>(request);
+                await _perchaseInvoiceRepository.AddPerchaseInvoiceAsync(invoice);
+                return Result.Created;
+            }
+            catch (Exception ex)
+            {
+                return Error.Failure(ex.Message);
+            }
         }
     }
 }

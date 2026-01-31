@@ -1,3 +1,4 @@
+using System.Data;
 using CRMD.Application.Orders.Commands;
 using CRMD.Application.Orders.Queries;
 using CRMD.Contracts.Employees.Post;
@@ -18,43 +19,38 @@ public class OrdersController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpPost("place-order", Name = "place-order")]
+    [HttpPost("add-order", Name = "add-order")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 
-    public async Task<IActionResult> PlaceAnOrder(PlaceAnOrderRequest request)
+    public async Task<IActionResult> AddOrder(AddOrderRequest request)
     {
-        if (request.CaptainId < 1
-           || request.TableId < 1 || request.OrderItemsDtos.Count <= 0)
-            return BadRequest("Invalid request");
-        var cmd = new PlaceAnOrderCommand(request.OrderItemsDtos,
+        var cmd = new AddOrderCommand(request.OrderItemsDtos,
             (short)request.OrderType,
             request.TableId,
             request.CaptainId,
             request.TotalAmount,
             request.CreatedAt);
-        var placeAnOrderResult = await _mediator.Send(cmd);
-        return placeAnOrderResult.MatchFirst(
+        var AddOrderResult = await _mediator.Send(cmd);
+        return AddOrderResult.MatchFirst(
             created => CreatedAtRoute("place-order", new AddResponse(created)),
-            error => Problem(error.Description)
+            error => error.Type == ErrorType.Validation ? BadRequest(new AddResponse(error)) : Problem(new AddResponse(error).ToString())
         );
     }
 
-    [HttpGet("get-orders-by-date", Name = "get-orders-by-date")]
+    [HttpGet("get-orders-by-date/{date}", Name = "get-orders-by-date")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
 
-    public async Task<IActionResult> GetOrdersByDate(GetOrdersByDateRequest request)
+    public async Task<IActionResult> GetOrdersByDate(DateTime date)
     {
-        if (request.Date == default)
-            return BadRequest("Invalid date");
-        var query = new GetOrdersByDateQuery(request.Date);
+        var query = new GetOrdersByDateQuery(date);
         var getOrdersResult = await _mediator.Send(query);
         return getOrdersResult.MatchFirst(
             orders => Ok(new GetOrdersByDateResponse(orders)),
-            error => Problem(error.Description)
+            error => error.Type == ErrorType.Validation ? BadRequest(new AddResponse(error)) : Problem(error.Description)
         );
     }
 

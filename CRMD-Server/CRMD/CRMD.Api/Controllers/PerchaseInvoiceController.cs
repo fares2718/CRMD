@@ -1,5 +1,6 @@
 using CRMD.Application.PerchaseInvoices;
 using CRMD.Contracts.PurchaseInvoices.Post;
+using ErrorOr;
 
 namespace CRMD.Api.Controllers
 {
@@ -21,9 +22,6 @@ namespace CRMD.Api.Controllers
 
         public async Task<IActionResult> AddPerchaseInvoice(AddPerchaseInvoiceRequest request)
         {
-            if (request.supplierId < 1
-               || request.totalAmount <= 0 || request.invoiceItems.Count <= 0)
-                return BadRequest("Invalid request");
             var cmd = new AddPerchaseInvoiceCommand(
                 request.supplierId,
                 request.totalAmount,
@@ -32,8 +30,8 @@ namespace CRMD.Api.Controllers
                 request.invoiceItems);
             var addInvoiceResult = await _mediator.Send(cmd);
             return addInvoiceResult.MatchFirst(
-                created => CreatedAtRoute("add-invoice", created),
-                error => Problem(error.Description)
+                created => CreatedAtRoute("add-invoice", new AddResponse(created)),
+                error => error.Type == ErrorType.Validation ? BadRequest(new AddResponse(error)) : Problem(new AddResponse(error).ToString())
             );
         }
     }
