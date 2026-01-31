@@ -10,11 +10,11 @@ namespace CRMD.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class InventoryItemComtroller : ControllerBase
+    public class InventoryItemController : ControllerBase
     {
         private readonly ISender _mediator;
 
-        public InventoryItemComtroller(ISender mediator)
+        public InventoryItemController(ISender mediator)
         {
             _mediator = mediator;
         }
