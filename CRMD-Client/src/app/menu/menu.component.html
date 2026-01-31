@@ -1,6 +1,9 @@
+@if (isAddingItem()) {
+  <app-new-menu-item />
+}
 <main>
   <menu>
-    <button>Add Task</button>
+    <button (click)="onStartAddingItem()">Add Item</button>
   </menu>
   <app-menu-items />
 </main>

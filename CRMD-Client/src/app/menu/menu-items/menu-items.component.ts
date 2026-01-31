@@ -37,7 +37,8 @@ export class MenuItemsComponent implements OnInit {
       {} as Record<string, MenuItem[]>,
     );
   });
-  ngOnInit(): void {
+  ngOnInit() {
+    this.isFetching.set(true);
     const subscription = this.menuService.fetchMenuItems().subscribe({
       next: (menuData) => {
         this.menuItems.set(menuData.menuItems);

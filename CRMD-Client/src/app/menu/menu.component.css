@@ -1,5 +1,5 @@
-main{
-    display: block;
+:host{
+  display: block;
   padding: 1.5rem;
   background-color: #9fa3ac;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;

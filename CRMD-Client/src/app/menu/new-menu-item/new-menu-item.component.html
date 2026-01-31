@@ -1,0 +1,27 @@
+<div class="backdrop"></div>
+<dialog open>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="control">
+      <label for="name">Name</label>
+      <input id="name" type="text" name="name" formControlName="name" />
+    </div>
+    <div class="control-row">
+      <div class="control">
+        <label for="category">Category</label>
+        <select
+          id="category"
+          name="category"
+          formControlName="category"
+        ></select>
+      </div>
+    </div>
+    <div class="control">
+      <label for="price">Price</label>
+      <input id="price" type="number" name="price" formControlName="price" />
+    </div>
+    <div class="form-actions">
+      <button type="reset" class="button button-flat">Reset</button>
+      <button type="submit" class="button">Add</button>
+    </div>
+  </form>
+</dialog>
