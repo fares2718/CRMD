@@ -29,7 +29,7 @@ namespace CRMD.Api.Controllers
 
         public async Task<IActionResult> AddMenuItem(AddNewMenuItemRequest request)
         {
-            if (string.IsNullOrWhiteSpace(request.Name) || request.Price <= 0 ||
+            if (string.IsNullOrEmpty(request.Name) || request.Price <= 0 ||
              request.Recipe == null ||
              request.CategoryId <= 0)
                 return BadRequest("Invalid request");

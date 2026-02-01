@@ -1,11 +1,11 @@
-<div class="backdrop"></div>
+<div class="backdrop" (click)="onClose()"></div>
 <dialog open>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="control">
-      <label for="name">Name</label>
-      <input id="name" type="text" name="name" formControlName="name" />
-    </div>
     <div class="control-row">
+      <div class="control">
+        <label for="name">Name</label>
+        <input id="name" type="text" name="name" formControlName="name" />
+      </div>
       <div class="control">
         <label for="category">Category</label>
         <select
@@ -15,6 +15,30 @@
         ></select>
       </div>
     </div>
+    <hr />
+    <div class="control-row">
+      <div class="control">
+        <label for="ingredient">ingredient</label>
+        <select
+          id="ingredient"
+          name="ingredient"
+          formControlName="ingredient"
+        ></select>
+      </div>
+      <div class="control">
+        <label for="quantity">Quantity</label>
+        <input
+          id="quantity"
+          type="quantity"
+          name="quantity"
+          formControlName="quantity"
+        />
+      </div>
+    </div>
+    <button type="button" class="btn btn-transparent btn-lg" aria-label="Add">
+      <i class="fas fa-plus"></i>
+    </button>
+    <hr />
     <div class="control">
       <label for="price">Price</label>
       <input id="price" type="number" name="price" formControlName="price" />

@@ -11,8 +11,13 @@ import { NewMenuItemComponent } from './new-menu-item/new-menu-item.component';
 })
 export class MenuComponent {
   isAddingItem = signal(false);
+
   onStartAddingItem() {
     this.isAddingItem.set(true);
     console.log('adding');
+  }
+
+  onCloseAddItem() {
+    this.isAddingItem.set(false);
   }
 }
