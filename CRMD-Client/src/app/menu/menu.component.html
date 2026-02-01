@@ -1,5 +1,8 @@
 @if (isAddingItem()) {
-  <app-new-menu-item (close)="onCloseAddItem()" />
+  <app-new-menu-item
+    [categories]="menuCategories()"
+    (close)="onCloseAddItem()"
+  />
 }
 <main>
   <menu>

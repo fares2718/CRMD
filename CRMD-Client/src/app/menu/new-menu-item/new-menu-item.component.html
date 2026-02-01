@@ -8,16 +8,16 @@
       </div>
       <div class="control">
         <label for="category">Category</label>
-        <select
-          id="category"
-          name="category"
-          formControlName="category"
-        ></select>
+        <select id="category" name="category" formControlName="category">
+          @for (category of categories(); track category.Id) {
+            <option [value]="category.Id">{{ category.name }}</option>
+          }
+        </select>
       </div>
     </div>
     <hr />
-    <div class="control-row">
-      <div class="control">
+
+    <!-- <div class="control">
         <label for="ingredient">ingredient</label>
         <select
           id="ingredient"
@@ -33,11 +33,42 @@
           name="quantity"
           formControlName="quantity"
         />
-      </div>
+      </div> -->
+    <div formArrayName="recipe">
+      @for (group of form.controls.recipe.controls; track group) {
+        <div class="control-row" [formGroup]="group">
+          <div class="control">
+            <label for="ingredient">ingredient</label>
+            <select
+              id="ingredient"
+              name="ingredient"
+              formControlName="ingredient"
+            >
+              @for (item of items(); track item.itemId) {
+                <option [value]="item.itemId">{{ item.name }}</option>
+              }
+            </select>
+          </div>
+          <div class="control">
+            <label for="quantity">Quantity</label>
+            <input
+              id="quantity"
+              type="quantity"
+              name="quantity"
+              formControlName="quantity"
+            />
+          </div>
+        </div>
+      }
+      <button
+        type="button"
+        class="btn btn-transparent btn-lg"
+        aria-label="Add"
+        (click)="onAddItem()"
+      >
+        <i class="fas fa-plus"></i>
+      </button>
     </div>
-    <button type="button" class="btn btn-transparent btn-lg" aria-label="Add">
-      <i class="fas fa-plus"></i>
-    </button>
     <hr />
     <div class="control">
       <label for="price">Price</label>

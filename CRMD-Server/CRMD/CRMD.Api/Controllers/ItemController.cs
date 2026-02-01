@@ -57,7 +57,7 @@ namespace CRMD.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 
 
-        public async Task<IActionResult> GetAllDepartment()
+        public async Task<IActionResult> GetAllItems()
         {
             var query = new GetAllItemsQuery();
             var getItemsResult = await _mediator.Send(query);

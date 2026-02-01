@@ -1,6 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { MenuItemsComponent } from './menu-items/menu-items.component';
 import { NewMenuItemComponent } from './new-menu-item/new-menu-item.component';
+import { MenuService } from '../Services/menu.service';
+import { Category } from '../models/category.model';
 
 @Component({
   selector: 'app-menu',
@@ -11,10 +13,18 @@ import { NewMenuItemComponent } from './new-menu-item/new-menu-item.component';
 })
 export class MenuComponent {
   isAddingItem = signal(false);
+  private menuService = inject(MenuService);
+  private destroyRef = inject(DestroyRef);
+  menuCategories = signal<Category[] | undefined>(undefined);
 
   onStartAddingItem() {
     this.isAddingItem.set(true);
-    console.log('adding');
+    const subscription = this.menuService.fetchMenuCategories().subscribe({
+      next: (categories) => this.menuCategories.set(categories.menuCategories),
+    });
+    this.destroyRef.onDestroy(() => {
+      subscription.unsubscribe();
+    });
   }
 
   onCloseAddItem() {
