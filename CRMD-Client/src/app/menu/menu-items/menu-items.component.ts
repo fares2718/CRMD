@@ -55,4 +55,12 @@ export class MenuItemsComponent implements OnInit {
       subscription.unsubscribe();
     });
   }
+
+  onDeleteItem() {
+    console.log('delete');
+  }
+
+  onEditItem() {
+    console.log('edit');
+  }
 }

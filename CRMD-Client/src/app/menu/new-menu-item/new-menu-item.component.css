@@ -106,8 +106,8 @@ hr {
 
 .btn-transparent {
   background: transparent !important;
-  border: 2px solid #411174;
-  color: #411174;
+  border: 2px solid #8045be;
+  color: #8045be;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -118,7 +118,7 @@ hr {
 }
 
 .btn-transparent:hover {
-  background-color: #360669 !important;
+  background-color: #be90f0 !important;
 }
 
 .button:hover,

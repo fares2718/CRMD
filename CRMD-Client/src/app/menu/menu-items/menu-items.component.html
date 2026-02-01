@@ -4,7 +4,23 @@
 
     <ul>
       @for (item of category.value; track item.menuItemId) {
-        <li>{{ item.name }} - {{ item.price | currency: "USD" : "symbol" }}</li>
+        <li>
+          {{ item.name }} - {{ item.price | currency: "USD" : "symbol" }}
+          <div>
+            <button
+              class="btn btn-sm btn-outline-secondary ms-2"
+              (click)="onEditItem()"
+            >
+              <i class="fa fa-edit"></i>
+            </button>
+            <button
+              class="btn btn-sm btn-outline-danger ms-2"
+              (click)="onDeleteItem()"
+            >
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        </li>
       }
     </ul>
   </section>
