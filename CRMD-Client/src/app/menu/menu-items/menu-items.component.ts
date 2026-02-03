@@ -18,11 +18,11 @@ import { CurrencyPipe, KeyValuePipe } from '@angular/common';
   styleUrl: './menu-items.component.css',
 })
 export class MenuItemsComponent implements OnInit {
-  menuItems = signal<MenuItem[] | undefined>(undefined);
   isFetching = signal(false);
   error = signal('');
   private destroyRef = inject(DestroyRef);
   private menuService = inject(MenuService);
+  menuItems = signal<MenuItem[] | undefined>(this.menuService.allMenuItems());
   groupedMenuItems = computed(() => {
     const items = this.menuItems();
     if (!items) return {};
@@ -41,7 +41,7 @@ export class MenuItemsComponent implements OnInit {
     this.isFetching.set(true);
     const subscription = this.menuService.fetchMenuItems().subscribe({
       next: (menuData) => {
-        this.menuItems.set(menuData.menuItems);
+        this.menuItems.set(menuData.response.value);
       },
       error: (err: Error) => {
         this.error.set(err.message);
@@ -56,8 +56,10 @@ export class MenuItemsComponent implements OnInit {
     });
   }
 
-  onDeleteItem() {
-    console.log('delete');
+  onDeleteItem(id: number) {
+    this.menuService.removeMenuItem(id).subscribe({
+      next: (res) => console.log(res),
+    });
   }
 
   onEditItem() {

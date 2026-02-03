@@ -1,11 +1,12 @@
 using CRMD.Application.DTOs;
+using CRMD.Application.Generics.Commands;
 using CRMD.Application.Generics.Queries;
 using CRMD.Application.MenuItems.Commands;
 using CRMD.Application.MenuItems.Queries;
-using CRMD.Contracts.MenuItems.Get;
 using CRMD.Contracts.MenuItems.Post;
 using CRMD.Contracts.MenuItems.Put;
 using CRMD.Domain.Categories;
+using CRMD.Domain.Menu;
 using ErrorOr;
 
 namespace CRMD.Api.Controllers
@@ -29,11 +30,6 @@ namespace CRMD.Api.Controllers
 
         public async Task<IActionResult> AddMenuItem(AddNewMenuItemRequest request)
         {
-            if (string.IsNullOrEmpty(request.Name) || request.Price <= 0 ||
-             request.Recipe == null ||
-             request.CategoryId <= 0)
-                return BadRequest("Invalid request");
-
             var cmd = new AddNewMenuItemCommand(request.Name,
                 request.Recipe,
                 request.Price,
@@ -42,6 +38,17 @@ namespace CRMD.Api.Controllers
             return addMenuItemResult.MatchFirst(
                 created => CreatedAtRoute("add-menu-item", new AddResponse(created)),
                 error => Problem(new AddResponse(error).ToString()));
+        }
+
+        [HttpDelete("delete-menu-item/{id}", Name = "delete-menu-item")]
+
+        public async Task<IActionResult> DeleteMenuItem(int id)
+        {
+            var cmd = new DeleteCommand<MenuItem>(id);
+            var addMenuItemResult = await _mediator.Send(cmd);
+            return addMenuItemResult.MatchFirst(
+                deleted => Ok(new DeleteResponse(deleted)),
+                error => Problem(new DeleteResponse(error).ToString()));
         }
 
         [HttpGet("get-menu-categories", Name = "get-menu-categories")]

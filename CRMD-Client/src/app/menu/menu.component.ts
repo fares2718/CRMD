@@ -20,7 +20,7 @@ export class MenuComponent {
   onStartAddingItem() {
     this.isAddingItem.set(true);
     const subscription = this.menuService.fetchMenuCategories().subscribe({
-      next: (categories) => this.menuCategories.set(categories.menuCategories),
+      next: (categories) => this.menuCategories.set(categories.response.value),
     });
     this.destroyRef.onDestroy(() => {
       subscription.unsubscribe();

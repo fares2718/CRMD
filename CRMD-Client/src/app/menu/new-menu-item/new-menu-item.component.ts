@@ -84,14 +84,6 @@ export class NewMenuItemComponent implements OnInit {
       categoryId: categoryId,
     };
 
-    /*this.newMenuItem.set({
-      name: name!,
-      categoryId: this.form.controls.categoryId.value ?? 0,
-      price: price,
-      recipe: {
-        items: recipeItems,
-      },
-    });*/
     const subscription = this.menuService.addMenuItem(payload).subscribe({
       next: (response) => console.log(response),
     });
