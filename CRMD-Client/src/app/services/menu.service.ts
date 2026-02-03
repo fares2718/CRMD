@@ -3,7 +3,6 @@ import { inject, Injectable, signal } from '@angular/core';
 import { MenuItem } from '../models/menu-item.model';
 import { catchError, map, tap, throwError } from 'rxjs';
 import { Category } from '../models/category.model';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -93,5 +92,10 @@ export class MenuService {
       );
   }
 
-  addMenuItem() {}
+  addMenuItem(newMenuItem: any) {
+    return this.httpClient.post(
+      'http://localhost:5145/api/Menu/add-menu-item',
+      newMenuItem,
+    );
+  }
 }

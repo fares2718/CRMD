@@ -4,55 +4,53 @@
     <div class="control-row">
       <div class="control">
         <label for="name">Name</label>
-        <input id="name" type="text" name="name" formControlName="name" />
+        <input
+          id="name"
+          type="text"
+          name="name"
+          formControlName="name"
+          autocomplete="name"
+        />
       </div>
       <div class="control">
         <label for="category">Category</label>
-        <select id="category" name="category" formControlName="category">
-          @for (category of categories(); track category.Id) {
-            <option [value]="category.Id">{{ category.name }}</option>
+        <select id="category" name="category" formControlName="categoryId">
+          <option [ngValue]="0">Choose Category..</option>
+          @for (category of categories(); track category.id) {
+            <option [ngValue]="category.id">
+              {{ category.name }}
+            </option>
           }
         </select>
       </div>
     </div>
     <hr />
-
-    <!-- <div class="control">
-        <label for="ingredient">ingredient</label>
-        <select
-          id="ingredient"
-          name="ingredient"
-          formControlName="ingredient"
-        ></select>
-      </div>
-      <div class="control">
-        <label for="quantity">Quantity</label>
-        <input
-          id="quantity"
-          type="quantity"
-          name="quantity"
-          formControlName="quantity"
-        />
-      </div> -->
     <div formArrayName="recipe">
-      @for (group of form.controls.recipe.controls; track group) {
-        <div class="control-row" [formGroup]="group">
+      @for (
+        group of form.controls.recipe.controls;
+        track group;
+        let i = $index
+      ) {
+        <div
+          class="control-row"
+          [formGroupName]="form.controls.recipe.controls.indexOf(group)"
+        >
           <div class="control">
-            <label for="ingredient">ingredient</label>
+            <label [for]="'ingredient-' + i">ingredient</label>
             <select
-              id="ingredient"
+              [id]="'ingredient-' + i"
               name="ingredient"
               formControlName="ingredient"
             >
               @for (item of items(); track item.itemId) {
-                <option [value]="item.itemId">{{ item.name }}</option>
+                <option [ngValue]="item.itemId">{{ item.name }}</option>
               }
             </select>
           </div>
           <div class="control">
-            <label for="quantity">Quantity</label>
+            <label [for]="'quantity-' + i">Quantity</label>
             <input
-              id="quantity"
+              [id]="'quantity-' + i"
               type="quantity"
               name="quantity"
               formControlName="quantity"

@@ -7,7 +7,7 @@ import {
   signal,
 } from '@angular/core';
 import { MenuItem } from '../../models/menu-item.model';
-import { MenuService } from '../../Services/menu.service';
+import { MenuService } from '../../services/menu.service';
 import { CurrencyPipe, KeyValuePipe } from '@angular/common';
 
 @Component({

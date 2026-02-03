@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { MenuItemsComponent } from './menu-items/menu-items.component';
 import { NewMenuItemComponent } from './new-menu-item/new-menu-item.component';
-import { MenuService } from '../Services/menu.service';
+import { MenuService } from '../services/menu.service';
 import { Category } from '../models/category.model';
 
 @Component({
