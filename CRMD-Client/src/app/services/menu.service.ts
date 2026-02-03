@@ -19,7 +19,6 @@ export class MenuService {
       .get<any>('http://localhost:5145/api/Menu/get-menu-items')
       .pipe(
         map((res) => {
-          console.log('fetchMenuItems raw response:', res);
           // Prefer explicit server shape: { response: { isError, value: MenuItem[] } }
           const resp = res?.response ?? res?.Response;
           if (resp) {
@@ -56,7 +55,6 @@ export class MenuService {
       .get<any>('http://localhost:5145/api/Menu/get-menu-categories')
       .pipe(
         map((res) => {
-          console.log('fetchMenuItems raw response:', res);
           // Prefer explicit server shape: { response: { isError, value: MenuItem[] } }
           const resp = res?.response ?? res?.Response;
           if (resp) {
@@ -93,7 +91,7 @@ export class MenuService {
   }
 
   addMenuItem(newMenuItem: any) {
-    return this.httpClient.post(
+    return this.httpClient.post<any>(
       'http://localhost:5145/api/Menu/add-menu-item',
       newMenuItem,
     );

@@ -14,13 +14,18 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAngular",
+    options.AddPolicy("CrmdPolicy",
         policy =>
         {
             policy
-                .WithOrigins("http://localhost:4200")
+                .WithOrigins(
+                "http://localhost:4200",
+                "https://localhost:7262",
+                "http://localhost:5145"
+                )
                 .AllowAnyHeader()
-                .AllowAnyMethod();
+                .AllowAnyMethod()
+                .AllowCredentials();
         });
 });
 
@@ -43,11 +48,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
-app.UseRouting();
-
-app.UseCors("AllowAngular");
+app.UseCors("CrmdPolicy");
 
 app.UseAuthorization();
 
