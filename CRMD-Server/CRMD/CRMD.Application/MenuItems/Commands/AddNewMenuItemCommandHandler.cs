@@ -15,7 +15,7 @@ namespace CRMD.Application.MenuItems.Commands
         CancellationToken cancellationToken)
         {
             if (string.IsNullOrWhiteSpace(request.Name) || request.Price <= 0 ||
-             request.Recipe == null || request.CategoryId <= 0)
+             request.Ingredients == null || request.Ingredients.Count == 0 || request.CategoryId <= 0)
                 return Error.Validation();
             var menuItem = _mapper.Map<MenuItem>(request);
             await _menuRepository.AddMenuItemAsync(menuItem);

@@ -41,7 +41,7 @@ export class MenuItemsComponent implements OnInit {
     this.isFetching.set(true);
     const subscription = this.menuService.fetchMenuItems().subscribe({
       next: (menuData) => {
-        this.menuItems.set(menuData.response.value);
+        this.menuItems.set(menuData.value);
       },
       error: (err: Error) => {
         this.error.set(err.message);

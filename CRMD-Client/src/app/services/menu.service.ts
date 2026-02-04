@@ -23,17 +23,18 @@ export class MenuService {
         };
       }>('http://localhost:5145/api/Menu/get-menu-items')
       .pipe(
+        map((data) => {
+          console.log(data.response.value);
+          return data.response;
+        }),
         catchError((err) =>
           throwError(
-            () =>
-              new Error(
-                err?.message ?? 'Something went wrong while fetching Menu',
-              ),
+            () => new Error('Something went wrong while fetching Menu'),
           ),
         ),
         tap({
           next: (items) => {
-            this.menuItems.set(items.response.value);
+            this.menuItems.set(items.value);
           },
         }),
       );
@@ -97,4 +98,6 @@ export class MenuService {
         }),
       );
   }
+
+  updateMenuItemRecipe() {}
 }

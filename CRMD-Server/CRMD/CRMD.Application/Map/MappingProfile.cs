@@ -34,5 +34,7 @@ public class MappingProfile : Profile
         CreateMap<AddSectionCommand, Section>();
         CreateMap<AddTableCommand, Table>();
         CreateMap<AddUserCommand, User>();
+        CreateMap<RecipeDto, Recipe>();
+        CreateMap<RecipeItemDto, RecipeItem>();
     }
 }

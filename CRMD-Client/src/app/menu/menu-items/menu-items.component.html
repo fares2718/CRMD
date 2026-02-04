@@ -1,27 +1,37 @@
-@for (category of groupedMenuItems() | keyvalue; track category.key) {
-  <section>
-    <h2>{{ category.key }}</h2>
+@if (isFetching() && !error()) {
+  <p class="fallback-text">Fetching menu...</p>
+}
+@if (error()) {
+  <p class="fallback-text">{{ error() }}</p>
+}
+@if (menuItems()) {
+  @for (category of groupedMenuItems() | keyvalue; track category.key) {
+    <section>
+      <h2>{{ category.key }}</h2>
 
-    <ul>
-      @for (item of category.value; track item.menuItemId) {
-        <li>
-          {{ item.name }} - {{ item.price | currency: "USD" : "symbol" }}
-          <div>
-            <button
-              class="btn btn-sm btn-outline-secondary ms-2"
-              (click)="onEditItem()"
-            >
-              <i class="fa fa-edit"></i>
-            </button>
-            <button
-              class="btn btn-sm btn-outline-danger ms-2"
-              (click)="onDeleteItem(item.menuItemId)"
-            >
-              <i class="fa fa-trash"></i>
-            </button>
-          </div>
-        </li>
-      }
-    </ul>
-  </section>
+      <ul>
+        @for (item of category.value; track item.menuItemId) {
+          <li>
+            {{ item.name }} - {{ item.price | currency: "USD" : "symbol" }}
+            <div>
+              <button
+                class="btn btn-sm btn-outline-secondary ms-2"
+                (click)="onEditItem()"
+              >
+                <i class="fa fa-edit"></i>
+              </button>
+              <button
+                class="btn btn-sm btn-outline-danger ms-2"
+                (click)="onDeleteItem(item.menuItemId)"
+              >
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+} @else if (!menuItems()) {
+  <p class="fallback-text">Your menu is empty</p>
 }

@@ -1,6 +1,9 @@
+using System.Collections;
 using System.Reflection;
+using System.Text.Json.Serialization;
 using CRMD.Domain;
 using CRMD.Domain.Attributes;
+using CRMD.Infrastructure.Generics.Helper;
 
 namespace CRMD.Infrastructure.Generics
 {
@@ -80,18 +83,36 @@ namespace CRMD.Infrastructure.Generics
                 if (ignoreAttrs.Any(a => a.operationMode == ignoreMode))
                     continue;
 
-                var value = prop.GetValue(entity) ?? DBNull.Value;
-                var dbType = _MapType(prop.PropertyType);
+                var value = prop.GetValue(entity);
 
-                var param = new NpgsqlParameter
+                if (value == null)
                 {
-                    ParameterName = $"p_{prop.Name.ToLower()}",
-                    Value = dbType == NpgsqlDbType.Jsonb ?
-                    JsonSerializer.Serialize(value) : value,
-                    NpgsqlDbType = dbType
-                };
+                    cmd.Parameters.AddWithValue($"p_{prop.Name.ToLower()}", DBNull.Value);
+                }
+                else if (value is IList)
+                {
+                    var options = new JsonSerializerOptions
+                    {
+                        PropertyNamingPolicy = new LowerCaseNamingPolicy(),
+                        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+                    };
+                    var json = JsonSerializer.Serialize(value, options);
+                    cmd.Parameters.Add($"p_{prop.Name.ToLower()}", NpgsqlDbType.Jsonb).Value = json;
+                }
+                else
+                {
+                    var dbType = _MapType(prop.PropertyType);
 
-                cmd.Parameters.Add(param);
+                    var param = new NpgsqlParameter
+                    {
+                        ParameterName = $"p_{prop.Name.ToLower()}",
+                        Value = dbType == NpgsqlDbType.Jsonb ?
+                        JsonSerializer.Serialize(value) : value,
+                        NpgsqlDbType = dbType
+                    };
+
+                    cmd.Parameters.Add(param);
+                }
 
             }
         }
@@ -105,9 +126,7 @@ namespace CRMD.Infrastructure.Generics
             if (type == typeof(bool)) return NpgsqlDbType.Boolean;
             if (type == typeof(DateTime)) return NpgsqlDbType.TimestampTz;
             if (type == typeof(decimal)) return NpgsqlDbType.Numeric;
-            if (type == typeof(List<>)) return NpgsqlDbType.Jsonb;
-
-            return NpgsqlDbType.Jsonb; // fallback
+            return NpgsqlDbType.Text;
         }
     }
 }

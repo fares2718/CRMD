@@ -14,7 +14,7 @@ namespace CRMD.Application.MenuItems.Commands
         public async Task<ErrorOr<Updated>> Handle(UpdateRecipeCommand request,
          CancellationToken cancellationToken)
         {
-            if (request.RecipeItems == null || !request.RecipeItems.Any())
+            if (request.RecipeItems == null || !request.RecipeItems.Any() || request.RecipeId < 1)
                 return Error.Validation("400", "Recipe items cannot be null or empty.");
 
             var recipe = _mapper.Map<Recipe>(request);

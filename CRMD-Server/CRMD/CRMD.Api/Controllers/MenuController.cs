@@ -31,7 +31,7 @@ namespace CRMD.Api.Controllers
         public async Task<IActionResult> AddMenuItem(AddNewMenuItemRequest request)
         {
             var cmd = new AddNewMenuItemCommand(request.Name,
-                request.Recipe,
+                request.Recipe.Items,
                 request.Price,
                 request.CategoryId);
             var addMenuItemResult = await _mediator.Send(cmd);
@@ -90,7 +90,7 @@ namespace CRMD.Api.Controllers
 
         public async Task<IActionResult> UpdateRecipe(UpdateRecipeRequest request)
         {
-            var cmd = new UpdateRecipeCommand(request.RecipeItems);
+            var cmd = new UpdateRecipeCommand(request.recipeId, request.RecipeItems);
             var updateRecipeResult = await _mediator.Send(cmd);
             return updateRecipeResult.MatchFirst(
                 updated => Ok(new UpdateResponse(updated)),
